@@ -110,12 +110,30 @@ details.task summary{cursor:pointer;display:flex;justify-content:space-between;g
 .ck label{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin:4px 0}
 .ck input[type=text]{width:100%;margin:6px 0}
 .pipe{display:flex;gap:4px}.pipe div{flex:1;background:var(--panel2);border-radius:6px;padding:6px 4px;text-align:center;font-size:11px}.pipe b{display:block;font-size:18px}
+#crumb{font-size:13px;margin-left:6px}
+nav#tabs .back{color:var(--accent);font-weight:600}nav#tabs .pname{align-self:center;padding:0 12px 0 4px;font-weight:700;white-space:nowrap}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.ptile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;display:grid;gap:6px;border-top:4px solid var(--none)}
+.ptile:hover,.ptile:focus{border-color:var(--accent);outline:none}
+.ptile.Red{border-top-color:var(--manual)}.ptile.Amber{border-top-color:var(--flag)}.ptile.Green{border-top-color:var(--auto)}
+.ptile h4{margin:0;font-size:17px}.ptile .ph{display:flex;justify-content:space-between;align-items:center}
+.code{background:var(--panel2);border-radius:6px;padding:1px 8px;font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--mute)}
+.pstats{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:4px}
+.pstats div{background:var(--panel2);border-radius:6px;padding:4px 2px;text-align:center}.pstats b{display:block;font-size:14px}.pstats span{font-size:10px;color:var(--mute)}
+.hl2{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600}.hdot{width:10px;height:10px;border-radius:50%;background:currentColor;display:inline-block}
+.Red.hl2{color:var(--manual)}.Amber.hl2{color:var(--flag)}.Green.hl2{color:var(--auto)}
+.pform{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:8px}
+.pform label{font-size:11px;color:var(--mute);display:grid;gap:3px}
+input[type=search]{min-width:220px}
+.hint{font-size:11.5px;color:var(--verify);margin-top:4px}
+.ck .lim{display:flex;gap:8px;align-items:center;font-size:12.5px;margin:6px 0}.ck .lim input{width:110px}
+.ck .evl{font-size:12.5px;margin-top:6px}
 footer{padding:8px 16px 20px;color:var(--mute);font-size:12px;text-align:center}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo"><div class="hex"></div><div>TagLink <div class="sub">Tag-centric change control · concept</div></div></div>
+  <div class="logo"><div class="hex"></div><div>TagLink <div class="sub">Tag-centric change control · concept</div></div></div><div id="crumb"></div>
   <div class="sp"></div>
   <span class="sub" id="saved"></span>
   <label class="role">Skin <select id="skin"><option value="dark">Dark industrial</option><option value="light">Light hex-grid</option></select></label>
@@ -127,6 +145,42 @@ footer{padding:8px 16px 20px;color:var(--mute);font-size:12px;text-align:center}
 <nav id="tabs"></nav>
 
 <main>
+<!-- ================= PORTFOLIO ================= -->
+<section class="tab" id="t-port">
+  <div class="g gd">
+    <div class="card tile s3" id="p1" style="cursor:default"></div>
+    <div class="card tile s3" id="p2" style="cursor:default"></div>
+    <div class="card tile s3" id="p3" style="cursor:default"></div>
+    <div class="card tile s3" id="p4" style="cursor:default"></div>
+    <div class="card tile s3" id="p5" style="cursor:default"></div>
+    <div class="card tile s3" id="p6" style="cursor:default"></div>
+    <div class="card tile s3" id="p7" style="cursor:default"></div>
+    <div class="card tile s3" id="p8" style="cursor:default"></div>
+    <div class="card s12">
+      <div class="row" style="margin:0"><input type="search" id="pq" placeholder="Search projects by name, code, commodity, location, lead…" style="flex:1" aria-label="Search projects">
+        <div class="chips" id="pf"></div>
+        <select id="ps" aria-label="Sort projects"><option value="name">Sort: name</option><option value="risk">Sort: risk (worst first)</option><option value="cost">Sort: cost impact</option><option value="stage">Sort: project stage</option></select>
+        <button class="pri" id="pnew">+ New project</button></div>
+      <div id="pnewForm" hidden>
+        <div class="pform">
+          <label>Name<input id="npn" placeholder="e.g. Silver Basin"></label>
+          <label>Code (3–4 letters)<input id="npc" maxlength="4" placeholder="SLB"></label>
+          <label>Commodity<input id="npm" placeholder="Silver"></label>
+          <label>Location<input id="npl" placeholder="Nevada, USA"></label>
+          <label>Project stage<select id="nps"></select></label>
+          <label>Project lead<input id="npd" placeholder="A. Name"></label>
+        </div>
+        <div class="row"><button class="pri" id="npgo">Create project</button><button id="npcancel">Cancel</button><span id="npmsg"></span></div>
+        <div class="sub">New projects start with two sample motors and the standard integration set. Change them in Integration and import your own tag register.</div>
+      </div>
+    </div>
+    <div class="s12"><div class="pgrid" id="ptiles"></div></div>
+    <div class="card s5"><h3><span>Needs my attention · <span id="pRole"></span></span></h3><div id="pTodo"></div></div>
+    <div class="card s4"><h3><span>Cost impact by project</span></h3><div id="pCost"></div></div>
+    <div class="card s3"><h3><span>Recent activity</span></h3><div class="log" id="pLog" style="max-height:260px"></div></div>
+  </div>
+</section>
+
 <!-- ================= DASHBOARD ================= -->
 <section class="tab" id="t-dash">
   <div class="g gd">
@@ -266,20 +320,35 @@ const OUT={
   manual:{t:'Not linked',d:'App not integrated: the change will not reach this record. Manual process (email/spreadsheet).'},
   none:{t:'Unaffected',d:'Linked to the tag, but does not depend on the changed attribute.'}
 };
-const CHK={
-  calc:['Re-run the calculation with the new rating','Check voltage drop, derating and short-circuit withstand','Confirm protection settings / discrimination','Attach the revised calc to the document register'],
-  model:['Update the object / routing in the model','Run clash detection on the revised geometry','Confirm supports, clearances and maintenance access','Publish the model revision to the review package'],
-  doc:['Update the value and revision cloud','Check cross-references to related documents','Peer check by a second engineer','Reissue through document control'],
-  proc:['Confirm the revised specification with the vendor','Check price and lead-time impact','Update commercial documents','Record the change in the procurement log'],
-  manual:['Identify the owner of the unlinked system','Apply the change manually','Record evidence of the update (screenshot / email)']
-};
-const ORIG=[
-  {id:'20-M-101A',desc:'Feed pump motor',attr:'Rated power',unit:'kW',val:250,to:315,phase:'Procure'},
-  {id:'20-M-205',desc:'Cooling fan motor',attr:'Rated power',unit:'kW',val:75,to:90,phase:'Design'},
-  {id:'30-M-310B',desc:'Thickener drive motor',attr:'Rated power',unit:'kW',val:132,to:160,phase:'Install'}
-];
-let TAGS=JSON.parse(JSON.stringify(ORIG));
-const RATE=145,LEAD_DAYS=21,KEY='taglink.v2';
+const REV='^(rev\\.?\\s*)?([A-Z]{1,2}|\\d{1,2})$';
+const QRE='^Q-?\\d{3,}$',WORE='^WO-?\\d{3,}$';
+function clFor(key,type,o){
+  const t=tag(),to=propVal(),f=fla(to);
+  const C={
+   calc:{ck:[`Re-run the calc at ${to} kW (FLA ≈ ${f} A)`,'Cable derating factor ≤ 0.87 applied (40 °C ambient, grouped tray)','Fault withstand ≥ 31.5 kA for 1 s','Protection discrimination checked against the upstream device'],ev:{label:'Calc revision',ex:'Rev C',re:REV},lim:{label:'Voltage drop at full load',unit:'%',max:5}},
+   etap:{ck:[`Update the motor rating to ${to} kW in the load-flow case`,'Bus loading ≤ 80 % of transformer rating','Start-up voltage dip ≤ 15 % at the motor terminals'],ev:{label:'Study case ID',ex:'LF-03',re:'^LF-?\\d{2,}$'},lim:{label:'Start-up voltage dip',unit:'%',max:15}},
+   d3:{ck:[`Update the motor object to frame ${frame(to)}`,'Clash check: 0 hard clashes','Maintenance access ≥ 800 mm around the motor','Publish the model revision to the review package'],ev:{label:'Clash report ID',ex:'CLR-0412',re:'^CLR-?\\d{3,}$'},lim:{label:'Minimum access clearance',unit:'mm',min:800}},
+   fdn:{ck:[`Update the baseplate to ${(to/250*1.2).toFixed(1)} t`,'Foundation mass ≥ 3× machine mass','Grout thickness 25–50 mm','Anchor bolt embedment per vendor drawing'],ev:{label:'Structural calc revision',ex:'Rev B',re:REV},lim:{label:'Foundation / machine mass ratio',unit:'×',min:3}},
+   cbl:{ck:[`Re-route cable at the new size (${cable(to)})`,'Cable tray fill ≤ 40 %','LV / instrumentation segregation ≥ 300 mm','Update the cable schedule'],ev:{label:'Clash report ID',ex:'CLR-0413',re:'^CLR-?\\d{3,}$'},lim:{label:'Tray fill',unit:'%',max:40}},
+   iwp:{ck:[`Lift plan updated for ${(to/250*2.1).toFixed(1)} t`,'Crane utilisation ≤ 80 %','Revise the installation sequence','Re-issue the work package to site'],ev:{label:'Work package revision',ex:'Rev B',re:REV},lim:{label:'Crane utilisation',unit:'%',max:80}},
+   asb:{ck:['Mark up the as-built nameplate rating','Photograph the installed nameplate','Update the as-built register'],ev:{label:'As-built markup ref',ex:'ASB-0231',re:'^ASB-?\\d{3,}$'}},
+   pm:{ck:['Align PM intervals with the OEM manual','Check lubricant quantity for the new frame','Update the CMMS asset record'],ev:{label:'CMMS work order',ex:'WO-18842',re:WORE}},
+   spr:{ck:[`Update critical spares to frame ${frame(to)}`,'Confirm stock levels and lead times','Update the CMMS spares link'],ev:{label:'CMMS work order',ex:'WO-18843',re:WORE}},
+   dt:{ck:['Update the nameplate on the digital twin node','Confirm operating envelope and alarm limits'],ev:{label:'Twin change ID',ex:'DTC-0099',re:'^DTC-?\\d{3,}$'}},
+   pr:{ck:['Confirm the revised specification with the vendor','Update commercial documents','Log in the procurement register'],ev:{label:'Vendor quote ref',ex:'Q-20417',re:QRE},lim:{label:'Quoted lead time',unit:'weeks',max:26}},
+   'st:bom':{ck:['Update the equipment BoM line','Check quantities and unit rates'],ev:{label:'BoM revision',ex:'Rev 4',re:REV}},
+   'st:req':{ck:['Revise the requisition','Attach the revised datasheet'],ev:{label:'Requisition revision',ex:'Rev 2',re:REV}},
+   'st:quote':{ck:['Vendor re-quote received','Price and lead time confirmed'],ev:{label:'Vendor quote ref',ex:'Q-20418',re:QRE},lim:{label:'Quoted lead time',unit:'weeks',max:26}},
+   'st:po':{ck:['Commercial approval for the PO amendment','Amendment issued to the vendor'],ev:{label:'PO amendment no.',ex:'PO-77120',re:'^PO-?\\d{3,}$'}},
+   'st:ifc':{ck:['Issue the datasheet to document control','Distribute to the disciplines'],ev:{label:'Transmittal no.',ex:'TRN-0345',re:'^TRN-?\\d{3,}$'}}
+  };
+  const D={ck:['Update the value and revision cloud','Cross-check related documents','Second-engineer peer check','Reissue through document control'],ev:{label:'Document revision',ex:'Rev C',re:REV}};
+  const M={ck:['Identify the owner of the unlinked system','Apply the change manually','Record evidence of the update'],ev:{label:'Evidence reference',ex:'EV-001',re:'^.{3,}$'}};
+  return C[key]||(o==='manual'?M:D);
+}
+let TAGS=[],S=null,PROJ=[];
+let G={role:'Electrical',skin:'dark',cur:null,q:'',flt:'all',sort:'name'};
+const RATE=145,LEAD_DAYS=21,KEY='taglink.v3';
 
 const fla=v=>Math.round(v*1.65);
 const cable=v=>{const need=fla(v)*1.25/2.6,sz=[35,50,70,95,120,150,185,240,300];
@@ -288,7 +357,7 @@ const frame=v=>(v<=90?'280S':v<=160?'315S':v<=250?'315L':v<=355?'355M':'400L');
 const money=n=>(n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString();
 
 const EDGES=[['ds','el'],['ds','sld'],['el','sld'],['sld','calc'],['calc','cbl'],['ds','d3'],['d3','fdn'],['fdn','iwp'],['d3','iwp'],['ds','etap'],['ds','pr'],['ds','dt'],['ds','spr'],['ds','pm'],['ds','mdr']];
-function recs(t){const i=t.id,x=i.slice(-4);return[
+function recs(t){const i=t.id,x=i.split('-').pop();return[
  {k:'ds',dom:'Technical',id:'DS-'+i,app:'SPF',name:'Motor datasheet',type:'doc',disc:'Electrical',dep:true,rev:'B',m:{h:3,d:1},fd:['Rated power',v=>v+' kW']},
  {k:'el',dom:'Technical',id:'EL-001',app:'SPF',name:'Electrical load list',type:'doc',disc:'Electrical',dep:true,rev:'D',m:{h:2,d:1},fd:['Connected load',v=>v+' kW']},
  {k:'sld',dom:'Technical',id:'SLD-020',app:'SPF',name:'Single-line diagram',type:'doc',disc:'Electrical',dep:true,rev:'C',m:{h:6,d:2},fd:['Breaker',v=>Math.ceil(fla(v)*1.25/50)*50+' A']},
@@ -308,13 +377,12 @@ function recs(t){const i=t.id,x=i.slice(-4);return[
  {k:'spr',dom:'Asset',id:'SPR-'+x,app:'CMS',name:'Critical spares list',type:'doc',disc:'Maintenance',dep:true,rev:'A',m:{h:2,d:1},fd:['Spare set',v=>'Frame '+frame(v)]}
 ]}
 
-const fresh=()=>({
-  tagId:TAGS[0].id,role:'Electrical',tab:'dash',skin:'dark',
+const fresh=tags=>({
+  tagId:tags[0].id,role:'Electrical',tab:'dash',skin:'dark',
   integ:{SPF:{on:true,map:true},S3D:{on:true,map:true},CLD:{on:true,map:false},SDX:{on:true,map:true},EXT:{on:false,map:false},CMS:{on:false,map:false}},
   matrix:{Electrical:'impacted',Mechanical:'impacted',Civil:'impacted',Procurement:'impacted',Piping:'impacted',Construction:'impacted',Maintenance:'impacted',Operations:'impacted','Project Manager':'always'},
   opsPct:20,cr:{},shared:{},seq:101,log:[],inbox:[],sel:null,mine:false,view:'overlay',dom:null,history:{},bundle:{}
 });
-let S=fresh();
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const tag=()=>TAGS.find(t=>t.id===S.tagId);
@@ -402,8 +470,8 @@ function stages(){
 }
 function taskList(rs){
   const t=[];
-  rs.filter(r=>['flag','verify','manual'].includes(r.o)).forEach(r=>t.push({id:r.id,label:r.id+' · '+r.name,disc:r.disc,kind:OUT[r.o].t,ck:r.o==='manual'?CHK.manual:r.type==='calc'?CHK.calc:r.type==='model'?CHK.model:CHK.doc}));
-  stages().filter(s=>!s.auto).forEach(s=>t.push({id:s.id,label:s.name,disc:s.disc,kind:'Procurement path',ck:CHK.proc}));
+  rs.filter(r=>['flag','verify','manual'].includes(r.o)).forEach(r=>t.push({id:r.id,label:r.id+' · '+r.name,disc:r.disc,kind:OUT[r.o].t,...clFor(r.k,r.type,r.o)}));
+  stages().filter(s=>!s.auto).forEach(s=>t.push({id:s.id,label:s.name,disc:s.disc,kind:'Procurement path',...clFor(s.id)}));
   return t;
 }
 function consistency(rs){
@@ -419,9 +487,21 @@ function groupWarns(c){return(c?grpOf(c):[S.tagId]).flatMap(g=>withTag(g,()=>con
 function allTasks(c){
   return grpOf(c).flatMap(id=>{const cc=S.cr[id];if(!cc)return[];cc.chk=cc.chk||{};
     return withTag(id,()=>taskList(records())).map(x=>{
-      const ch=cc.chk[x.id]||(cc.chk[x.id]={items:x.ck.map(()=>false),note:''});
+      const ch=cc.chk[x.id]||(cc.chk[x.id]={items:[],note:'',ev:'',num:''});
+      if(!Array.isArray(ch.items)||ch.items.length!==x.ck.length)ch.items=x.ck.map((_,i)=>!!(ch.items||[])[i]);
+      ch.ev=ch.ev||'';ch.num=ch.num==null?'':ch.num;ch.note=ch.note||'';
       return{...x,tag:id,done:!!cc.tasks[x.id],chk:ch};
     })});
+}
+function taskMissing(x){
+  const k=x.chk,miss=[];
+  if(!k.items.every(Boolean))miss.push('tick every checklist item');
+  if(x.lim){const v=parseFloat(k.num);
+    if(!isFinite(v))miss.push('enter '+x.lim.label.toLowerCase());
+    else if((x.lim.max!=null&&v>x.lim.max)||(x.lim.min!=null&&v<x.lim.min))miss.push(x.lim.label.toLowerCase()+' is outside the limit – revise the design before sign-off')}
+  if(x.ev&&!new RegExp(x.ev.re,'i').test((k.ev||'').trim()))miss.push(x.ev.label.toLowerCase()+' (e.g. '+x.ev.ex+')');
+  if((k.note||'').trim().length<3)miss.push('a sign-off note');
+  return miss;
 }
 function readiness(rs,c){
   const aff=rs.filter(r=>r.o!=='none'&&r.o!=='notify');
@@ -440,7 +520,7 @@ function reconcile(){
 }
 function decide(tid,d,val){
   const c=S.cr[tid],req=withTag(tid,required);
-  SH(c).appr[d]=val;log(`${val.toLowerCase()} ${c.id}`);
+  SH(c).appr[d]=val;(SH(c).at=SH(c).at||{})[d]=new Date().toISOString();log(`${val.toLowerCase()} ${c.id}`);
   notify(['Project Manager',...req],`${c.id}: ${d} ${val.toLowerCase()}`);
   if(val==='Rejected')setStatus(c,'Rejected');
   render();
@@ -462,15 +542,25 @@ function closeCR(tid){
   delete S.shared[c.id];log('closed '+c.id);render();
 }
 function goTab(t,tid){if(tid){S.tagId=tid;S.sel=null}S.tab=t;render();window.scrollTo(0,0)}
+const curP=()=>PROJ.find(p=>p.id===G.cur);
 
 /* ---------- render: shell ---------- */
 function renderTabs(){
+  const inP=!!G.cur;
+  $('t-port').classList.toggle('on',!inP);
+  TABS.forEach(([k])=>$('t-'+k).classList.toggle('on',inP&&S.tab===k));
+  $('tabs').style.display=inP?'flex':'none';
+  $('mine').closest('label').style.display=inP?'':'none';
+  if(!inP){$('crumb').innerHTML='<span class="sub">› Portfolio overview</span>';return}
+  const P=curP();
+  $('crumb').innerHTML=`<span class="sub">› Portfolio ›</span> <b>${esc(P.name)}</b>`;
   const open=uniqueCRs().length,unread=S.inbox.filter(m=>m.role===S.role&&!m.read).length;
   const badge={change:open,act:unread};
-  $('tabs').innerHTML=TABS.map(([k,l])=>`<button data-t="${k}" class="${S.tab===k?'on':''}">${l}${badge[k]?`<b>${badge[k]}</b>`:''}</button>`).join('');
-  $('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>goTab(b.dataset.t));
-  TABS.forEach(([k])=>$('t-'+k).classList.toggle('on',S.tab===k));
-  document.querySelectorAll('[data-go]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();goTab(e.dataset.go)});
+  $('tabs').innerHTML=`<button class="back" id="backP">‹ Portfolio</button><span class="pname">${esc(P.name)} <span class="sub">${esc(P.code)} · ${esc(P.stage)}</span></span>`+
+    TABS.map(([k,l])=>`<button data-t="${k}" class="${S.tab===k?'on':''}">${l}${badge[k]?`<b>${badge[k]}</b>`:''}</button>`).join('');
+  $('tabs').querySelectorAll('button[data-t]').forEach(b=>b.onclick=()=>goTab(b.dataset.t));
+  $('backP').onclick=closeProject;
+  document.querySelectorAll('#t-'+S.tab+' [data-go], #t-dash [data-go]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();goTab(e.dataset.go)});
 }
 
 /* ---------- render: dashboard ---------- */
@@ -562,7 +652,7 @@ function renderChange(){
       const n=+$('newv').value||t.to,id='CR-'+(S.seq++);
       const extra=Object.keys(S.bundle).filter(k=>S.bundle[k]!=null&&!S.cr[k]&&TAGS.some(x=>x.id===k));
       const grp=[S.tagId,...extra],why=$('why').value;
-      S.shared[id]={appr:{},ack:false};
+      S.shared[id]={appr:{},ack:false,at:{}};
       grp.forEach(g=>{S.cr[g]={id,to:g===S.tagId?n:S.bundle[g],why,status:'In review',tasks:{},chk:{},grp}});
       S.bundle={};
       log(`raised ${id} on ${grp.join(', ')}`);
@@ -601,18 +691,23 @@ function renderChange(){
 }
 function renderTasks(){
   const c=cr(),box=$('tasks');
-  if(!c||c.status!=='Implemented'){box.innerHTML='<span class="sub">Tasks appear after implementation: flagged items, calcs, unlinked apps and manual procurement steps. Each has an engineer checklist and needs a sign-off note.</span>';return}
+  if(!c||c.status!=='Implemented'){box.innerHTML='<span class="sub">Tasks appear after implementation: flagged items, calcs, unlinked apps and manual procurement steps. Each has a discipline checklist with limits, a measured value where relevant, and a required evidence reference.</span>';return}
   const tl=allTasks(c);
   box.innerHTML=tl.length?tl.map((x,i)=>{
     const can=!x.done&&(S.role===x.disc||S.role==='Project Manager');
-    const all=x.chk.items.every(Boolean)&&x.chk.note.trim().length>=3;
+    const miss=taskMissing(x);
     return`<details class="task" ${can?'open':''} data-i="${i}"><summary><span>${esc(x.label)}<br><span class="sub">${x.tag} · ${x.disc} · ${x.kind}</span></span>${x.done?'<span class="pill auto">Signed off</span>':`<span class="pill ${can?'flag':'none'}">${x.chk.items.filter(Boolean).length}/${x.ck.length}</span>`}</summary>
       <div class="ck">${x.ck.map((q,j)=>`<label><input type="checkbox" class="switch ckb" data-i="${i}" data-j="${j}" ${x.chk.items[j]?'checked':''} ${can?'':'disabled'}> ${esc(q)}</label>`).join('')}
+      ${x.lim?`<div class="lim"><span>${esc(x.lim.label)} (limit ${x.lim.max!=null?'≤ '+x.lim.max:'≥ '+x.lim.min} ${esc(x.lim.unit)})</span><input type="number" step="any" class="cknum" data-i="${i}" value="${esc(x.chk.num)}" ${can?'':'disabled'}></div>`:''}
+      ${x.ev?`<div class="evl"><span>Evidence – ${esc(x.ev.label)}</span><input type="text" class="ckev" data-i="${i}" placeholder="e.g. ${esc(x.ev.ex)}" value="${esc(x.chk.ev)}" ${can?'':'disabled'}></div>`:''}
       <input type="text" class="cknote" data-i="${i}" placeholder="Sign-off note (required)" value="${esc(x.chk.note)}" ${can?'':'disabled'}>
-      ${x.done?'':`<button class="pri sm cksign" data-i="${i}" ${can&&all?'':'disabled'}>Sign off</button>`}</div></details>`}).join(''):'<span class="msgok">No manual tasks – fully auto-synced.</span>';
+      ${x.done?`<div class="sub">Evidence: ${esc(x.chk.ev||'—')}${x.lim?' · '+esc(x.lim.label)+': '+esc(x.chk.num)+' '+esc(x.lim.unit):''}</div>`:`<div class="hint" data-hint="${i}">${can&&miss.length?'Still needed: '+esc(miss.join('; ')):''}</div><button class="pri sm cksign" data-i="${i}" ${can&&!miss.length?'':'disabled'}>Sign off</button>`}</div></details>`}).join(''):'<span class="msgok">No manual tasks – fully auto-synced.</span>';
+  const live=e=>{const x=tl[+e.dataset.i],b=box.querySelector(`.cksign[data-i="${e.dataset.i}"]`),h=box.querySelector(`[data-hint="${e.dataset.i}"]`),m=taskMissing(x);if(b)b.disabled=!!m.length;if(h)h.textContent=m.length?'Still needed: '+m.join('; '):'';save()};
   box.querySelectorAll('.ckb').forEach(e=>e.onchange=()=>{tl[+e.dataset.i].chk.items[+e.dataset.j]=e.checked;render()});
-  box.querySelectorAll('.cknote').forEach(e=>e.oninput=()=>{const x=tl[+e.dataset.i];x.chk.note=e.value;const b=box.querySelector(`.cksign[data-i="${e.dataset.i}"]`);if(b)b.disabled=!(x.chk.items.every(Boolean)&&e.value.trim().length>=3);save()});
-  box.querySelectorAll('.cksign').forEach(b=>b.onclick=()=>{const x=tl[+b.dataset.i];S.cr[x.tag].tasks[x.id]=true;log(`signed off ${x.label} (${x.tag})`);notify(['Project Manager'],`${c.id}: ${x.label} signed off by ${S.role}`);render()});
+  box.querySelectorAll('.cknote').forEach(e=>e.oninput=()=>{tl[+e.dataset.i].chk.note=e.value;live(e)});
+  box.querySelectorAll('.ckev').forEach(e=>e.oninput=()=>{tl[+e.dataset.i].chk.ev=e.value;live(e)});
+  box.querySelectorAll('.cknum').forEach(e=>e.oninput=()=>{tl[+e.dataset.i].chk.num=e.value;live(e)});
+  box.querySelectorAll('.cksign').forEach(b=>b.onclick=()=>{const x=tl[+b.dataset.i];if(taskMissing(x).length)return;S.cr[x.tag].tasks[x.id]=true;log(`signed off ${x.label} (${x.tag})`);notify(['Project Manager'],`${c.id}: ${x.label} signed off by ${S.role}`);render()});
 }
 function renderConsistency(rs){
   const c=cr(),w=c?groupWarns(c):consistency(rs);
@@ -829,41 +924,52 @@ function renderNotif(rs){
 function download(name,mime,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:mime}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
 const csvCell=v=>{v=String(v==null?'':v);return/[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
 function exportCsv(){
-  const c=cr(),G=c?grpOf(c):[S.tagId],head=['tag','record','name','app','discipline','domain','impact','field','baseline','proposed','rev','rev_after','result'];
+  const c=cr(),P=curP(),G2=c?grpOf(c):[S.tagId],head=['project','tag','record','name','app','discipline','domain','impact','field','baseline','proposed','rev','rev_after','result'];
   const rows=[head];
-  G.forEach(g=>withTag(g,()=>{const t=tag(),p=propVal();records().forEach(r=>rows.push([g,r.id,r.name,r.app,r.disc,r.dom,OUT[r.o].t,r.fd?r.fd[0]:'',r.fd?r.fd[1](t.val,0):'',r.fd?r.fd[1](p,1):'',r.rev,r.rev2||'',r.state||'']))}));
-  download((c?c.id:'preview-'+S.tagId)+'-impact-register.csv','text/csv',rows.map(r=>r.map(csvCell).join(',')).join('\n'));
+  G2.forEach(g=>withTag(g,()=>{const t=tag(),p=propVal();records().forEach(r=>rows.push([P.code,g,r.id,r.name,r.app,r.disc,r.dom,OUT[r.o].t,r.fd?r.fd[0]:'',r.fd?r.fd[1](t.val,0):'',r.fd?r.fd[1](p,1):'',r.rev,r.rev2||'',r.state||'']))}));
+  download(P.code+'-'+(c?c.id:'preview-'+S.tagId)+'-impact-register.csv','text/csv',rows.map(r=>r.map(csvCell).join(',')).join('\n'));
 }
 function packHtml(){
-  const c=cr(),G=c?grpOf(c):[S.tagId],id=c?c.id:'PREVIEW';
-  const req=required(),sh=c?SH(c):{appr:{}};
-  let h=`<!doctype html><meta charset="utf-8"><title>${esc(id)} change pack</title><style>body{font:13px/1.45 system-ui,sans-serif;max-width:980px;margin:24px auto;padding:0 16px;color:#14202b}h1{margin:0}h2{border-bottom:2px solid #0a7f77;padding-bottom:3px;margin-top:26px}table{border-collapse:collapse;width:100%;margin:6px 0}td,th{border:1px solid #cfd8e0;padding:4px 6px;text-align:left;vertical-align:top;font-size:12px}th{background:#eef3f6}.w{border-left:3px solid #c4580a;padding:3px 8px;margin:3px 0;background:#fdf3ea}.s{color:#5a6978;font-size:12px}@media print{h2{break-after:avoid}}</style>
-  <h1>Change pack · ${esc(id)}</h1><div class="s">Generated ${new Date().toLocaleString()} by ${esc(S.role)} · status: ${c?c.status:'not raised (preview)'} · illustrative concept data</div>
-  <p>${esc(c?c.why:'')}</p><h2>Approvals</h2><table><tr><th>Discipline</th><th>Decision</th></tr>${req.map(d=>`<tr><td>${d}</td><td>${sh.appr[d]||'Pending'}</td></tr>`).join('')}</table>`;
+  const c=cr(),P=curP(),G2=c?grpOf(c):[S.tagId],id=c?c.id:'PREVIEW';
+  const req=required(),sh=c?SH(c):{appr:{},at:{}};
+  const rev=!c?'P0 (preview)':c.status==='Implemented'?'C1 (implemented)':c.status==='Approved'?'P2 (approved)':'P1 (for approval)';
   const W=groupWarns(c);
-  G.forEach(g=>withTag(g,()=>{
+  const sums=G2.map(g=>withTag(g,()=>{const t=tag(),rs=records(),k=calc(rs);return{g,t,p:propVal(),k,rs}}));
+  const tot=sums.reduce((a,x)=>({c:a.c+x.k.eng+x.k.mat+x.k.rework,d:Math.max(a.d,x.k.crit),h:a.h+x.k.hrs}),{c:0,d:0,h:0});
+  let h=`<!doctype html><meta charset="utf-8"><title>${esc(P.code)} ${esc(id)} change pack</title><style>body{font:13px/1.45 system-ui,sans-serif;max-width:980px;margin:24px auto;padding:0 16px;color:#14202b}h1{margin:0}h2{border-bottom:2px solid #0a7f77;padding-bottom:3px;margin-top:26px}h3{margin:18px 0 4px}table{border-collapse:collapse;width:100%;margin:6px 0}td,th{border:1px solid #cfd8e0;padding:4px 6px;text-align:left;vertical-align:top;font-size:12px}th{background:#eef3f6}.w{border-left:3px solid #c4580a;padding:3px 8px;margin:3px 0;background:#fdf3ea}.s{color:#5a6978;font-size:12px}.cover{page-break-after:always;min-height:900px}.meta td:first-child{width:170px;background:#eef3f6;font-weight:600}.sig td{height:38px}.badge{display:inline-block;background:#0a7f77;color:#fff;border-radius:4px;padding:1px 8px;font-size:12px;letter-spacing:.6px}@media print{h2{break-after:avoid}body{margin:0}}</style>
+  <div class="cover"><div class="badge">${esc(P.code)}</div> <span class="s">${esc(P.name)} · ${esc(P.commodity)} · ${esc(P.location)}</span>
+  <h1 style="margin-top:14px">Change pack</h1><h2 style="border:0;margin-top:2px">${esc(id)} · ${esc(G2.join(', '))}</h2>
+  <table class="meta"><tr><td>Document no.</td><td>${esc(P.code)}-${esc(id)}-PACK</td></tr><tr><td>Revision</td><td>${rev}</td></tr><tr><td>Date</td><td>${new Date().toLocaleDateString()}</td></tr><tr><td>Prepared by (role)</td><td>${esc(S.role)}</td></tr><tr><td>Project stage</td><td>${esc(P.stage)} · lead ${esc(P.lead)}</td></tr><tr><td>Change status</td><td>${c?c.status:'Not raised (preview)'}</td></tr><tr><td>Reason for change</td><td>${esc(c?c.why:'')}</td></tr><tr><td>Classification</td><td>Illustrative concept data – not for construction</td></tr></table>
+  <h3>Impact summary</h3><table><tr><th>Tag</th><th>Change</th><th>Stage</th><th>Eng. hours</th><th>Cost impact</th><th>Critical path</th></tr>${sums.map(x=>`<tr><td>${esc(x.g)} – ${esc(x.t.desc)}</td><td>${x.t.val} → ${x.p} ${esc(x.t.unit)}</td><td>${x.t.phase}</td><td>${x.k.hrs.toFixed(1)}</td><td>${money(x.k.eng+x.k.mat+x.k.rework)}</td><td>${x.k.crit} d</td></tr>`).join('')}<tr><th colspan="3">Total</th><th>${tot.h.toFixed(1)}</th><th>${money(tot.c)}</th><th>${tot.d} d</th></tr></table>
+  <p class="s">${W.length} consistency warning(s)${c&&SH(c).ack&&W.length?' – accepted by the Project Manager before implementation':''}.</p>
+  <h3>Approval &amp; sign-off</h3><table class="sig"><tr><th>Discipline</th><th>Decision recorded</th><th>Name</th><th>Signature</th><th>Date</th></tr>${req.map(d=>`<tr><td><b>${d}</b></td><td>${sh.appr[d]||'Pending'}${sh.at&&sh.at[d]?'<br><span class="s">'+new Date(sh.at[d]).toLocaleString()+'</span>':''}</td><td></td><td></td><td></td></tr>`).join('')}<tr style="background:#eef3f6"><td><b>Project Manager – authorisation to implement</b></td><td>${c&&(c.status==='Implemented')?'Implemented':'Pending'}</td><td></td><td></td><td></td></tr></table>
+  <p class="s">Electronic decisions are recorded from the application; wet or digital signatures above are for the controlled issue of this pack.</p></div>`;
+  G2.forEach(g=>withTag(g,()=>{
     const t=tag(),rs=records(),k=calc(rs),cc=cr(),p=propVal();
     h+=`<h2>${esc(g)} · ${esc(t.desc)}: ${t.val} → ${p} ${esc(t.unit)} (stage ${t.phase})</h2>
     <p class="s">Engineering ${k.hrs.toFixed(1)} h · ${money(k.eng)} · materials Δ ${money(k.mat+k.rework)} · critical path ${k.crit} d · exposure if unlinked items missed ${money(k.exposure)}</p>
     <table><tr><th>Record</th><th>App</th><th>Owner</th><th>Impact</th><th>Baseline → proposed</th><th>Rev</th><th>Result</th></tr>${rs.map(r=>`<tr><td>${esc(r.id)} – ${esc(r.name)}</td><td>${r.app}</td><td>${r.disc}</td><td>${OUT[r.o].t}</td><td>${r.fd&&r.dep?esc(r.fd[0])+': '+esc(r.fd[1](t.val,0))+' → '+esc(r.fd[1](p,1)):'—'}</td><td>${r.rev}${r.rev2?' → '+r.rev2:''}</td><td>${esc(r.state||'—')}</td></tr>`).join('')}</table>`;
     if(cc&&cc.status==='Implemented'){const tl=allTasks(c).filter(x=>x.tag===g);
-      h+=`<b>Close-out tasks</b><table><tr><th>Task</th><th>Owner</th><th>Checklist</th><th>Sign-off note</th></tr>${tl.map(x=>`<tr><td>${esc(x.label)}</td><td>${x.disc}</td><td>${x.ck.map((q,j)=>(x.chk.items[j]?'☑ ':'☐ ')+esc(q)).join('<br>')}</td><td>${x.done?'Signed off: ':'OPEN: '}${esc(x.chk.note)}</td></tr>`).join('')}</table>`}
+      h+=`<b>Close-out tasks</b><table><tr><th>Task</th><th>Owner</th><th>Checklist</th><th>Evidence / measured</th><th>Sign-off note</th></tr>${tl.map(x=>`<tr><td>${esc(x.label)}</td><td>${x.disc}</td><td>${x.ck.map((q,j)=>(x.chk.items[j]?'☑ ':'☐ ')+esc(q)).join('<br>')}</td><td>${x.ev?esc(x.ev.label)+': '+esc(x.chk.ev||'—'):'—'}${x.lim?'<br>'+esc(x.lim.label)+': '+esc(x.chk.num||'—')+' '+esc(x.lim.unit)+' (limit '+(x.lim.max!=null?'≤ '+x.lim.max:'≥ '+x.lim.min)+')':''}</td><td>${x.done?'Signed off: ':'OPEN: '}${esc(x.chk.note)}</td></tr>`).join('')}</table>`}
   }));
   h+=`<h2>Consistency warnings (${W.length})</h2>`+(W.map(x=>`<div class="w"><b>${x.tag}</b> ${esc(x.msg)}</div>`).join('')||'<p>None.</p>');
   h+=`<h2>Audit trail</h2><table>${S.log.slice().reverse().map(l=>`<tr><td>${esc(l)}</td></tr>`).join('')}</table>`;
   return h;
 }
 function save(){
-  try{localStorage.setItem(KEY,JSON.stringify({S,TAGS}));const e=$('saved');if(e)e.textContent='Saved '+now()}catch(e){const el=$('saved');if(el)el.textContent='Not saved (storage unavailable)'}
+  try{localStorage.setItem(KEY,JSON.stringify({v:3,G:{cur:G.cur,role:G.role,skin:G.skin},projects:PROJ}));const e=$('saved');if(e)e.textContent='Saved '+now()}catch(e){const el=$('saved');if(el)el.textContent='Not saved (storage unavailable)'}
+}
+function hydrate(d){
+  if(!d||!Array.isArray(d.projects)||!d.projects.length||!d.projects.every(p=>p&&p.id&&Array.isArray(p.tags)&&p.tags.length&&p.st))throw new Error('Not a TagLink state file');
+  PROJ=d.projects.map(p=>({...p,st:Object.assign(fresh(p.tags),p.st)}));
+  G.role=(d.G&&ROLES.includes(d.G.role))?d.G.role:'Electrical';G.skin=(d.G&&d.G.skin==='light')?'light':'dark';
+  G.cur=d.G&&PROJ.some(p=>p.id===d.G.cur)?d.G.cur:null;
+  const P=PROJ.find(p=>p.id===G.cur)||PROJ[0];TAGS=P.tags;S=P.st;
 }
 function load(){
-  try{const raw=localStorage.getItem(KEY);if(!raw)return;const d=JSON.parse(raw);
-    if(d&&d.S&&Array.isArray(d.TAGS)&&d.TAGS.length){TAGS=d.TAGS;S=Object.assign(fresh(),d.S)}}catch(e){}
+  try{const raw=localStorage.getItem(KEY);if(!raw)return false;hydrate(JSON.parse(raw));return true}catch(e){return false}
 }
-function restoreState(txt){
-  const d=JSON.parse(txt);if(!d||!d.S||!Array.isArray(d.TAGS)||!d.TAGS.length)throw new Error('Not a TagLink state file');
-  TAGS=d.TAGS;S=Object.assign(fresh(),d.S);
-}
+function restoreState(txt){hydrate(JSON.parse(txt))}
 function parseRegister(txt){
   txt=txt.trim();if(!txt)throw new Error('Nothing to import');
   if(txt[0]==='[')return JSON.parse(txt);
@@ -886,10 +992,146 @@ function doImport(){
   }catch(e){$('impMsg').innerHTML=`<span class="msgerr">${esc(e.message)}</span>`}
 }
 
+/* ---------- projects ---------- */
+function withProject(P,fn){const oT=TAGS,oS=S;TAGS=P.tags;S=P.st;try{return fn()}finally{TAGS=oT;S=oS}}
+const mkT=(id,desc,val,to,phase)=>({id,desc,attr:'Rated power',unit:'kW',val,to,phase});
+const STAGES=['Feasibility','Detailed design','Procurement','Execution','Construction','Commissioning'];
+const SEEDS=[
+ {id:'eskay',name:'Eskay Creek',code:'ESK',commodity:'Gold–silver',location:'British Columbia, Canada',stage:'Execution',lead:'M. Tremblay',
+  tags:[['10-M-101','Primary crusher motor',250,315,'Procure'],['20-M-210','Ball mill drive motor',1500,1800,'Fabricate'],['30-M-310','Thickener drive motor',132,160,'Install'],['40-M-405','Leach tank agitator motor',90,110,'Design']],
+  integ:{EXT:{on:true,map:true},CMS:{on:true,map:true}},
+  crs:[{tags:[['10-M-101',315],['20-M-210',1800]],status:'In review',appr:3,why:'Crusher and mill duty revised after updated ore hardness testwork.'},
+       {tags:[['30-M-310',160]],status:'Implemented',signed:.5,why:'Thickener torque increase from revised underflow density.'}]},
+ {id:'blackwater',name:'Blackwater',code:'BLK',commodity:'Gold',location:'British Columbia, Canada',stage:'Detailed design',lead:'S. Okafor',
+  tags:[['21-M-110','Apron feeder motor',75,90,'Design'],['22-P-120','Slurry pump motor',200,250,'Design'],['23-M-130','Reclaim conveyor motor',55,75,'Design']],
+  integ:{S3D:{on:true,map:false}},
+  crs:[{tags:[['22-P-120',250]],status:'In review',appr:2,why:'Slurry density increase requires larger pump motor.'},
+       {tags:[['21-M-110',90]],status:'Approved',why:'Feeder upsized for higher ore moisture.'}]},
+ {id:'northisland',name:'North Island',code:'NIC',commodity:'Copper',location:'Vancouver Island, Canada',stage:'Feasibility',lead:'J. Haldane',
+  tags:[['01-M-001','Concentrator feed motor',160,200,'Design'],['01-M-002','Regrind mill motor',355,400,'Design']],
+  integ:{S3D:{on:false,map:false}},crs:[]},
+ {id:'copperridge',name:'Copper Ridge',code:'CRG',commodity:'Copper',location:'Atacama, Chile',stage:'Construction',lead:'R. Valdés',
+  tags:[['50-M-501','SAG mill motor',4000,4500,'Install'],['50-M-502','Pebble crusher motor',315,355,'Install'],['60-M-601','Tailings pump motor',400,450,'Install']],
+  integ:{EXT:{on:true,map:true}},
+  crs:[{tags:[['50-M-501',4500],['60-M-601',450]],status:'Implemented',signed:.25,why:'Mill liner change increases power draw; tailings pump upsized to suit.'}]},
+ {id:'salarnorte',name:'Salar Norte',code:'SLN',commodity:'Lithium',location:'Salta, Argentina',stage:'Procurement',lead:'P. Moreno',
+  tags:[['11-M-110','Brine pump motor',110,132,'Procure'],['12-M-120','Evaporation fan motor',37,45,'Procure']],
+  integ:{EXT:{on:true,map:true}},
+  crs:[{tags:[['11-M-110',132]],status:'Approved',why:'Brine flow rate increased after pond redesign.'}]},
+ {id:'halcyon',name:'Mount Halcyon',code:'HLC',commodity:'Nickel',location:'Western Australia',stage:'Commissioning',lead:'T. Whitby',
+  tags:[['70-M-701','Autoclave agitator motor',250,280,'Operate'],['70-M-702','Filter press pump motor',90,110,'Operate']],
+  integ:{EXT:{on:true,map:true},CMS:{on:true,map:false}},
+  crs:[{tags:[['70-M-701',280]],status:'In review',appr:1,why:'Autoclave slurry viscosity higher than design.'}]}
+];
+function seedCR(sp){
+  const id='CR-'+(S.seq++),grp=sp.tags.map(x=>x[0]);
+  S.shared[id]={appr:{},ack:true,at:{}};
+  grp.forEach(g=>{const to=sp.tags.find(x=>x[0]===g)[1];S.cr[g]={id,to,why:sp.why,status:'In review',tasks:{},chk:{},grp}});
+  const req=withTag(grp[0],required),n=sp.status==='In review'?Math.min(sp.appr||0,req.length-1):req.length;
+  const done=sp.status==='In review'?req.slice(1,1+n):req;
+  done.forEach(d=>{S.shared[id].appr[d]='Approved';S.shared[id].at[d]=new Date(Date.now()-864e5).toISOString()});
+  if(sp.status==='In review')req.filter(d=>!done.includes(d)).forEach(d=>S.inbox.push({role:d,msg:`${id}: approval requested for ${grp.join(', ')}`,t:'09:00',read:false}));
+  S.log.unshift(`09:00 · Seed: raised ${id} on ${grp.join(', ')}`);
+  if(sp.status==='Implemented'){
+    grp.forEach(g=>{S.cr[g].status='Implemented';const tl=withTag(g,()=>taskList(records())),k=Math.floor(tl.length*(sp.signed||0)),sg=tl.slice(tl.length-k),rest=tl.slice(0,tl.length-k);
+      sg.forEach(x=>{S.cr[g].tasks[x.id]=true;S.cr[g].chk[x.id]={items:x.ck.map(()=>true),note:'Signed off (seed data)',ev:x.ev?x.ev.ex:'',num:x.lim?String(x.lim.max!=null?x.lim.max-1:x.lim.min+1):''}});
+      rest.forEach(x=>S.inbox.push({role:x.disc,msg:`${id}: task for you (${g}) – ${x.label}`,t:'09:05',read:false}))});
+    S.log.unshift(`09:10 · Seed: implemented ${id}`);
+  }
+  if(sp.status!=='In review')grp.forEach(g=>S.cr[g].status=sp.status);
+}
+function buildProject(def){
+  const tags=def.tags.map(a=>mkT(...a));
+  const P={id:def.id,name:def.name,code:def.code,commodity:def.commodity,location:def.location,stage:def.stage,lead:def.lead,tags,st:fresh(tags)};
+  Object.keys(def.integ||{}).forEach(k=>Object.assign(P.st.integ[k],def.integ[k]));
+  withProject(P,()=>{(def.crs||[]).forEach(seedCR)});
+  return P;
+}
+function seedAll(){PROJ=SEEDS.map(buildProject);G.cur=null;TAGS=PROJ[0].tags;S=PROJ[0].st}
+function openProject(id,tab,tid){
+  const P=PROJ.find(p=>p.id===id);if(!P)return;
+  G.cur=id;TAGS=P.tags;S=P.st;S.tab=tab||'dash';if(tid&&TAGS.some(t=>t.id===tid)){S.tagId=tid;S.sel=null}
+  render();window.scrollTo(0,0);
+}
+function closeProject(){G.cur=null;render();window.scrollTo(0,0)}
+function setRole(v){G.role=v;if(G.cur)S.role=v}
+
+function projStats(P){return withProject(P,()=>{
+  const rows=TAGS.map(t=>({t,...calcFor(t.id)})),ucr=uniqueCRs(),withCr=rows.filter(r=>r.c);
+  const mine=ucr.filter(({tid,c})=>c.status==='In review'&&withTag(tid,required).includes(G.role)&&!SH(c).appr[G.role]);
+  const todo=mine.map(({tid,c})=>({tid,tab:'change',label:`Approve ${c.id}`,sub:grpOf(c).join(', ')}));
+  ucr.filter(({c})=>c.status==='Approved'&&G.role==='Project Manager').forEach(({tid,c})=>todo.push({tid,tab:'change',label:`Implement ${c.id}`,sub:grpOf(c).join(', ')}));
+  let openTasks=0;
+  ucr.forEach(({c})=>{if(c.status!=='Implemented')return;allTasks(c).filter(x=>!x.done).forEach(x=>{openTasks++;if(x.disc===G.role||G.role==='Project Manager')todo.push({tid:x.tag,tab:'change',label:x.label,sub:`${x.tag} · ${x.kind}`})})});
+  const cost=withCr.reduce((n,r)=>n+r.k.eng+r.k.mat+r.k.rework,0),crit=Math.max(0,...withCr.map(r=>r.k.crit));
+  const warns=withCr.reduce((n,r)=>n+r.w.length,0),blocked=withCr.reduce((n,r)=>n+r.rs.filter(x=>x.o==='manual').length,0);
+  const risk=warns+(crit>=30?2:0)+(cost>150000?2:0)+(openTasks>3?1:0)+(blocked>=6?1:0);
+  const health=!withCr.length?'Green':risk>=5?'Red':(risk>=2||crit>=21)?'Amber':'Green';
+  return{tags:TAGS.length,ncr:ucr.length,awaiting:mine.length,openTasks,cost,crit,warns,health,risk,todo,unread:S.inbox.filter(m=>m.role===G.role&&!m.read).length,logs:S.log.slice(0,3)};
+})}
+const HLAB={Red:'At risk',Amber:'Watch',Green:'On track'};
+function filteredProjects(){
+  const q=G.q.trim().toLowerCase(),all=PROJ.map(p=>({p,s:projStats(p)}));
+  let r=all.filter(({p,s})=>(G.flt==='all'||s.health===G.flt)&&(!q||[p.name,p.code,p.commodity,p.location,p.lead,p.stage].join(' ').toLowerCase().includes(q)));
+  const ord={Red:0,Amber:1,Green:2};
+  r.sort((a,b)=>G.sort==='risk'?(ord[a.s.health]-ord[b.s.health])||(b.s.risk-a.s.risk):G.sort==='cost'?b.s.cost-a.s.cost:G.sort==='stage'?STAGES.indexOf(a.p.stage)-STAGES.indexOf(b.p.stage):a.p.name.localeCompare(b.p.name));
+  return{all,r};
+}
+function renderTiles(){
+  const{all,r}=filteredProjects();
+  $('ptiles').innerHTML=r.length?r.map(({p,s})=>`<div class="ptile ${s.health}" role="button" tabindex="0" data-p="${esc(p.id)}" aria-label="Open project ${esc(p.name)}">
+    <div class="ph"><span class="code">${esc(p.code)}</span><span class="hl2 ${s.health}"><i class="hdot"></i>${HLAB[s.health]}</span></div>
+    <h4>${esc(p.name)}</h4><div class="sub">${esc(p.commodity)} · ${esc(p.location)}</div>
+    <div class="chips"><span class="pill none">${esc(p.stage)}</span>${s.awaiting?`<span class="pill flag">${s.awaiting} awaiting you</span>`:''}${s.unread?`<span class="pill notify">${s.unread} unread</span>`:''}</div>
+    <div class="pstats"><div><b>${s.tags}</b><span>tags</span></div><div><b>${s.ncr}</b><span>changes</span></div><div><b>${s.openTasks}</b><span>tasks</span></div><div><b>${money(s.cost)}</b><span>cost</span></div><div><b>${s.crit} d</b><span>crit.</span></div></div>
+    <div class="sub">Lead ${esc(p.lead)}</div></div>`).join(''):`<div class="card s12 sub">No projects match “${esc(G.q)}”. Clear the search or filter.</div>`;
+  $('ptiles').querySelectorAll('.ptile').forEach(e=>{e.onclick=()=>openProject(e.dataset.p);e.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();openProject(e.dataset.p)}}});
+  const cnt={all:all.length,Red:0,Amber:0,Green:0};all.forEach(x=>cnt[x.s.health]++);
+  $('pf').innerHTML=[['all','All'],['Red','At risk'],['Amber','Watch'],['Green','On track']].map(([k,l])=>`<span class="chip ${G.flt===k?'on':''}" data-f="${k}">${l} ${cnt[k]}</span>`).join('');
+  $('pf').querySelectorAll('.chip').forEach(e=>e.onclick=()=>{G.flt=e.dataset.f;render()});
+}
+function renderPortfolio(){
+  const all=PROJ.map(p=>({p,s:projStats(p)}));
+  const sum=f=>all.reduce((n,x)=>n+f(x.s),0),worst=all.reduce((a,x)=>x.s.crit>a.s.crit?x:a,all[0]);
+  const tile=(id,n,l,c)=>{$(id).innerHTML=`<b class="${c||''}">${n}</b><span>${l}</span>`};
+  tile('p1',PROJ.length,'projects in portfolio');
+  tile('p2',sum(s=>s.ncr),'open change requests');
+  tile('p3',sum(s=>s.awaiting),'awaiting my approval',sum(s=>s.awaiting)?'flag':'');
+  tile('p4',sum(s=>s.openTasks),'open close-out tasks',sum(s=>s.openTasks)?'verify':'');
+  tile('p5',money(sum(s=>s.cost)),'total cost impact');
+  tile('p6',worst.s.crit+' d','worst critical path · '+esc(worst.p.code),worst.s.crit>25?'flag':'');
+  tile('p7',all.filter(x=>x.s.health==='Red').length,'projects at risk',all.some(x=>x.s.health==='Red')?'manual':'auto');
+  tile('p8',sum(s=>s.unread),'unread notifications',sum(s=>s.unread)?'notify':'');
+  if($('pq').value!==G.q)$('pq').value=G.q;$('ps').value=G.sort;
+  renderTiles();
+  $('pRole').textContent=G.role;
+  const todo=all.flatMap(x=>x.s.todo.map(t=>({...t,p:x.p})));
+  $('pTodo').innerHTML=todo.length?todo.slice(0,10).map((t,i)=>`<div class="todo"><span><b>${esc(t.p.code)}</b> · ${esc(t.label)}<br><span class="sub">${esc(t.p.name)} · ${esc(t.sub)}</span></span><button class="sm" data-i="${i}">Open</button></div>`).join('')+(todo.length>10?`<div class="sub">+${todo.length-10} more</div>`:''):'<span class="sub">Nothing waiting on this role across the portfolio.</span>';
+  $('pTodo').querySelectorAll('button').forEach(b=>b.onclick=()=>{const t=todo[+b.dataset.i];openProject(t.p.id,t.tab,t.tid)});
+  const mx=Math.max(1,...all.map(x=>x.s.cost));
+  $('pCost').innerHTML=all.map(x=>`<div class="hbar"><span style="width:92px">${esc(x.p.name)}</span><span class="tr"><i style="width:${x.s.cost/mx*100}%;background:var(--${x.s.health==='Red'?'manual':x.s.health==='Amber'?'flag':'auto'})"></i></span><span style="width:70px;text-align:right">${money(x.s.cost)}</span></div>`).join('');
+  $('pLog').innerHTML=all.flatMap(x=>x.s.logs.map(l=>`<div><b>${esc(x.p.code)}</b> ${esc(l)}</div>`)).join('')||'<span class="sub">No activity yet.</span>';
+  $('bellN').textContent=sum(s=>s.unread);
+}
+function createProject(){
+  const name=$('npn').value.trim(),code=$('npc').value.trim().toUpperCase(),msg=$('npmsg');
+  if(!name){msg.innerHTML='<span class="msgerr">Name is required</span>';return}
+  if(!/^[A-Z]{3,4}$/.test(code)){msg.innerHTML='<span class="msgerr">Code must be 3–4 letters</span>';return}
+  if(PROJ.some(p=>p.code===code||p.name.toLowerCase()===name.toLowerCase())){msg.innerHTML='<span class="msgerr">Name or code already exists</span>';return}
+  const id=name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||code.toLowerCase();
+  const P=buildProject({id,name,code,commodity:$('npm').value.trim()||'—',location:$('npl').value.trim()||'—',stage:$('nps').value,lead:$('npd').value.trim()||'Unassigned',
+    tags:[['01-M-001','Sample feed motor',160,200,'Design'],['01-M-002','Sample mill motor',355,400,'Design']],crs:[]});
+  PROJ.push(P);msg.innerHTML='';['npn','npc','npm','npl','npd'].forEach(x=>$(x).value='');$('pnewForm').hidden=true;
+  G.q='';G.flt='all';openProject(id);
+}
+
 function render(){
+  document.body.classList.toggle('light',G.skin==='light');$('skin').value=G.skin;$('role').value=G.role;
+  if(!G.cur){renderTabs();renderPortfolio();save();return}
+  S.role=G.role;S.skin=G.skin;
   reconcile();
   const rs=records();
-  document.body.classList.toggle('light',S.skin==='light');$('skin').value=S.skin;$('role').value=S.role;$('mine').checked=S.mine;
+  $('mine').checked=S.mine;
   renderTabs();renderDash(rs);renderTags();renderChange();renderTasks();renderConsistency(rs);
   renderKpi(rs);renderGraph(rs);renderLegend();renderDetail(rs);renderImpact(rs);renderDom(rs);renderCost(rs);renderIso(rs);
   renderInteg();renderMatrix();renderArch();renderExchange(rs);
@@ -900,20 +1142,27 @@ function render(){
   save();
 }
 $('role').innerHTML=ROLES.map(r=>`<option>${r}</option>`).join('');
-$('role').onchange=e=>{S.role=e.target.value;render()};
+$('nps').innerHTML=STAGES.map(x=>`<option>${x}</option>`).join('');
+$('role').onchange=e=>{setRole(e.target.value);render()};
 $('mine').onchange=e=>{S.mine=e.target.checked;render()};
-$('skin').onchange=e=>{S.skin=e.target.value;render()};
-$('bell').onclick=()=>goTab('act');
+$('skin').onchange=e=>{G.skin=e.target.value;render()};
+$('bell').onclick=()=>{if(G.cur)return goTab('act');const best=PROJ.map(p=>({p,s:projStats(p)})).sort((a,b)=>b.s.unread-a.s.unread)[0];if(best&&best.s.unread)openProject(best.p.id,'act')};
 $('readAll').onclick=()=>{S.inbox.filter(m=>m.role===S.role).forEach(m=>m.read=true);render()};
+$('pq').oninput=e=>{G.q=e.target.value;renderTiles()};
+$('ps').onchange=e=>{G.sort=e.target.value;render()};
+$('pnew').onclick=()=>{$('pnewForm').hidden=!$('pnewForm').hidden};
+$('npcancel').onclick=()=>{$('pnewForm').hidden=true;$('npmsg').innerHTML=''};
+$('npgo').onclick=createProject;
 $('impBtn').onclick=doImport;
 $('impSample').onclick=()=>{$('imp').value='tag,desc,attr,unit,val,to,phase\n40-M-401,Slurry pump motor,Rated power,kW,200,250,Design\n40-M-402,Reagent mixer motor,Rated power,kW,55,75,Procure'};
 $('impFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('imp').value=r.result;doImport()};r.readAsText(f)};
-$('exPack').onclick=()=>download((cr()?cr().id:'preview')+'-change-pack.html','text/html',packHtml());
+$('exPack').onclick=()=>download(curP().code+'-'+(cr()?cr().id:'preview')+'-change-pack.html','text/html',packHtml());
 $('exCsv').onclick=exportCsv;
-$('exJson').onclick=()=>download('taglink-state.json','application/json',JSON.stringify({S,TAGS},null,1));
+$('exJson').onclick=()=>download('taglink-portfolio.json','application/json',JSON.stringify({v:3,G:{cur:G.cur,role:G.role,skin:G.skin},projects:PROJ},null,1));
 $('stFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{restoreState(r.result);render();$('stMsg').innerHTML='<span class="msgok">State restored</span>'}catch(err){$('stMsg').innerHTML=`<span class="msgerr">${esc(err.message)}</span>`}};r.readAsText(f)};
-$('reset').onclick=()=>{try{localStorage.removeItem(KEY)}catch(e){}TAGS=JSON.parse(JSON.stringify(ORIG));const sk=S.skin;S=fresh();S.skin=sk;$('imp').value='';$('impMsg').innerHTML='';$('stMsg').innerHTML='';render()};
-load();render();
+$('reset').onclick=()=>{if(!confirm('Reset all projects to the demo data? Your saved changes will be lost.'))return;try{localStorage.removeItem(KEY)}catch(e){}const sk=G.skin,ro=G.role;G.q='';G.flt='all';seedAll();G.skin=sk;G.role=ro;$('imp').value='';$('impMsg').innerHTML='';$('stMsg').innerHTML='';render()};
+if(!load())seedAll();
+render();
 </script>
 </body>
 </html>
