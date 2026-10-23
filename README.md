@@ -13,3 +13,10 @@ Illustrative only. No real Hexagon APIs or data.
 - Configurable approval matrix (always / when impacted / never, plus % escalation rule)
 - Isometric 3D view (baseline / proposed / overlay), per-role notification inbox, CSV/JSON tag import
 - Dark and light hex-grid skins; BoM → requisition → PO procurement path with close-out task sign-off
+
+## Architecture-aligned features
+- Connected data architecture view (authoring → SDx exchange → data backbone → procurement / project / operations), click to link/unlink, packets animate on implementation
+- Six lifecycle domains (design, technical, procurement, project, construction, asset) with new construction and maintenance records and a CMS integration
+- Relationship graph (where-used cascade) and a pre-flight consistency check that gates implementation
+- Lifecycle stage multiplies change cost and can force Construction approval
+- Data exchange monitor, revision bumps, asset as-built history, handover readiness, project change register
