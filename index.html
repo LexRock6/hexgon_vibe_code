@@ -29,11 +29,24 @@ button.pri{background:var(--accent);border-color:var(--accent);color:var(--on-ac
 button.bad{border-color:var(--manual);color:var(--manual)}
 button.sm{padding:2px 8px;font-size:12px}
 label.role{font-size:12px;color:var(--mute);display:flex;gap:6px;align-items:center}
-.bell{position:relative}.bell b{background:var(--manual);color:#fff;border-radius:99px;padding:0 6px;font-size:11px;margin-left:4px}
-main{display:grid;grid-template-columns:280px 1fr 380px;gap:12px;padding:12px;align-items:start}
-@media(max-width:1150px){main{grid-template-columns:1fr}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px}
-.card h3{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--mute)}
+.bell b{background:var(--manual);color:#fff;border-radius:99px;padding:0 6px;font-size:11px;margin-left:4px}
+nav#tabs{display:flex;gap:2px;padding:0 12px;background:var(--panel);border-bottom:1px solid var(--line);overflow-x:auto}
+nav#tabs button{border:0;border-bottom:3px solid transparent;border-radius:0;background:none;padding:10px 14px;color:var(--mute);white-space:nowrap}
+nav#tabs button.on{color:var(--text);border-color:var(--accent);font-weight:600}
+nav#tabs b{background:var(--accent);color:var(--on-accent);border-radius:99px;font-size:10.5px;padding:0 6px;margin-left:6px}
+main{padding:12px}
+.tab{display:none}.tab.on{display:block}
+.g{display:grid;gap:12px;align-items:start}
+.g3{grid-template-columns:300px 1fr 420px}.g2{grid-template-columns:1fr 1fr}.g21{grid-template-columns:1.4fr 1fr}
+.gd{grid-template-columns:repeat(12,1fr);align-items:stretch}
+.s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
+@media(max-width:1150px){.g3,.g2,.g21{grid-template-columns:1fr}.gd{grid-template-columns:repeat(2,1fr)}.gd>*{grid-column:span 2}.gd>.s3{grid-column:span 1}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}
+.stack{display:grid;gap:12px;align-items:start;min-width:0}
+.card h3{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--mute);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card h3 a{font-size:11px;color:var(--accent);cursor:pointer;text-transform:none;letter-spacing:0}
+.tile{cursor:pointer;text-align:center}.tile:hover{border-color:var(--accent)}
+.tile b{font-size:30px;display:block;line-height:1.1}.tile span{font-size:11.5px;color:var(--mute)}
 .tag{display:flex;gap:10px;align-items:center;padding:8px;border:1px solid transparent;border-radius:8px;cursor:pointer}
 .tag:hover{background:var(--panel2)}.tag.sel{border-color:var(--accent);background:var(--panel2)}
 .tag b{display:block}.tag span{color:var(--mute);font-size:12px}
@@ -51,15 +64,15 @@ svg text{fill:var(--text);font-size:10.5px}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th{color:var(--mute);text-align:left;font-weight:500;font-size:11px;padding:4px 6px;border-bottom:1px solid var(--line)}
 td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}
-tr.hl td{background:rgba(0,179,164,.1)}
+tr.hl td{background:rgba(0,179,164,.1)}tr.clk{cursor:pointer}tr.clk:hover td{background:rgba(0,179,164,.07)}
 .steps{display:flex;gap:4px;margin:6px 0 12px}
 .step{flex:1;text-align:center;font-size:11px;padding:5px 2px;border-radius:6px;background:var(--panel2);color:var(--mute)}
 .step.done{background:rgba(46,163,107,.18);color:var(--auto)}.step.cur{background:var(--accent);color:var(--on-accent);font-weight:700}
 .row{display:flex;gap:8px;align-items:center;margin:6px 0;flex-wrap:wrap}
 .row input[type=number]{width:90px}
 textarea{width:100%;min-height:50px;resize:vertical;font-family:ui-monospace,Menlo,monospace;font-size:12px}
-.appr{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--line)}
-.log{max-height:170px;overflow:auto;font-size:12px;color:var(--mute)}.log div{padding:2px 0;border-bottom:1px dashed var(--line)}
+.appr{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--line)}
+.log{max-height:260px;overflow:auto;font-size:12px;color:var(--mute)}.log div{padding:2px 0;border-bottom:1px dashed var(--line)}
 .note{font-size:12px;color:var(--mute);border-left:3px solid var(--flag);padding:4px 8px;margin-top:8px;background:rgba(224,168,0,.07)}
 .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
 .kpi div{background:var(--panel2);border-radius:8px;padding:8px;text-align:center}
@@ -88,6 +101,15 @@ svg.arch text{font-size:11px}
 .warn.d{border-color:var(--manual);background:rgba(229,72,77,.08)}
 .okmsg{border-left:3px solid var(--auto);padding:4px 8px;font-size:12.5px;background:rgba(46,163,107,.09)}
 .xl div{padding:3px 0;border-bottom:1px dashed var(--line);font-size:12px;display:flex;gap:6px;justify-content:space-between}
+.todo{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}
+.hbar{display:flex;align-items:center;gap:8px;font-size:12px;margin:5px 0}.hbar .tr{flex:1;background:var(--panel2);border-radius:4px;height:10px;overflow:hidden;display:flex}.hbar .tr i{display:block;height:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.chip{background:var(--panel2);border-radius:99px;padding:2px 10px;font-size:12px;cursor:pointer;border:1px solid var(--line)}
+.chip.on{border-color:var(--accent);color:var(--accent)}
+details.task{background:var(--panel2);border-radius:8px;padding:6px 10px;margin-bottom:6px}
+details.task summary{cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:13px}
+.ck label{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin:4px 0}
+.ck input[type=text]{width:100%;margin:6px 0}
+.pipe{display:flex;gap:4px}.pipe div{flex:1;background:var(--panel2);border-radius:6px;padding:6px 4px;text-align:center;font-size:11px}.pipe b{display:block;font-size:18px}
 footer{padding:8px 16px 20px;color:var(--mute);font-size:12px;text-align:center}
 </style>
 </head>
@@ -95,63 +117,131 @@ footer{padding:8px 16px 20px;color:var(--mute);font-size:12px;text-align:center}
 <header>
   <div class="logo"><div class="hex"></div><div>TagLink <div class="sub">Tag-centric change control · concept</div></div></div>
   <div class="sp"></div>
+  <span class="sub" id="saved"></span>
   <label class="role">Skin <select id="skin"><option value="dark">Dark industrial</option><option value="light">Light hex-grid</option></select></label>
   <label class="role">Viewing as <select id="role"></select></label>
   <button class="bell" id="bell" title="Notification inbox">Inbox<b id="bellN">0</b></button>
   <label class="role"><input type="checkbox" id="mine" class="switch"> My items only</label>
   <button id="reset">Reset demo</button>
 </header>
+<nav id="tabs"></nav>
 
 <main>
-  <section>
-    <div class="card"><h3>Equipment tags</h3><div id="tags"></div></div>
-    <div class="card"><h3>Integration &amp; data mapping</h3>
-      <div class="integ" id="integ"></div>
-      <div class="note">Impact depends on which apps are connected, whether the attribute is mapped, and the approval gate. Toggle them and watch the impact change.</div>
-    </div>
-    <div class="card"><h3>Approval matrix</h3><div id="matrix"></div></div>
-    <div class="card"><h3>Import tag register</h3>
-      <textarea id="imp" rows="5" placeholder="tag,desc,attr,unit,val,to"></textarea>
-      <div class="row"><button id="impBtn" class="pri">Import</button><button id="impSample">Sample</button>
-        <input type="file" id="impFile" accept=".csv,.json,.txt" style="max-width:150px"></div>
-      <div id="impMsg"></div>
-      <div class="sub">CSV (<span class="mono">tag,desc,attr,unit,val,to</span>) or a JSON array of the same keys.</div>
-    </div>
-  </section>
+<!-- ================= DASHBOARD ================= -->
+<section class="tab" id="t-dash">
+  <div class="g gd">
+    <div class="card tile s3" data-go="change" id="k1"></div>
+    <div class="card tile s3" data-go="change" id="k2"></div>
+    <div class="card tile s3" data-go="change" id="k3"></div>
+    <div class="card tile s3" data-go="act" id="k4"></div>
+    <div class="card tile s3" data-go="proj" id="k5"></div>
+    <div class="card tile s3" data-go="proj" id="k6"></div>
+    <div class="card tile s3" data-go="integ" id="k7"></div>
+    <div class="card tile s3" data-go="impact" id="k8"></div>
 
-  <section>
-    <div class="card"><h3>Connected data architecture <span class="sub">(click a node to link / unlink)</span></h3>
-      <svg id="arch" class="arch" viewBox="0 0 750 320" role="img" aria-label="Architecture"></svg>
-      <div class="sub" id="archNote"></div></div>
-    <div class="card"><h3>Lifecycle coverage · click a domain to filter the register</h3><div class="dom" id="dom"></div></div>
-    <div class="card">
-      <h3 id="hubTitle">Tag hub</h3>
-      <div class="kpi" id="kpi"></div>
-      <svg id="graph" viewBox="0 0 760 520" role="img" aria-label="Tag relationship graph"></svg>
-      <div class="legend" id="legend"></div>
-      <div class="detail" id="detail">Click a node to inspect the linked record.</div>
-    </div>
-    <div class="card">
-      <h3>3D model view (Smart 3D link)</h3>
-      <div class="row"><div class="seg" id="viewSeg"></div><span id="viewNote" class="sub"></span></div>
-      <svg id="iso" viewBox="0 0 560 300" role="img" aria-label="Isometric equipment model"></svg>
-    </div>
-    <div class="card"><h3>Pre-flight consistency check</h3><div id="cons"></div></div>
-    <div class="card"><h3>Cost &amp; schedule impact <span class="sub">(illustrative rates)</span></h3><div id="cost"></div></div>
-    <div class="card"><h3>Procurement path · BoM → requisition → PO (Ausenco-style)</h3><div class="path" id="path"></div><div id="pathNote"></div></div>
-    <div class="card"><h3>Data exchange monitor · apps ⇄ SDx2</h3><div class="xl" id="xl"></div></div>
-    <div class="card"><h3>Asset record &amp; handover</h3><div id="asset"></div></div>
-    <div class="card"><h3>Project controls · change register</h3><div id="proj"></div></div>
-    <div class="card"><h3>Impact register · baseline → proposed</h3><div id="impact"></div></div>
-  </section>
+    <div class="card s4"><h3><span>My to-do · <span id="todoRole"></span></span></h3><div id="todo"></div></div>
+    <div class="card s4"><h3><span>Impact mix · <span id="donutTag"></span></span><a data-go="impact">analysis →</a></h3><div id="donut"></div></div>
+    <div class="card s4"><h3>Lifecycle stage of tags</h3><div id="stagePipe"></div><h3 style="margin-top:14px">Integration health<a data-go="integ">configure →</a></h3><div id="ihealth"></div></div>
 
-  <section>
-    <div class="card"><h3>Controlled change</h3><div id="change"></div></div>
-    <div class="card"><h3>Close-out tasks</h3><div id="tasks"></div></div>
-    <div class="card inbox"><h3>Notification inbox · <span id="inboxRole"></span> <button class="sm" id="readAll" style="float:right">Mark all read</button></h3><div id="inbox"></div></div>
-    <div class="card"><h3>Impact for this role</h3><div id="notif" style="font-size:13px"></div></div>
-    <div class="card"><h3>Audit trail</h3><div class="log" id="log"></div></div>
-  </section>
+    <div class="card s8"><h3>Open change requests<a data-go="change">change control →</a></h3><div id="dCR"></div></div>
+    <div class="card s4"><h3>Consistency alerts<a data-go="change">review →</a></h3><div id="dAlert"></div></div>
+
+    <div class="card s6"><h3><span>Change impact by tag <span class="sub">(open CR solid · preview faded)</span></span></h3><div id="dCost"></div></div>
+    <div class="card s3"><h3>Handover readiness<a data-go="proj">project →</a></h3><div id="dReady"></div></div>
+    <div class="card s3"><h3>Recent activity<a data-go="act">all →</a></h3><div class="log" id="dLog" style="max-height:240px"></div></div>
+  </div>
+</section>
+
+<!-- ================= CHANGE CONTROL ================= -->
+<section class="tab" id="t-change">
+  <div class="g g3">
+    <div class="stack"><div class="card"><h3>Equipment tags</h3><div id="tags"></div></div></div>
+    <div class="stack">
+      <div class="card"><h3>Controlled change</h3><div id="change"></div></div>
+      <div class="card"><h3>Pre-flight consistency check</h3><div id="cons"></div></div>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>Close-out tasks &amp; engineer checklists</h3><div id="tasks"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IMPACT ================= -->
+<section class="tab" id="t-impact">
+  <div class="g g21">
+    <div class="stack">
+      <div class="card">
+        <h3 id="hubTitle">Tag hub</h3>
+        <div class="kpi" id="kpi"></div>
+        <svg id="graph" viewBox="0 0 760 520" role="img" aria-label="Tag relationship graph"></svg>
+        <div class="legend" id="legend"></div>
+        <div class="detail" id="detail"></div>
+      </div>
+      <div class="card"><h3>Impact register · baseline → proposed</h3><div id="impact"></div></div>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>Lifecycle coverage · click a domain to filter</h3><div class="dom" id="dom"></div></div>
+      <div class="card"><h3>Cost &amp; schedule impact <span class="sub">(illustrative rates)</span></h3><div id="cost"></div></div>
+      <div class="card"><h3>3D model view (Smart 3D link)</h3>
+        <div class="row"><div class="seg" id="viewSeg"></div></div><div id="viewNote" class="sub"></div>
+        <svg id="iso" viewBox="0 0 560 300" role="img" aria-label="Isometric equipment model"></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTEGRATION ================= -->
+<section class="tab" id="t-integ">
+  <div class="g g21">
+    <div class="stack">
+      <div class="card"><h3>Connected data architecture <span class="sub">click a node to link / unlink</span></h3>
+        <svg id="arch" class="arch" viewBox="0 0 750 320" role="img" aria-label="Architecture"></svg><div class="sub" id="archNote"></div></div>
+      <div class="card"><h3>Data exchange monitor · apps ⇄ SDx2</h3><div class="xl" id="xl"></div></div>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>Integration &amp; data mapping</h3><div class="integ" id="integ"></div>
+        <div class="note">Impact depends on which apps are connected, whether the attribute is mapped, and the approval gate.</div></div>
+      <div class="card"><h3>Approval matrix</h3><div id="matrix"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECT & ASSET ================= -->
+<section class="tab" id="t-proj">
+  <div class="g g2">
+    <div class="stack">
+      <div class="card"><h3>Project controls · change register</h3><div id="proj"></div></div>
+      <div class="card"><h3>Asset record &amp; handover</h3><div id="asset"></div></div>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>Procurement path · BoM → requisition → PO (Ausenco-style)</h3><div class="path" id="path"></div><div id="pathNote"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACTIVITY & DATA ================= -->
+<section class="tab" id="t-act">
+  <div class="g g2">
+    <div class="stack">
+      <div class="card inbox"><h3><span>Notification inbox · <span id="inboxRole"></span></span> <button class="sm" id="readAll">Mark all read</button></h3><div id="inbox"></div></div>
+      <div class="card"><h3>Impact for this role</h3><div id="notif" style="font-size:13px"></div></div>
+      <div class="card"><h3>Audit trail</h3><div class="log" id="log"></div></div>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>Export change pack</h3>
+        <div class="sub">Pack = approvals, baseline→proposed, cost, consistency, tasks with checklists and sign-off notes, audit trail. Open the HTML and print to PDF.</div>
+        <div class="row"><button class="pri" id="exPack">Change pack (HTML)</button><button id="exCsv">Impact register (CSV)</button></div></div>
+      <div class="card"><h3>Save &amp; restore</h3>
+        <div class="sub">State auto-saves in this browser (localStorage). Back up or move it as JSON.</div>
+        <div class="row"><button id="exJson">Download state (JSON)</button><input type="file" id="stFile" accept=".json" style="max-width:190px"></div><div id="stMsg"></div></div>
+      <div class="card"><h3>Import tag register</h3>
+        <textarea id="imp" rows="5" placeholder="tag,desc,attr,unit,val,to,phase"></textarea>
+        <div class="row"><button id="impBtn" class="pri">Import</button><button id="impSample">Sample</button>
+          <input type="file" id="impFile" accept=".csv,.json,.txt" style="max-width:170px"></div>
+        <div id="impMsg"></div>
+        <div class="sub">CSV (<span class="mono">tag,desc,attr,unit,val,to[,phase]</span>) or a JSON array of the same keys.</div></div>
+    </div>
+  </div>
+</section>
 </main>
 <footer>Illustrative concept only. Product names (SmartPlant Foundation, Smart 3D, Smart Cloud, HxGN SDx2) are Hexagon's; no real integration, data, API or Ausenco process is used. Rates, prices and lead times are made up.</footer>
 
@@ -167,6 +257,7 @@ const APPS={
 const ROLES=['Electrical','Mechanical','Civil','Procurement','Piping','Construction','Maintenance','Operations','Project Manager'];
 const DOMS=[['Design','Engineering design'],['Technical','Technical information'],['Procurement','Procurement'],['Project','Project management'],['Construction','Construction'],['Asset','Asset management']];
 const PH=[{n:'Design',m:1,d:0},{n:'Procure',m:1.5,d:0},{n:'Fabricate',m:3,d:14},{n:'Install',m:6,d:21},{n:'Operate',m:10,d:30}];
+const TABS=[['dash','Dashboard'],['change','Change control'],['impact','Impact analysis'],['integ','Integration'],['proj','Project & asset'],['act','Activity & data']];
 const OUT={
   auto:{t:'Auto-sync',d:'Connected + mapped: value propagates on implementation.'},
   flag:{t:'Flag for review',d:'Connected but attribute not mapped: change is flagged, a human updates it.'},
@@ -175,15 +266,21 @@ const OUT={
   manual:{t:'Not linked',d:'App not integrated: the change will not reach this record. Manual process (email/spreadsheet).'},
   none:{t:'Unaffected',d:'Linked to the tag, but does not depend on the changed attribute.'}
 };
+const CHK={
+  calc:['Re-run the calculation with the new rating','Check voltage drop, derating and short-circuit withstand','Confirm protection settings / discrimination','Attach the revised calc to the document register'],
+  model:['Update the object / routing in the model','Run clash detection on the revised geometry','Confirm supports, clearances and maintenance access','Publish the model revision to the review package'],
+  doc:['Update the value and revision cloud','Check cross-references to related documents','Peer check by a second engineer','Reissue through document control'],
+  proc:['Confirm the revised specification with the vendor','Check price and lead-time impact','Update commercial documents','Record the change in the procurement log'],
+  manual:['Identify the owner of the unlinked system','Apply the change manually','Record evidence of the update (screenshot / email)']
+};
 const ORIG=[
   {id:'20-M-101A',desc:'Feed pump motor',attr:'Rated power',unit:'kW',val:250,to:315,phase:'Procure'},
   {id:'20-M-205',desc:'Cooling fan motor',attr:'Rated power',unit:'kW',val:75,to:90,phase:'Design'},
   {id:'30-M-310B',desc:'Thickener drive motor',attr:'Rated power',unit:'kW',val:132,to:160,phase:'Install'}
 ];
 let TAGS=JSON.parse(JSON.stringify(ORIG));
-const RATE=145, LEAD_DAYS=21;
+const RATE=145,LEAD_DAYS=21,KEY='taglink.v2';
 
-/* ---- derived engineering values (illustrative) ---- */
 const fla=v=>Math.round(v*1.65);
 const cable=v=>{const need=fla(v)*1.25/2.6,sz=[35,50,70,95,120,150,185,240,300];
   const pick=n=>sz.find(s=>s>=n);return pick(need)?pick(need)+' mm²':'2×'+(pick(need/2)||300)+' mm²'};
@@ -212,11 +309,10 @@ function recs(t){const i=t.id,x=i.slice(-4);return[
 ]}
 
 const fresh=()=>({
-  tagId:TAGS[0].id,role:'Electrical',
+  tagId:TAGS[0].id,role:'Electrical',tab:'dash',skin:'dark',
   integ:{SPF:{on:true,map:true},S3D:{on:true,map:true},CLD:{on:true,map:false},SDX:{on:true,map:true},EXT:{on:false,map:false},CMS:{on:false,map:false}},
   matrix:{Electrical:'impacted',Mechanical:'impacted',Civil:'impacted',Procurement:'impacted',Piping:'impacted',Construction:'impacted',Maintenance:'impacted',Operations:'impacted','Project Manager':'always'},
-  opsPct:20,
-  cr:{},log:[],inbox:[],sel:null,mine:false,view:'overlay',showInbox:false,dom:null,history:{}
+  opsPct:20,cr:{},shared:{},seq:101,log:[],inbox:[],sel:null,mine:false,view:'overlay',dom:null,history:{},bundle:{}
 });
 let S=fresh();
 const $=id=>document.getElementById(id);
@@ -225,7 +321,15 @@ const tag=()=>TAGS.find(t=>t.id===S.tagId);
 const now=()=>new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
 function log(m){S.log.unshift(`${now()} · ${S.role}: ${m}`)}
 function notify(roles,msg){[...new Set(roles)].filter(r=>r!==S.role).forEach(r=>S.inbox.unshift({role:r,msg,t:now(),read:false}))}
+function withTag(id,fn){const old=S.tagId;S.tagId=id;try{return fn()}finally{S.tagId=old}}
+const cr=()=>S.cr[S.tagId]||null;
+const SH=c=>S.shared[c.id];
+const grpOf=c=>c.grp||[];
+const propVal=()=>cr()?cr().to:tag().to;
+function setStatus(c,st){c.status=st;grpOf(c).forEach(g=>{if(S.cr[g])S.cr[g].status=st})}
+const uniqueCRs=()=>{const seen={},out=[];Object.keys(S.cr).forEach(t=>{const c=S.cr[t];if(!seen[c.id]){seen[c.id]=1;out.push({tid:t,c})}});return out};
 
+/* ---------- engine ---------- */
 function outcome(r){
   if(!r.dep)return'none';
   const a=S.integ[r.app];
@@ -235,8 +339,6 @@ function outcome(r){
   if(r.type==='info')return'notify';
   return a.map?'auto':'flag';
 }
-const cr=()=>S.cr[S.tagId]||null;
-const propVal=()=>cr()?cr().to:tag().to;
 function records(){
   const c=cr(),t=tag();
   return recs(t).map(r=>{
@@ -253,7 +355,7 @@ function records(){
     return{...r,o,state,rev2:upd&&r.rev!=='-'?bump(r.rev):null};
   });
 }
-function required(){
+function reqOne(){
   const rs=records(),set=new Set();
   const pct=Math.abs(propVal()-tag().val)/tag().val*100;
   ROLES.forEach(d=>{
@@ -266,8 +368,12 @@ function required(){
   if(!set.size)set.add('Project Manager');
   return ROLES.filter(r=>set.has(r));
 }
-
-/* ---- cost & schedule ---- */
+function required(){
+  const c=cr();
+  if(!c||grpOf(c).length<2)return reqOne();
+  const set=new Set();grpOf(c).forEach(g=>withTag(g,reqOne).forEach(r=>set.add(r)));
+  return ROLES.filter(r=>set.has(r));
+}
 function calc(rs){
   const t=tag(),to=propVal(),ratio=to/t.val,ph=PH.find(p=>p.n===t.phase)||PH[0],pi=PH.indexOf(ph);
   let hrs=0,days=0,exposure=0;const byD={};
@@ -284,17 +390,6 @@ function calc(rs){
   const lead=to!==t.val?LEAD_DAYS:0;
   return{hrs,eng:hrs*RATE*ph.m,mat,rework,days:days+ph.d,lead,crit:Math.max(days+ph.d,lead),exposure,byD,ratio,ph};
 }
-function consistency(rs){
-  const by={};rs.forEach(r=>by[r.k]=r);const c=cr(),out=[],sg=r=>c&&c.tasks&&c.tasks[r.id];
-  EDGES.forEach(([u,v])=>{const a=by[u],b=by[v];if(!a||!b)return;
-    if(b.o==='auto'&&['flag','verify','manual'].includes(a.o)&&!sg(a))out.push({kind:'stale',msg:`${b.id} auto-updates from ${a.id}, which is “${OUT[a.o].t}” — values may be unverified.`});
-    else if(a.o==='auto'&&b.o==='manual'&&!sg(b))out.push({kind:'diverge',msg:`${b.id} is not linked and will diverge from ${a.id} after the change.`});
-  });
-  return out;
-}
-function calcFor(id){const old=S.tagId;S.tagId=id;try{const rs=records(),c=cr();return{rs,k:calc(rs),c,tl:c&&c.status==='Implemented'?taskList(rs):[]}}finally{S.tagId=old}}
-
-/* ---- procurement path stages ---- */
 function stages(){
   const I=S.integ,live=I.EXT.on&&I.SDX.on&&I.EXT.map,spf=I.SPF.on&&I.SPF.map;
   return[
@@ -307,42 +402,225 @@ function stages(){
 }
 function taskList(rs){
   const t=[];
-  rs.filter(r=>['flag','verify','manual'].includes(r.o)).forEach(r=>t.push({id:r.id,label:r.id+' · '+r.name,disc:r.disc,kind:OUT[r.o].t}));
-  stages().filter(s=>!s.auto).forEach(s=>t.push({id:s.id,label:s.name,disc:s.disc,kind:'Procurement path'}));
+  rs.filter(r=>['flag','verify','manual'].includes(r.o)).forEach(r=>t.push({id:r.id,label:r.id+' · '+r.name,disc:r.disc,kind:OUT[r.o].t,ck:r.o==='manual'?CHK.manual:r.type==='calc'?CHK.calc:r.type==='model'?CHK.model:CHK.doc}));
+  stages().filter(s=>!s.auto).forEach(s=>t.push({id:s.id,label:s.name,disc:s.disc,kind:'Procurement path',ck:CHK.proc}));
   return t;
 }
+function consistency(rs){
+  const by={};rs.forEach(r=>by[r.k]=r);const c=cr(),out=[],sg=r=>c&&c.tasks&&c.tasks[r.id];
+  EDGES.forEach(([u,v])=>{const a=by[u],b=by[v];if(!a||!b)return;
+    if(b.o==='auto'&&['flag','verify','manual'].includes(a.o)&&!sg(a))out.push({kind:'stale',tag:S.tagId,msg:`${b.id} auto-updates from ${a.id}, which is “${OUT[a.o].t}” — values may be unverified.`});
+    else if(a.o==='auto'&&b.o==='manual'&&!sg(b))out.push({kind:'diverge',tag:S.tagId,msg:`${b.id} is not linked and will diverge from ${a.id} after the change.`});
+  });
+  return out;
+}
+function calcFor(id){return withTag(id,()=>{const rs=records(),c=cr();return{rs,k:calc(rs),c,w:consistency(rs),tl:c&&c.status==='Implemented'?taskList(rs):[]}})}
+function groupWarns(c){return(c?grpOf(c):[S.tagId]).flatMap(g=>withTag(g,()=>consistency(records())))}
+function allTasks(c){
+  return grpOf(c).flatMap(id=>{const cc=S.cr[id];if(!cc)return[];cc.chk=cc.chk||{};
+    return withTag(id,()=>taskList(records())).map(x=>{
+      const ch=cc.chk[x.id]||(cc.chk[x.id]={items:x.ck.map(()=>false),note:''});
+      return{...x,tag:id,done:!!cc.tasks[x.id],chk:ch};
+    })});
+}
+function readiness(rs,c){
+  const aff=rs.filter(r=>r.o!=='none'&&r.o!=='notify');
+  if(!c)return 100;if(c.status!=='Implemented')return 0;
+  return Math.round(aff.filter(r=>r.o==='auto'||c.tasks[r.id]).length/aff.length*100);
+}
 
-/* ---------- render ---------- */
+/* ---------- actions ---------- */
+function reconcile(){
+  Object.keys(S.cr).forEach(tid=>{
+    const c=S.cr[tid];if(c.status!=='In review'&&c.status!=='Approved')return;
+    const req=withTag(tid,required),all=req.every(d=>SH(c).appr[d]==='Approved');
+    if(c.status==='In review'&&all){setStatus(c,'Approved');log(`${c.id} fully approved`);notify(['Project Manager'],`${c.id} fully approved – ready to implement`)}
+    else if(c.status==='Approved'&&!all){setStatus(c,'In review');log(`${c.id} back to review (approver set changed)`)}
+  });
+}
+function decide(tid,d,val){
+  const c=S.cr[tid],req=withTag(tid,required);
+  SH(c).appr[d]=val;log(`${val.toLowerCase()} ${c.id}`);
+  notify(['Project Manager',...req],`${c.id}: ${d} ${val.toLowerCase()}`);
+  if(val==='Rejected')setStatus(c,'Rejected');
+  render();
+}
+function implement(tid){
+  const c=S.cr[tid],req=withTag(tid,required);let auto=0,tasks=0;
+  grpOf(c).forEach(g=>{S.cr[g].status='Implemented';withTag(g,()=>{
+    const rs=records(),tl=taskList(rs);auto+=rs.filter(r=>r.o==='auto').length;tasks+=tl.length;
+    tl.forEach(x=>notify([x.disc],`${c.id}: task for you (${g}) – ${x.label}`));
+  })});
+  log(`implemented ${c.id}; ${auto} records auto-synced, ${tasks} tasks opened`);
+  notify(req,`${c.id} implemented`);render();
+}
+function closeCR(tid){
+  const c=S.cr[tid];
+  grpOf(c).forEach(g=>{const cc=S.cr[g];if(!cc)return;const t=TAGS.find(x=>x.id===g);
+    if(cc.status==='Implemented'){(S.history[g]=S.history[g]||[]).unshift({id:c.id,from:t.val,to:cc.to,t:now(),phase:t.phase});t.val=cc.to}
+    delete S.cr[g]});
+  delete S.shared[c.id];log('closed '+c.id);render();
+}
+function goTab(t,tid){if(tid){S.tagId=tid;S.sel=null}S.tab=t;render();window.scrollTo(0,0)}
+
+/* ---------- render: shell ---------- */
+function renderTabs(){
+  const open=uniqueCRs().length,unread=S.inbox.filter(m=>m.role===S.role&&!m.read).length;
+  const badge={change:open,act:unread};
+  $('tabs').innerHTML=TABS.map(([k,l])=>`<button data-t="${k}" class="${S.tab===k?'on':''}">${l}${badge[k]?`<b>${badge[k]}</b>`:''}</button>`).join('');
+  $('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>goTab(b.dataset.t));
+  TABS.forEach(([k])=>$('t-'+k).classList.toggle('on',S.tab===k));
+  document.querySelectorAll('[data-go]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();goTab(e.dataset.go)});
+}
+
+/* ---------- render: dashboard ---------- */
+function donut(counts){
+  const R=54,C=2*Math.PI*R,total=counts.reduce((n,c)=>n+c[1],0)||1;let off=0;
+  const col={auto:'--auto',flag:'--flag',verify:'--verify',manual:'--manual',notify:'--notify'};
+  const segs=counts.filter(c=>c[1]>0).map(([o,n])=>{const d=n/total*C;const s=`<circle cx="70" cy="70" r="${R}" fill="none" stroke="var(${col[o]})" stroke-width="16" stroke-dasharray="${d} ${C-d}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"/>`;off+=d;return s}).join('');
+  return`<svg viewBox="0 0 140 140" style="width:140px;margin:0 auto"><circle cx="70" cy="70" r="${R}" fill="none" stroke="var(--line)" stroke-width="16"/>${segs}<text x="70" y="68" text-anchor="middle" style="font-size:24px;font-weight:700">${counts.reduce((n,c)=>n+c[1],0)}</text><text x="70" y="84" text-anchor="middle" style="font-size:10px;fill:var(--mute)">affected</text></svg>`;
+}
+function renderDash(rs){
+  const rows=TAGS.map(t=>({t,...calcFor(t.id)}));
+  const ucr=uniqueCRs(),withCr=rows.filter(r=>r.c);
+  const myAppr=ucr.filter(({tid,c})=>c.status==='In review'&&withTag(tid,required).includes(S.role)&&!SH(c).appr[S.role]);
+  const openTasks=withCr.reduce((n,r)=>n+r.tl.filter(x=>!r.c.tasks[x.id]).length,0);
+  const unread=S.inbox.filter(m=>m.role===S.role&&!m.read).length;
+  const cost=withCr.reduce((n,r)=>n+r.k.eng+r.k.mat+r.k.rework,0),crit=Math.max(0,...withCr.map(r=>r.k.crit));
+  const warns=withCr.reduce((n,r)=>n+r.w.length,0);
+  const linked=Object.keys(APPS).filter(a=>S.integ[a].on&&(!['EXT','CMS'].includes(a)||S.integ.SDX.on)).length;
+  const blocked=rs.filter(r=>r.o==='manual').length;
+  const tile=(id,n,l,c)=>{$(id).innerHTML=`<b class="${c||''}">${n}</b><span>${l}</span>`};
+  tile('k1',ucr.length,'open change requests');
+  tile('k2',myAppr.length,'awaiting my approval',myAppr.length?'flag':'');
+  tile('k3',openTasks,'open close-out tasks',openTasks?'verify':'');
+  tile('k4',unread,'unread notifications',unread?'notify':'');
+  tile('k5',money(cost),'total cost impact');
+  tile('k6',crit+' d','worst critical path',crit>25?'flag':'');
+  tile('k7',linked+'/'+Object.keys(APPS).length,'applications linked',linked<Object.keys(APPS).length?'flag':'auto');
+  tile('k8',warns,'consistency warnings',warns?'verify':'auto');
+  $('todoRole').textContent=S.role;
+  let td='';
+  myAppr.forEach(({tid,c})=>td+=`<div class="todo"><span>Approve <b>${c.id}</b><br><span class="sub">${grpOf(c).join(', ')}</span></span><span><button class="pri sm" data-ap="${tid}">Approve</button> <button class="sm" data-open="${tid}">Open</button></span></div>`);
+  ucr.filter(({tid,c})=>c.status==='Approved'&&S.role==='Project Manager').forEach(({tid,c})=>td+=`<div class="todo"><span>Implement <b>${c.id}</b></span><button class="sm" data-open="${tid}">Open</button></div>`);
+  ucr.forEach(({tid,c})=>{if(c.status!=='Implemented')return;allTasks(c).filter(x=>!x.done&&(x.disc===S.role||S.role==='Project Manager')).forEach(x=>td+=`<div class="todo"><span>${esc(x.label)}<br><span class="sub">${x.tag} · ${x.kind}</span></span><button class="sm" data-open="${x.tag}">Open</button></div>`)});
+  $('todo').innerHTML=td||'<span class="sub">Nothing waiting on this role.</span>';
+  $('todo').querySelectorAll('[data-ap]').forEach(b=>b.onclick=()=>decide(b.dataset.ap,S.role,'Approved'));
+  $('todo').querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>goTab('change',b.dataset.open));
+  $('donutTag').textContent=tag().id;
+  const n=o=>rs.filter(r=>r.o===o).length;
+  $('donut').innerHTML=donut(['auto','flag','verify','manual','notify'].map(o=>[o,n(o)]))+`<div class="legend" style="justify-content:center">${['auto','flag','verify','manual','notify'].map(o=>`<span class="${o}"><i class="dot"></i>${OUT[o].t} ${n(o)}</span>`).join('')}</div>`;
+  $('stagePipe').innerHTML=`<div class="pipe">${PH.map(p=>`<div><b>${TAGS.filter(t=>t.phase===p.n).length}</b>${p.n}<br><span class="sub">×${p.m}</span></div>`).join('')}</div>`;
+  $('ihealth').innerHTML=Object.keys(APPS).map(a=>{const live=S.integ[a].on&&(!['EXT','CMS'].includes(a)||S.integ.SDX.on);
+    return`<div class="appr"><span>${APPS[a].name}</span><span class="pill ${live?(S.integ[a].map||a==='SDX'?'auto':'flag'):'manual'}">${live?(S.integ[a].map?'linked · mapped':'linked · unmapped'):'not linked'}</span></div>`}).join('')+`<div class="sub" style="margin-top:6px">${blocked} record(s) on ${tag().id} blocked by missing links.</div>`;
+  $('dCR').innerHTML=ucr.length?`<table><tr><th>CR</th><th>Tags</th><th>Status</th><th>Approvals</th><th>Cost</th><th>Crit.</th></tr>`+ucr.map(({tid,c})=>{
+    const req=withTag(tid,required),ok=req.filter(d=>SH(c).appr[d]==='Approved').length;
+    const k=grpOf(c).reduce((a,g)=>{const x=rows.find(r=>r.t.id===g);return{cost:a.cost+x.k.eng+x.k.mat+x.k.rework,crit:Math.max(a.crit,x.k.crit)}},{cost:0,crit:0});
+    return`<tr class="clk" data-open="${tid}"><td><b>${c.id}</b></td><td>${esc(grpOf(c).join(', '))}</td><td><span class="pill ${c.status==='Implemented'?'auto':c.status==='Rejected'?'manual':'flag'}">${c.status}</span></td><td>${ok}/${req.length}</td><td>${money(k.cost)}</td><td>${k.crit} d</td></tr>`}).join('')+'</table>'
+    :'<span class="sub">No open changes. Raise one from Change control.</span>';
+  $('dCR').querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>goTab('change',b.dataset.open));
+  const al=withCr.flatMap(r=>r.w);
+  $('dAlert').innerHTML=al.length?al.slice(0,4).map(x=>`<div class="warn ${x.kind==='diverge'?'d':''}"><b>${x.tag}</b> ${esc(x.msg)}</div>`).join('')+(al.length>4?`<div class="sub">+${al.length-4} more</div>`:''):'<div class="okmsg">No consistency warnings on open changes.</div>';
+  const tot=r=>r.k.eng+r.k.mat+r.k.rework,mx=Math.max(1,...rows.map(tot));
+  $('dCost').innerHTML=rows.map(r=>{const e=r.k.eng/mx*100,m=(r.k.mat+r.k.rework)/mx*100;
+    return`<div class="hbar" style="opacity:${r.c?1:.45}"><span style="width:92px">${esc(r.t.id)}</span><span class="tr"><i style="width:${e}%;background:var(--accent)"></i><i style="width:${Math.max(0,m)}%;background:var(--notify)"></i></span><span style="width:130px;text-align:right">${money(tot(r))} · ${r.k.crit} d</span></div>`}).join('')+
+    `<div class="legend"><span style="color:var(--accent)"><i class="dot"></i>Engineering</span><span style="color:var(--notify)"><i class="dot"></i>Materials / rework</span></div>`;
+  $('dReady').innerHTML=rows.map(r=>{const p=readiness(r.rs,r.c);return`<div class="hbar"><span style="width:80px">${esc(r.t.id)}</span><span class="tr"><i style="width:${p}%;background:var(--auto)"></i></span><span style="width:34px;text-align:right">${p}%</span></div>`}).join('');
+  $('dLog').innerHTML=S.log.slice(0,8).map(l=>`<div>${esc(l)}</div>`).join('')||'<span class="sub">No activity yet.</span>';
+}
+
+/* ---------- render: change control ---------- */
 function renderTags(){
   $('tags').innerHTML=TAGS.map(t=>{
     const c=S.cr[t.id];
     return`<div class="tag ${t.id===S.tagId?'sel':''}" data-t="${esc(t.id)}"><div class="hex" style="width:22px;height:25px;background:${c?'var(--flag)':'var(--accent)'}"></div>
-    <div><b>${esc(t.id)}</b><span>${esc(t.desc)} · ${t.val} ${esc(t.unit)} · ${t.phase}${c?' · '+c.status:''}</span></div></div>`}).join('');
-  document.querySelectorAll('.tag').forEach(e=>e.onclick=()=>{S.tagId=e.dataset.t;S.sel=null;render()});
+    <div><b>${esc(t.id)}</b><span>${esc(t.desc)} · ${t.val} ${esc(t.unit)} · ${t.phase}${c?' · '+c.id+' '+c.status:''}</span></div></div>`}).join('');
+  document.querySelectorAll('#tags .tag').forEach(e=>e.onclick=()=>{S.tagId=e.dataset.t;S.sel=null;render()});
 }
-function renderInteg(){
-  let h='<div class="h">Application</div><div class="h">Linked</div><div class="h">Power mapped</div>';
-  for(const k in APPS){
-    const a=S.integ[k],dis=['EXT','CMS'].includes(k)&&!S.integ.SDX.on;
-    h+=`<div>${APPS[k].name}<small>${APPS[k].role}</small></div>
-    <input type="checkbox" class="switch" data-k="${k}" data-f="on" ${a.on&&!dis?'checked':''} ${dis?'disabled':''}>
-    <input type="checkbox" class="switch" data-k="${k}" data-f="map" ${a.map?'checked':''} ${!a.on||dis?'disabled':''}>`;
+function phaseSel(dis){const t=tag(),p=PH.find(x=>x.n===t.phase)||PH[0];
+  return`<div class="row">Lifecycle stage: <select id="phase" ${dis?'disabled':''}>${PH.map(x=>`<option ${t.phase===x.n?'selected':''}>${x.n}</option>`).join('')}</select> <span class="sub">change-cost ×${p.m}</span></div>`}
+function bindPhase(){const e=$('phase');if(e)e.onchange=ev=>{tag().phase=ev.target.value;log(`${tag().id} lifecycle stage → ${ev.target.value}`);render()}}
+const STEPS=['Draft','In review','Approved','Implemented'];
+function renderChange(){
+  const t=tag(),c=cr(),box=$('change');
+  if(!c){
+    const others=TAGS.filter(x=>x.id!==t.id);
+    box.innerHTML=`<div>Propose a controlled change to <b>${esc(t.id)}</b>.</div>
+    <div class="row">${esc(t.attr)}: <b>${t.val} ${esc(t.unit)}</b> → <input type="number" id="newv" value="${t.to}"> ${esc(t.unit)}</div>
+    ${phaseSel(false)}
+    <details style="margin:6px 0"><summary class="sub" style="cursor:pointer">Bundle other tags in the same change (${Object.keys(S.bundle).filter(k=>S.bundle[k]!=null).length} selected)</summary>
+      ${others.map(o=>`<div class="row"><label><input type="checkbox" class="switch bnd" data-t="${esc(o.id)}" ${S.cr[o.id]?'disabled':''} ${S.bundle[o.id]!=null?'checked':''}> ${esc(o.id)}</label><span class="sub">${o.val} →</span><input type="number" class="bndv" data-t="${esc(o.id)}" value="${S.bundle[o.id]!=null?S.bundle[o.id]:o.to}" ${S.cr[o.id]?'disabled':''}> ${esc(o.unit)} <span class="sub">${S.cr[o.id]?'has open CR':o.phase}</span></div>`).join('')}
+      <div class="sub">One approval set (union of all tags' approvers), one implementation, one close-out.</div></details>
+    <textarea id="why" style="font-family:inherit;font-size:13px" placeholder="Reason">Pump duty point revised; motor upsized.</textarea>
+    <div class="row"><button class="pri" id="raise">Raise change request</button></div>
+    <div class="note">Baseline vs proposed, cost/schedule, consistency check and the 3D view all preview the proposed value.</div>`;
+    bindPhase();
+    box.querySelectorAll('.bnd').forEach(e=>e.onchange=()=>{const v=box.querySelector(`.bndv[data-t="${e.dataset.t}"]`).value;S.bundle[e.dataset.t]=e.checked?(+v||null):null;render()});
+    box.querySelectorAll('.bndv').forEach(e=>e.onchange=()=>{if(S.bundle[e.dataset.t]!=null){S.bundle[e.dataset.t]=+e.value||S.bundle[e.dataset.t]}});
+    $('newv').oninput=e=>{t.to=+e.target.value||t.to;const rs=records();renderCost(rs);renderImpact(rs);renderIso(rs);renderKpi(rs);renderMatrix();renderConsistency(rs);renderExchange(rs);renderProject();renderDash(rs)};
+    $('raise').onclick=()=>{
+      const n=+$('newv').value||t.to,id='CR-'+(S.seq++);
+      const extra=Object.keys(S.bundle).filter(k=>S.bundle[k]!=null&&!S.cr[k]&&TAGS.some(x=>x.id===k));
+      const grp=[S.tagId,...extra],why=$('why').value;
+      S.shared[id]={appr:{},ack:false};
+      grp.forEach(g=>{S.cr[g]={id,to:g===S.tagId?n:S.bundle[g],why,status:'In review',tasks:{},chk:{},grp}});
+      S.bundle={};
+      log(`raised ${id} on ${grp.join(', ')}`);
+      notify(withTag(S.tagId,required),`${id}: approval requested for ${grp.join(', ')}`);render();
+    };return;
   }
-  $('integ').innerHTML=h;
-  document.querySelectorAll('#integ input').forEach(e=>e.onchange=()=>{
-    S.integ[e.dataset.k][e.dataset.f]=e.checked;
-    log(`${APPS[e.dataset.k].name}: ${e.dataset.f==='on'?'link':'attribute mapping'} ${e.checked?'enabled':'disabled'}`);
-    render();
-  });
+  const req=required(),sh=SH(c),G=grpOf(c);
+  const idx=STEPS.indexOf(c.status),rej=c.status==='Rejected';
+  const warns=groupWarns(c);
+  let h=`<b>${c.id}</b> · ${esc(t.id)}: ${t.val} → <b>${c.to} ${esc(t.unit)}</b><br><span class="sub">${esc(c.why)}</span>`;
+  if(G.length>1)h+=`<div class="chips" style="margin-top:6px"><span class="sub">Bundle:</span>${G.map(g=>{const x=TAGS.find(q=>q.id===g);return`<span class="chip ${g===S.tagId?'on':''}" data-chip="${esc(g)}">${esc(g)} ${x.val}→${S.cr[g].to}</span>`}).join('')}</div>`;
+  h+=`<div class="steps">${STEPS.map((s,i)=>`<div class="step ${rej?'':i<idx?'done':i===idx?'cur':''}">${s}</div>`).join('')}</div>${phaseSel(c.status==='Implemented'||rej)}`;
+  if(rej)h+=`<div class="note" style="border-color:var(--manual)">Rejected. Tag values unchanged.</div>`;
+  h+=`<h3>Required approvals${G.length>1?' (all bundled tags)':''}</h3>`+req.map(d=>{
+    const st=sh.appr[d];
+    const can=c.status==='In review'&&S.role===d&&!st;
+    return`<div class="appr"><span>${d}</span><span>${st?`<span class="pill ${st==='Approved'?'auto':'manual'}">${st}</span>`:
+      can?`<button class="pri sm" data-a="Approved" data-d="${d}">Approve</button> <button class="bad sm" data-a="Rejected" data-d="${d}">Reject</button>`:
+      `<span class="pill none">Pending</span>`}</span></div>`}).join('');
+  const open=c.status==='Implemented'?allTasks(c).filter(x=>!x.done).length:0;
+  if(c.status==='Approved'&&warns.length)h+=`<label class="row" style="margin-top:8px"><input type="checkbox" id="ack" class="switch" ${sh.ack?'checked':''}> Accept ${warns.length} consistency warning(s) and proceed</label>`;
+  h+=`<div class="row" style="margin-top:10px">`;
+  const gate=warns.length&&!sh.ack;
+  if(c.status==='Approved')h+=`<button class="pri" id="impl" ${S.role==='Project Manager'&&!gate?'':'disabled'}>Implement ${G.length>1?'bundle':'change'}${S.role!=='Project Manager'?' (PM only)':gate?' (accept warnings first)':''}</button>`;
+  if(c.status==='Implemented')h+=`<button id="close" ${open?'disabled':''}>${open?`Close-out blocked: ${open} task(s) open`:'Close &amp; allow new change'}</button>`;
+  if(rej)h+=`<button id="close">Close &amp; allow new change</button>`;
+  h+=`</div>`;
+  if(c.status==='In review')h+=`<div class="note">Switch “Viewing as” to each discipline to approve (or use the dashboard to-do). Integration, matrix or lifecycle-stage changes re-compute who must approve.</div>`;
+  if(c.status==='Implemented')h+=`<div class="note">Auto-sync records updated. Flagged items, calcs and unlinked apps are tasks with engineer checklists — nothing is claimed correct until signed off.</div>`;
+  box.innerHTML=h;bindPhase();
+  box.querySelectorAll('[data-chip]').forEach(e=>e.onclick=()=>{S.tagId=e.dataset.chip;S.sel=null;render()});
+  const ak=$('ack');if(ak)ak.onchange=e=>{sh.ack=e.target.checked;log((sh.ack?'accepted':'withdrew acceptance of')+' consistency warnings');render()};
+  box.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>decide(S.tagId,b.dataset.d,b.dataset.a));
+  const im=$('impl');if(im)im.onclick=()=>implement(S.tagId);
+  const cl=$('close');if(cl)cl.onclick=()=>closeCR(S.tagId);
 }
-function renderMatrix(){
-  $('matrix').innerHTML=`<table><tr><th>Discipline</th><th>Approval required</th></tr>`+ROLES.map(d=>
-   `<tr><td>${d}</td><td><select data-d="${d}">${[['always','Always'],['impacted','When impacted'],['never','Never']].map(([v,l])=>`<option value="${v}" ${S.matrix[d]===v?'selected':''}>${l}</option>`).join('')}</select></td></tr>`).join('')+
-   `</table><div class="row">Escalate to PM + Operations when change &gt; <input type="number" id="pct" min="0" max="500" value="${S.opsPct}" style="width:64px"> %</div>
-   <div class="sub">Approvers this change: <b>${required().join(', ')}</b></div>`;
-  document.querySelectorAll('#matrix select').forEach(e=>e.onchange=()=>{S.matrix[e.dataset.d]=e.value;log(`approval matrix: ${e.dataset.d} → ${e.value}`);render()});
-  $('pct').onchange=e=>{S.opsPct=Math.max(0,+e.target.value||0);log('escalation threshold → '+S.opsPct+'%');render()};
+function renderTasks(){
+  const c=cr(),box=$('tasks');
+  if(!c||c.status!=='Implemented'){box.innerHTML='<span class="sub">Tasks appear after implementation: flagged items, calcs, unlinked apps and manual procurement steps. Each has an engineer checklist and needs a sign-off note.</span>';return}
+  const tl=allTasks(c);
+  box.innerHTML=tl.length?tl.map((x,i)=>{
+    const can=!x.done&&(S.role===x.disc||S.role==='Project Manager');
+    const all=x.chk.items.every(Boolean)&&x.chk.note.trim().length>=3;
+    return`<details class="task" ${can?'open':''} data-i="${i}"><summary><span>${esc(x.label)}<br><span class="sub">${x.tag} · ${x.disc} · ${x.kind}</span></span>${x.done?'<span class="pill auto">Signed off</span>':`<span class="pill ${can?'flag':'none'}">${x.chk.items.filter(Boolean).length}/${x.ck.length}</span>`}</summary>
+      <div class="ck">${x.ck.map((q,j)=>`<label><input type="checkbox" class="switch ckb" data-i="${i}" data-j="${j}" ${x.chk.items[j]?'checked':''} ${can?'':'disabled'}> ${esc(q)}</label>`).join('')}
+      <input type="text" class="cknote" data-i="${i}" placeholder="Sign-off note (required)" value="${esc(x.chk.note)}" ${can?'':'disabled'}>
+      ${x.done?'':`<button class="pri sm cksign" data-i="${i}" ${can&&all?'':'disabled'}>Sign off</button>`}</div></details>`}).join(''):'<span class="msgok">No manual tasks – fully auto-synced.</span>';
+  box.querySelectorAll('.ckb').forEach(e=>e.onchange=()=>{tl[+e.dataset.i].chk.items[+e.dataset.j]=e.checked;render()});
+  box.querySelectorAll('.cknote').forEach(e=>e.oninput=()=>{const x=tl[+e.dataset.i];x.chk.note=e.value;const b=box.querySelector(`.cksign[data-i="${e.dataset.i}"]`);if(b)b.disabled=!(x.chk.items.every(Boolean)&&e.value.trim().length>=3);save()});
+  box.querySelectorAll('.cksign').forEach(b=>b.onclick=()=>{const x=tl[+b.dataset.i];S.cr[x.tag].tasks[x.id]=true;log(`signed off ${x.label} (${x.tag})`);notify(['Project Manager'],`${c.id}: ${x.label} signed off by ${S.role}`);render()});
 }
+function renderConsistency(rs){
+  const c=cr(),w=c?groupWarns(c):consistency(rs);
+  $('cons').innerHTML=w.length?w.slice(0,8).map(x=>`<div class="warn ${x.kind==='diverge'?'d':''}">${c&&grpOf(c).length>1?'<b>'+x.tag+'</b> ':''}${esc(x.msg)}</div>`).join('')+(w.length>8?`<div class="sub">+${w.length-8} more</div>`:'')+`<div class="sub">${w.filter(x=>x.kind==='stale').length} unverified-upstream · ${w.filter(x=>x.kind==='diverge').length} divergence. The PM must accept these before implementing.</div>`
+   :'<div class="okmsg">No consistency warnings: every auto-updating record is fed by verified or auto-synced upstream data, and no linked chain diverges.</div>';
+}
+
+/* ---------- render: impact ---------- */
 function renderKpi(rs){
   const n=o=>rs.filter(r=>r.o===o).length;
   $('kpi').innerHTML=`<div><b class="auto">${n('auto')}</b><span>auto-sync</span></div>
@@ -396,6 +674,14 @@ function renderImpact(rs){
   `<table><tr><th>Record</th><th>App</th><th>Owner</th><th>Impact</th><th>Baseline → proposed</th><th>Rev</th><th>Result</th></tr>`+
   list.map(r=>`<tr class="${r.id===S.sel?'hl':''}"><td><b>${esc(r.id)}</b><br><span class="sub">${esc(r.name)}</span></td><td>${r.app}</td><td>${r.disc}</td><td>${pill(r.o)}</td><td>${diffOf(r)}</td><td>${r.rev==='-'?'—':r.rev2?`<s>${r.rev}</s> → <b>${r.rev2}</b>`:r.rev}</td><td>${r.state?esc(r.state):'—'}</td></tr>`).join('')+'</table>';
 }
+function renderDom(rs){
+  $('dom').innerHTML=DOMS.map(([k,l])=>{
+    const q=rs.filter(r=>r.dom===k),a=q.filter(r=>r.o!=='none').length;
+    const n=o=>q.filter(r=>r.o===o).length,w=o=>(q.length?n(o)/q.length*100:0)+'%';
+    return`<div class="t ${S.dom===k?'on':''}" data-d="${k}"><div>${l}</div><b>${a}</b><span class="sub"> of ${q.length} affected</span>
+    <div class="bar"><i style="width:${w('auto')};background:var(--auto)"></i><i style="width:${w('flag')};background:var(--flag)"></i><i style="width:${w('verify')};background:var(--verify)"></i><i style="width:${w('manual')};background:var(--manual)"></i><i style="width:${w('notify')};background:var(--notify)"></i></div></div>`}).join('');
+  $('dom').querySelectorAll('.t').forEach(e=>e.onclick=()=>{S.dom=S.dom===e.dataset.d?null:e.dataset.d;render()});
+}
 function renderCost(rs){
   const k=calc(rs),t=tag(),c=cr();
   const bars=Object.entries(k.byD).sort((a,b)=>b[1]-a[1]).map(([d,h])=>
@@ -406,123 +692,21 @@ function renderCost(rs){
    <div class="row sub"><span>Rework: ${k.days} d${k.ph.d?` (incl. +${k.ph.d} d ${k.ph.n.toLowerCase()} stage)`:''}</span>·<span>Procurement lead-time Δ: ${k.lead} d (parallel)</span>${k.rework?`·<span>Fab/field rework allowance: ${money(k.rework)}</span>`:''}·<span class="${k.exposure?'manual':''}">Exposure if unlinked items are missed: <b>${money(k.exposure)}</b></span></div>
    ${bars}`;
 }
-function renderPath(){
-  const c=cr(),impl=c&&c.status==='Implemented';
-  $('path').innerHTML=stages().map(s=>{
-    const signed=impl&&c.tasks[s.id];
-    const cls=!impl?'':s.auto?'auto':signed?'signed':'task';
-    const st=!impl?(s.auto?'Will auto-run':'Will be a task'):s.auto?'Auto-completed':signed?'Signed off ✓':'Task open';
-    return`<div class="stage ${cls}"><b>${s.name}</b><small>${s.disc}</small><br><small>${s.note}</small><br><span class="pill ${cls==='auto'||cls==='signed'?'auto':cls==='task'?'flag':'none'}">${st}</span></div>`}).join('');
-  $('pathNote').innerHTML=`<div class="note">Even with full integration, vendor re-quote and PO amendment stay human decisions.</div>`;
-}
-const STEPS=['Draft','In review','Approved','Implemented'];
-function phaseSel(dis){const t=tag(),p=PH.find(x=>x.n===t.phase)||PH[0];
-  return`<div class="row">Lifecycle stage: <select id="phase" ${dis?'disabled':''}>${PH.map(x=>`<option ${t.phase===x.n?'selected':''}>${x.n}</option>`).join('')}</select> <span class="sub">change-cost ×${p.m}</span></div>`}
-function bindPhase(){const e=$('phase');if(e)e.onchange=ev=>{tag().phase=ev.target.value;log(`${tag().id} lifecycle stage → ${ev.target.value}`);render()}}
-function renderChange(){
-  const t=tag(),c=cr(),box=$('change');
-  if(!c){
-    box.innerHTML=`<div>Propose a controlled change to <b>${esc(t.id)}</b>.</div>
-    <div class="row">${esc(t.attr)}: <b>${t.val} ${esc(t.unit)}</b> → <input type="number" id="newv" value="${t.to}"> ${esc(t.unit)}</div>
-    ${phaseSel(false)}
-    <textarea id="why" style="font-family:inherit;font-size:13px" placeholder="Reason">Pump duty point revised; motor upsized.</textarea>
-    <div class="row"><button class="pri" id="raise">Raise change request</button></div>
-    <div class="note">Baseline vs proposed, cost/schedule, consistency check and the 3D view all preview the proposed value.</div>`;
-    bindPhase();
-    $('newv').oninput=e=>{t.to=+e.target.value||t.to;const rs=records();renderCost(rs);renderImpact(rs);renderIso(rs);renderKpi(rs);renderMatrix();renderConsistency(rs);renderExchange(rs);renderProject()};
-    $('raise').onclick=()=>{
-      const n=+$('newv').value||t.to;
-      S.cr[S.tagId]={id:'CR-'+(100+Object.keys(S.cr).length+1),to:n,why:$('why').value,status:'In review',appr:{},tasks:{},ack:false};
-      log(`raised ${S.cr[S.tagId].id} on ${t.id}: ${t.val}→${n} ${t.unit}`);
-      notify(required(),`${S.cr[S.tagId].id}: approval requested for ${t.id} (${t.val}→${n} ${t.unit})`);render();
-    };return;
-  }
-  const req=required();
-  if(c.status==='In review'&&req.every(d=>c.appr[d]==='Approved')){c.status='Approved';log(`${c.id} fully approved`);notify(['Project Manager'],`${c.id} fully approved – ready to implement`)}
-  else if(c.status==='Approved'&&!req.every(d=>c.appr[d]==='Approved')){c.status='In review';log(`${c.id} back to review (approver set changed)`)}
-  const idx=STEPS.indexOf(c.status),rej=c.status==='Rejected';
-  const warns=consistency(records());
-  let h=`<b>${c.id}</b> · ${esc(t.id)}: ${t.val} → <b>${c.to} ${esc(t.unit)}</b><br><span class="sub">${esc(c.why)}</span>
-   <div class="steps">${STEPS.map((s,i)=>`<div class="step ${rej?'':i<idx?'done':i===idx?'cur':''}">${s}</div>`).join('')}</div>${phaseSel(c.status==='Implemented'||rej)}`;
-  if(rej)h+=`<div class="note" style="border-color:var(--manual)">Rejected. Tag value unchanged.</div>`;
-  h+=`<h3>Required approvals</h3>`+req.map(d=>{
-    const st=c.appr[d];
-    const can=c.status==='In review'&&S.role===d&&!st;
-    return`<div class="appr"><span>${d}</span><span>${st?`<span class="pill ${st==='Approved'?'auto':'manual'}">${st}</span>`:
-      can?`<button class="pri sm" data-a="Approved" data-d="${d}">Approve</button> <button class="bad sm" data-a="Rejected" data-d="${d}">Reject</button>`:
-      `<span class="pill none">Pending</span>`}</span></div>`}).join('');
-  const open=c.status==='Implemented'?taskList(records()).filter(x=>!c.tasks[x.id]).length:0;
-  if(c.status==='Approved'&&warns.length)h+=`<label class="row" style="margin-top:8px"><input type="checkbox" id="ack" class="switch" ${c.ack?'checked':''}> Accept ${warns.length} consistency warning(s) and proceed</label>`;
-  h+=`<div class="row" style="margin-top:10px">`;
-  const gate=warns.length&&!c.ack;
-  if(c.status==='Approved')h+=`<button class="pri" id="impl" ${S.role==='Project Manager'&&!gate?'':'disabled'}>Implement change${S.role!=='Project Manager'?' (PM only)':gate?' (accept warnings first)':''}</button>`;
-  if(c.status==='Implemented')h+=`<button id="close" ${open?'disabled':''}>${open?`Close-out blocked: ${open} task(s) open`:'Close &amp; allow new change'}</button>`;
-  if(rej)h+=`<button id="close">Close &amp; allow new change</button>`;
-  h+=`</div>`;
-  if(c.status==='In review')h+=`<div class="note">Switch “Viewing as” to each discipline to approve. Integration, matrix or lifecycle-stage changes re-compute who must approve.</div>`;
-  if(c.status==='Implemented')h+=`<div class="note">Auto-sync records updated. Flagged items, calcs and unlinked apps are tasks — nothing is claimed correct until an engineer signs off.</div>`;
-  box.innerHTML=h;bindPhase();
-  const ak=$('ack');if(ak)ak.onchange=e=>{c.ack=e.target.checked;log((c.ack?'accepted':'withdrew acceptance of')+' consistency warnings');render()};
-  box.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
-    c.appr[b.dataset.d]=b.dataset.a;log(`${b.dataset.a.toLowerCase()} ${c.id}`);
-    notify(['Project Manager',...req],`${c.id}: ${b.dataset.d} ${b.dataset.a.toLowerCase()}`);
-    if(b.dataset.a==='Rejected')c.status='Rejected';render();
-  });
-  const im=$('impl');if(im)im.onclick=()=>{
-    c.status='Implemented';
-    const rs=records(),tl=taskList(rs);
-    log(`implemented ${c.id}; ${rs.filter(r=>r.o==='auto').length} records auto-synced, ${tl.length} tasks opened`);
-    tl.forEach(x=>notify([x.disc],`${c.id}: task for you – ${x.label}`));
-    notify(req,`${c.id} implemented`);render()};
-  const cl=$('close');if(cl)cl.onclick=()=>{if(c.status==='Implemented'){(S.history[S.tagId]=S.history[S.tagId]||[]).unshift({id:c.id,from:tag().val,to:c.to,t:now(),phase:tag().phase});tag().val=c.to}delete S.cr[S.tagId];log('closed '+c.id);render()};
-}
-function renderTasks(rs){
-  const c=cr();
-  if(!c||c.status!=='Implemented'){$('tasks').innerHTML='<span class="sub">Tasks appear after implementation (flagged items, calcs, unlinked apps, manual procurement steps).</span>';return}
-  const tl=taskList(rs);
-  $('tasks').innerHTML=tl.length?tl.map(x=>{
-    const d=c.tasks[x.id],can=!d&&(S.role===x.disc||S.role==='Project Manager');
-    return`<div class="appr"><span>${esc(x.label)}<br><span class="sub">${x.disc} · ${x.kind}</span></span>
-    <span>${d?'<span class="pill auto">Signed off</span>':`<button class="pri sm" data-task="${esc(x.id)}" ${can?'':'disabled'}>Sign off</button>`}</span></div>`}).join(''):'<span class="msgok">No manual tasks – fully auto-synced.</span>';
-  $('tasks').querySelectorAll('[data-task]').forEach(b=>b.onclick=()=>{const lbl=(tl.find(x=>x.id===b.dataset.task)||{}).label||b.dataset.task;c.tasks[b.dataset.task]=true;log('signed off '+lbl);notify(['Project Manager'],`${c.id}: ${lbl} signed off by ${S.role}`);render()});
-}
-function renderInbox(){
-  const mine=S.inbox.filter(m=>m.role===S.role);
-  $('inboxRole').textContent=S.role;
-  $('inbox').innerHTML=mine.length?mine.map((m,i)=>`<div class="msg ${m.read?'read':''}" data-i="${S.inbox.indexOf(m)}"><b>${m.t}</b> ${esc(m.msg)}</div>`).join(''):'<span class="sub">No notifications for this role.</span>';
-  $('inbox').querySelectorAll('.msg').forEach(e=>e.onclick=()=>{S.inbox[+e.dataset.i].read=true;render()});
-  $('bellN').textContent=mine.filter(m=>!m.read).length;
-}
-function renderNotif(rs){
-  const mine=rs.filter(r=>r.disc===S.role&&r.o!=='none');
-  const c=cr();
-  if(!c){$('notif').innerHTML='<span class="sub">No open change on this tag.</span>';return}
-  $('notif').innerHTML=mine.length?`<b>${S.role}</b> sees ${mine.length} impacted item(s) from ${c.id}:<ul>`+mine.map(r=>`<li>${esc(r.id)} — ${OUT[r.o].t}</li>`).join('')+'</ul>'
-   :`<b>${S.role}</b> has no impacted records on ${c.id}; ${S.role==='Project Manager'?'oversees all.':'informed only.'}`;
-}
-
-/* ---- isometric 3D view ---- */
 function renderIso(rs){
   const t=tag(),k=34,ox=215,oy=130;
   const P=(x,y,z)=>`${(ox+(x-y)*0.866*k).toFixed(1)},${(oy+(x+y)*0.5*k-z*k).toFixed(1)}`;
-  const box=(x,y,z,w,d,h,fill,dash,stroke)=>{
-    const st=`stroke="${stroke||'var(--text)'}" stroke-width="1" ${dash?'stroke-dasharray="4 3"':''}`;
+  const box=(x,y,z,w,d,h,fill,dash)=>{
+    const st=`stroke="var(--text)" stroke-width="1" ${dash?'stroke-dasharray="4 3"':''}`;
     const f=dash?'none':fill;
-    return`<polygon points="${P(x,y,z+h)} ${P(x+w,y,z+h)} ${P(x+w,y+d,z+h)} ${P(x,y+d,z+h)}" fill="${f}" ${st} opacity="${dash?1:1}"/>
+    return`<polygon points="${P(x,y,z+h)} ${P(x+w,y,z+h)} ${P(x+w,y+d,z+h)} ${P(x,y+d,z+h)}" fill="${f}" ${st}/>
     <polygon points="${P(x,y+d,z)} ${P(x+w,y+d,z)} ${P(x+w,y+d,z+h)} ${P(x,y+d,z+h)}" fill="${f}" fill-opacity="${dash?0:.78}" ${st}/>
     <polygon points="${P(x+w,y,z)} ${P(x+w,y+d,z)} ${P(x+w,y+d,z+h)} ${P(x+w,y,z+h)}" fill="${f}" fill-opacity="${dash?0:.55}" ${st}/>`};
-  const obj=rs.find(r=>r.id.startsWith('3D-')),c=cr();
+  const obj=rs.find(r=>r.k==='d3'),c=cr();
   const modelUpdates=obj.o==='auto'&&c&&c.status==='Implemented';
-  const sFor=v=>Math.cbrt(v/ORIG[0].val); // relative size scale from kW
-  const base=Math.cbrt(t.val/t.val),prop=Math.cbrt(propVal()/t.val);
+  const base=1,prop=Math.cbrt(propVal()/t.val);
   const scene=(s,dash,tint)=>{
     const mw=2.4*s,md=1.4*s,mh=1.4*s,fw=Math.max(5.8,3.0+mw+.5),fd=Math.max(3.2,md+1.4);
-    let o='';
-    o+=box(0,0,0,fw,fd,.4,'#6b7785',dash);
-    o+=box(.4,(fd-1.4)/2,.4,2.2,1.4,1.2,'#8a96a3',dash);
-    o+=box(2.8,(fd-md)/2,.4,mw,md,mh,tint,dash);
-    o+=box(2.8+mw,(fd-.5)/2,.4+mh/2,fw-2.8-mw+.8,.5,.2,'#c9a227',dash);
-    return o;
+    return box(0,0,0,fw,fd,.4,'#6b7785',dash)+box(.4,(fd-1.4)/2,.4,2.2,1.4,1.2,'#8a96a3',dash)+box(2.8,(fd-md)/2,.4,mw,md,mh,tint,dash)+box(2.8+mw,(fd-.5)/2,.4+mh/2,fw-2.8-mw+.8,.5,.2,'#c9a227',dash);
   };
   const tint=obj.o==='auto'?'#2ea36b':obj.o==='manual'?'#e5484d':'#e0a800';
   let s=`<polygon points="${P(-1,-1,0)} ${P(9,-1,0)} ${P(9,6,0)} ${P(-1,6,0)}" fill="var(--panel2)" stroke="var(--line)"/>`;
@@ -530,43 +714,40 @@ function renderIso(rs){
   if(v==='baseline')s+=scene(base,false,'#3b82f6');
   else if(v==='proposed')s+=scene(prop,false,tint);
   else s+=scene(base,true)+scene(prop,false,tint);
-  s+=`<text x="12" y="20" style="font-weight:700">${esc(t.id)} · ${v==='baseline'?t.val:propVal()} ${esc(t.unit)}${v==='overlay'?` <tspan style="font-weight:400">(dashed = baseline ${t.val})</tspan>`:''}</text>
-   <text x="12" y="288" style="font-size:10px">Frame ${frame(v==='baseline'?t.val:propVal())} · baseplate ${((v==='baseline'?t.val:propVal())/250*1.2).toFixed(1)} t</text>`;
+  const shown=v==='baseline'?t.val:propVal();
+  s+=`<text x="12" y="20" style="font-weight:700">${esc(t.id)} · ${shown} ${esc(t.unit)}${v==='overlay'?` <tspan style="font-weight:400">(dashed = baseline ${t.val})</tspan>`:''}</text>
+   <text x="12" y="288" style="font-size:10px">Frame ${frame(shown)} · baseplate ${(shown/250*1.2).toFixed(1)} t</text>`;
   $('iso').innerHTML=s;
   $('viewSeg').innerHTML=[['baseline','Baseline'],['proposed','Proposed'],['overlay','Overlay']].map(([k,l])=>`<button data-v="${k}" class="${S.view===k?'on':''}">${l}</button>`).join('');
-  $('viewSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;renderIso(rs);});
+  $('viewSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;renderIso(rs);save()});
   $('viewNote').innerHTML=obj.o==='auto'?`<span class="auto">Smart 3D linked + mapped: object resizes on implementation${modelUpdates?' (done)':''}.</span>`
     :`<span class="${obj.o==='manual'?'manual':'flag'}">${obj.o==='manual'?'Smart 3D not linked: model stays at baseline until updated by hand.':'Mapping off: modeller must update the object manually.'}</span>`;
 }
 
-/* ---- import ---- */
-function parseRegister(txt){
-  txt=txt.trim();if(!txt)throw new Error('Nothing to import');
-  let rows;
-  if(txt[0]==='['){rows=JSON.parse(txt)}
-  else{
-    const lines=txt.split(/\r?\n/).filter(l=>l.trim());
-    const hdr=lines[0].toLowerCase().includes('tag')&&isNaN(+lines[0].split(',')[4]);
-    rows=(hdr?lines.slice(1):lines).map(l=>{const p=l.split(',').map(x=>x.trim());return{tag:p[0],desc:p[1],attr:p[2],unit:p[3],val:p[4],to:p[5]}});
+/* ---------- render: integration ---------- */
+function renderInteg(){
+  let h='<div class="h">Application</div><div class="h">Linked</div><div class="h">Power mapped</div>';
+  for(const k in APPS){
+    const a=S.integ[k],dis=['EXT','CMS'].includes(k)&&!S.integ.SDX.on;
+    h+=`<div>${APPS[k].name}<small>${APPS[k].role}</small></div>
+    <input type="checkbox" class="switch" data-k="${k}" data-f="on" ${a.on&&!dis?'checked':''} ${dis?'disabled':''}>
+    <input type="checkbox" class="switch" data-k="${k}" data-f="map" ${a.map?'checked':''} ${!a.on||dis?'disabled':''}>`;
   }
-  return rows;
-}
-function doImport(){
-  const msg=$('impMsg');
-  try{
-    const rows=parseRegister($('imp').value);let added=0,skipped=[];
-    rows.forEach((r,i)=>{
-      const id=String(r.tag||r.id||'').trim(),val=+r.val,to=+r.to;
-      if(!id||!isFinite(val)||!isFinite(to)||val<=0){skipped.push(`row ${i+1}: invalid`);return}
-      if(TAGS.some(t=>t.id===id)){skipped.push(`${id}: duplicate`);return}
-      TAGS.push({id,desc:r.desc||'Imported equipment',attr:r.attr||'Rated power',unit:r.unit||'kW',val,to,phase:PH.some(p=>p.n===r.phase)?r.phase:'Design'});added++;
-    });
-    if(added){const last=TAGS[TAGS.length-1];S.tagId=last.id;S.sel=null;log(`imported ${added} tag(s)`)}
+  $('integ').innerHTML=h;
+  document.querySelectorAll('#integ input').forEach(e=>e.onchange=()=>{
+    S.integ[e.dataset.k][e.dataset.f]=e.checked;
+    log(`${APPS[e.dataset.k].name}: ${e.dataset.f==='on'?'link':'attribute mapping'} ${e.checked?'enabled':'disabled'}`);
     render();
-    $('impMsg').innerHTML=`<span class="${added?'msgok':'msgerr'}">${added} imported${skipped.length?'; skipped '+esc(skipped.join(', ')):''}</span>`;
-  }catch(e){msg.innerHTML=`<span class="msgerr">${esc(e.message)}</span>`}
+  });
 }
-
+function renderMatrix(){
+  $('matrix').innerHTML=`<table><tr><th>Discipline</th><th>Approval required</th></tr>`+ROLES.map(d=>
+   `<tr><td>${d}</td><td><select data-d="${d}">${[['always','Always'],['impacted','When impacted'],['never','Never']].map(([v,l])=>`<option value="${v}" ${S.matrix[d]===v?'selected':''}>${l}</option>`).join('')}</select></td></tr>`).join('')+
+   `</table><div class="row">Escalate to PM + Operations when change &gt; <input type="number" id="pct" min="0" max="500" value="${S.opsPct}" style="width:64px"> %</div>
+   <div class="sub">Approvers for ${esc(tag().id)}: <b>${required().join(', ')}</b></div>`;
+  document.querySelectorAll('#matrix select').forEach(e=>e.onchange=()=>{S.matrix[e.dataset.d]=e.value;log(`approval matrix: ${e.dataset.d} → ${e.value}`);render()});
+  $('pct').onchange=e=>{S.opsPct=Math.max(0,+e.target.value||0);log('escalation threshold → '+S.opsPct+'%');render()};
+}
 function renderArch(){
   const I=S.integ,lk=a=>I[a].on&&(!['EXT','CMS'].includes(a)||I.SDX.on);
   const col=a=>lk(a)?'var(--auto)':'var(--manual)',d=a=>lk(a)?'':'5 4';
@@ -582,7 +763,7 @@ function renderArch(){
   });
   s+=`<g class="clk" data-app="SDX"><rect class="box" x="10" y="100" width="730" height="40" rx="8" style="stroke:${col('SDX')}"/><text class="lbl" x="375" y="125" text-anchor="middle">Controlled data exchange · HxGN SDx2 · ${I.SDX.on?'online':'OFFLINE'}</text></g>`;
   s+=`<rect class="box" x="10" y="170" width="730" height="50" rx="8"/><text class="lbl" x="375" y="190" text-anchor="middle">Connected engineering data backbone</text>
-   <text x="375" y="208" text-anchor="middle" style="fill:var(--mute)">${TAGS.length} tags · ${EDGES.length*TAGS.length} relationships · ${docs*TAGS.length} revisioned docs · ${Object.keys(S.cr).length} open change(s)</text>`;
+   <text x="375" y="208" text-anchor="middle" style="fill:var(--mute)">${TAGS.length} tags · ${EDGES.length*TAGS.length} relationships · ${docs*TAGS.length} revisioned docs · ${uniqueCRs().length} open change(s)</text>`;
   bt.forEach(([n,a,sub],j)=>{const x=125+255*j;
     s+=`<line x1="${x}" y1="220" x2="${x}" y2="260" stroke="${col(a)}" stroke-width="2" stroke-dasharray="${d(a)}"/>
     <g class="clk" data-app="${a}"><rect class="box" x="${x-115}" y="260" width="230" height="50" rx="8" style="stroke:${col(a)}"/><text class="lbl" x="${x}" y="280" text-anchor="middle">${n}</text><text x="${x}" y="297" text-anchor="middle" style="fill:var(--mute)">${sub} · ${lk(a)?'linked':'NOT LINKED'}</text></g>`;
@@ -592,30 +773,26 @@ function renderArch(){
   $('arch').querySelectorAll('.clk').forEach(g=>g.onclick=()=>{const a=g.dataset.app;if(['EXT','CMS'].includes(a)&&!I.SDX.on)return;I[a].on=!I[a].on;log(`${APPS[a].name}: link ${I[a].on?'enabled':'disabled'} (architecture view)`);render()});
   $('archNote').textContent=flow?'Packets show the approved change flowing through linked applications; red dashed paths carry nothing.':'Red dashed = not linked: changes will not reach that application. Exact integrations depend on project configuration.';
 }
-function renderDom(rs){
-  $('dom').innerHTML=DOMS.map(([k,l])=>{
-    const q=rs.filter(r=>r.dom===k),a=q.filter(r=>r.o!=='none').length;
-    const n=o=>q.filter(r=>r.o===o).length,w=o=>(q.length?n(o)/q.length*100:0)+'%';
-    return`<div class="t ${S.dom===k?'on':''}" data-d="${k}"><div>${l}</div><b>${a}</b><span class="sub"> of ${q.length} affected</span>
-    <div class="bar"><i style="width:${w('auto')};background:var(--auto)"></i><i style="width:${w('flag')};background:var(--flag)"></i><i style="width:${w('verify')};background:var(--verify)"></i><i style="width:${w('manual')};background:var(--manual)"></i><i style="width:${w('notify')};background:var(--notify)"></i></div></div>`}).join('');
-  $('dom').querySelectorAll('.t').forEach(e=>e.onclick=()=>{S.dom=S.dom===e.dataset.d?null:e.dataset.d;render()});
-}
-function renderConsistency(rs){
-  const w=consistency(rs);
-  $('cons').innerHTML=w.length?w.slice(0,8).map(x=>`<div class="warn ${x.kind==='diverge'?'d':''}">${esc(x.msg)}</div>`).join('')+(w.length>8?`<div class="sub">+${w.length-8} more</div>`:'')+`<div class="sub">${w.filter(x=>x.kind==='stale').length} unverified-upstream · ${w.filter(x=>x.kind==='diverge').length} divergence. The PM must accept these before implementing.</div>`
-   :'<div class="okmsg">No consistency warnings: every auto-updating record is fed by verified or auto-synced upstream data, and no linked chain diverges.</div>';
-}
 function renderExchange(rs){
   const c=cr(),impl=c&&c.status==='Implemented',p=propVal();
   const st={auto:[impl?'Delivered':'Queued','auto'],flag:[impl?'Flag raised':'Will flag','flag'],verify:['Held for engineer','verify'],notify:[impl?'Notified':'Will notify','notify'],manual:['Blocked – not linked','manual']};
-  $('xl').innerHTML=rs.filter(r=>r.dep).map(r=>`<div><span>${r.app} ⇄ SDx · ${esc(r.id)} · ${r.fd?esc(r.fd[0])+'='+esc(r.fd[1](p,1)):'event'}</span><span class="pill ${st[r.o][1]}">${st[r.o][0]}</span></div>`).join('');
+  $('xl').innerHTML=`<div class="sub"><span>Tag ${esc(tag().id)}</span></div>`+rs.filter(r=>r.dep).map(r=>`<div><span>${r.app} ⇄ SDx · ${esc(r.id)} · ${r.fd?esc(r.fd[0])+'='+esc(r.fd[1](p,1)):'event'}</span><span class="pill ${st[r.o][1]}">${st[r.o][0]}</span></div>`).join('');
+}
+
+/* ---------- render: project & asset ---------- */
+function renderPath(){
+  const c=cr(),impl=c&&c.status==='Implemented';
+  $('path').innerHTML=stages().map(s=>{
+    const signed=impl&&c.tasks[s.id];
+    const cls=!impl?'':s.auto?'auto':signed?'signed':'task';
+    const st=!impl?(s.auto?'Will auto-run':'Will be a task'):s.auto?'Auto-completed':signed?'Signed off ✓':'Task open';
+    return`<div class="stage ${cls}"><b>${s.name}</b><small>${s.disc}</small><br><small>${s.note}</small><br><span class="pill ${cls==='auto'||cls==='signed'?'auto':cls==='task'?'flag':'none'}">${st}</span></div>`}).join('');
+  $('pathNote').innerHTML=`<div class="note">Even with full integration, vendor re-quote and PO amendment stay human decisions. Showing ${esc(tag().id)}.</div>`;
 }
 function renderAsset(rs){
   const t=tag(),h=S.history[t.id]||[],c=cr();
-  const aff=rs.filter(r=>r.o!=='none'&&r.o!=='notify'),ready=aff.filter(r=>r.o==='auto'||(c&&c.tasks&&c.tasks[r.id])).length;
-  const pct=c&&c.status==='Implemented'?Math.round(ready/aff.length*100):c?0:100;
-  const pm=rs.find(r=>r.k==='pm');
-  $('asset').innerHTML=`<div class="row"><span>Nameplate <b>${t.val} ${esc(t.unit)}</b></span>·<span>Frame <b>${frame(t.val)}</b></span>·<span>Stage <b>${t.phase}</b></span>·<span>${pm.id} ${pm.rev}</span></div>
+  const pct=readiness(rs,c),pm=rs.find(r=>r.k==='pm');
+  $('asset').innerHTML=`<div class="row"><span>${esc(t.id)} nameplate <b>${t.val} ${esc(t.unit)}</b></span>·<span>Frame <b>${frame(t.val)}</b></span>·<span>Stage <b>${t.phase}</b></span>·<span>${pm.id} rev ${pm.rev}</span></div>
    <div class="sub">Handover readiness${c&&c.status!=='Implemented'?' (change not yet implemented)':''}: <b>${pct}%</b></div>
    <div class="bar" style="height:8px"><i style="height:8px;width:${pct}%;background:var(--accent)"></i></div>
    <h3 style="margin-top:10px">As-built history</h3>`+(h.length?h.map(x=>`<div class="appr"><span>${x.id} · ${x.from} → ${x.to} ${esc(t.unit)}</span><span class="sub">${x.t} · at ${x.phase}</span></div>`).join(''):'<span class="sub">No closed changes. The first closed change creates an as-built revision.</span>');
@@ -625,30 +802,118 @@ function renderProject(){
   const withCr=rows.filter(r=>r.c);
   const openT=withCr.reduce((n,r)=>n+r.tl.filter(x=>!r.c.tasks[x.id]).length,0);
   const eng=withCr.reduce((n,r)=>n+r.k.eng,0),mat=withCr.reduce((n,r)=>n+r.k.mat+r.k.rework,0),crit=Math.max(0,...withCr.map(r=>r.k.crit));
-  $('proj').innerHTML=`<div class="kpi"><div><b>${withCr.length}</b><span>open changes</span></div><div><b>${openT}</b><span>open tasks</span></div><div><b>${money(eng+mat)}</b><span>total cost impact</span></div><div><b>${crit} d</b><span>worst critical path</span></div></div>
+  $('proj').innerHTML=`<div class="kpi"><div><b>${uniqueCRs().length}</b><span>open changes</span></div><div><b>${openT}</b><span>open tasks</span></div><div><b>${money(eng+mat)}</b><span>total cost impact</span></div><div><b>${crit} d</b><span>worst critical path</span></div></div>
   <table><tr><th>Tag</th><th>Stage</th><th>Change</th><th>Docs revised</th><th>Tasks</th><th>Cost</th></tr>`+rows.map(r=>{
     const docs=r.rs.filter(x=>x.rev!=='-'&&x.dep);
-    return`<tr class="${r.t.id===S.tagId?'hl':''}" data-t="${esc(r.t.id)}" style="cursor:pointer"><td><b>${esc(r.t.id)}</b></td><td>${r.t.phase}</td><td>${r.c?r.c.id+' · '+r.c.status:'—'}</td><td>${r.c?docs.filter(x=>x.rev2).length+'/'+docs.length:'—'}</td><td>${r.c&&r.tl.length?r.tl.filter(x=>r.c.tasks[x.id]).length+'/'+r.tl.length:'—'}</td><td>${r.c?money(r.k.eng+r.k.mat+r.k.rework):'—'}</td></tr>`}).join('')+'</table>';
+    return`<tr class="clk ${r.t.id===S.tagId?'hl':''}" data-t="${esc(r.t.id)}"><td><b>${esc(r.t.id)}</b></td><td>${r.t.phase}</td><td>${r.c?r.c.id+' · '+r.c.status:'—'}</td><td>${r.c?docs.filter(x=>x.rev2).length+'/'+docs.length:'—'}</td><td>${r.c&&r.tl.length?r.tl.filter(x=>r.c.tasks[x.id]).length+'/'+r.tl.length:'—'}</td><td>${r.c?money(r.k.eng+r.k.mat+r.k.rework):'—'}</td></tr>`}).join('')+'</table>';
   $('proj').querySelectorAll('tr[data-t]').forEach(e=>e.onclick=()=>{S.tagId=e.dataset.t;S.sel=null;render()});
 }
+
+/* ---------- render: activity ---------- */
+function renderInbox(){
+  const mine=S.inbox.filter(m=>m.role===S.role);
+  $('inboxRole').textContent=S.role;
+  $('inbox').innerHTML=mine.length?mine.map(m=>`<div class="msg ${m.read?'read':''}" data-i="${S.inbox.indexOf(m)}"><b>${m.t}</b> ${esc(m.msg)}</div>`).join(''):'<span class="sub">No notifications for this role.</span>';
+  $('inbox').querySelectorAll('.msg').forEach(e=>e.onclick=()=>{S.inbox[+e.dataset.i].read=true;render()});
+  $('bellN').textContent=mine.filter(m=>!m.read).length;
+}
+function renderNotif(rs){
+  const mine=rs.filter(r=>r.disc===S.role&&r.o!=='none');
+  const c=cr();
+  if(!c){$('notif').innerHTML='<span class="sub">No open change on this tag.</span>';return}
+  $('notif').innerHTML=mine.length?`<b>${S.role}</b> sees ${mine.length} impacted item(s) from ${c.id} on ${esc(S.tagId)}:<ul>`+mine.map(r=>`<li>${esc(r.id)} — ${OUT[r.o].t}</li>`).join('')+'</ul>'
+   :`<b>${S.role}</b> has no impacted records on ${c.id}; ${S.role==='Project Manager'?'oversees all.':'informed only.'}`;
+}
+
+/* ---------- export / persistence / import ---------- */
+function download(name,mime,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:mime}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+const csvCell=v=>{v=String(v==null?'':v);return/[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+function exportCsv(){
+  const c=cr(),G=c?grpOf(c):[S.tagId],head=['tag','record','name','app','discipline','domain','impact','field','baseline','proposed','rev','rev_after','result'];
+  const rows=[head];
+  G.forEach(g=>withTag(g,()=>{const t=tag(),p=propVal();records().forEach(r=>rows.push([g,r.id,r.name,r.app,r.disc,r.dom,OUT[r.o].t,r.fd?r.fd[0]:'',r.fd?r.fd[1](t.val,0):'',r.fd?r.fd[1](p,1):'',r.rev,r.rev2||'',r.state||'']))}));
+  download((c?c.id:'preview-'+S.tagId)+'-impact-register.csv','text/csv',rows.map(r=>r.map(csvCell).join(',')).join('\n'));
+}
+function packHtml(){
+  const c=cr(),G=c?grpOf(c):[S.tagId],id=c?c.id:'PREVIEW';
+  const req=required(),sh=c?SH(c):{appr:{}};
+  let h=`<!doctype html><meta charset="utf-8"><title>${esc(id)} change pack</title><style>body{font:13px/1.45 system-ui,sans-serif;max-width:980px;margin:24px auto;padding:0 16px;color:#14202b}h1{margin:0}h2{border-bottom:2px solid #0a7f77;padding-bottom:3px;margin-top:26px}table{border-collapse:collapse;width:100%;margin:6px 0}td,th{border:1px solid #cfd8e0;padding:4px 6px;text-align:left;vertical-align:top;font-size:12px}th{background:#eef3f6}.w{border-left:3px solid #c4580a;padding:3px 8px;margin:3px 0;background:#fdf3ea}.s{color:#5a6978;font-size:12px}@media print{h2{break-after:avoid}}</style>
+  <h1>Change pack · ${esc(id)}</h1><div class="s">Generated ${new Date().toLocaleString()} by ${esc(S.role)} · status: ${c?c.status:'not raised (preview)'} · illustrative concept data</div>
+  <p>${esc(c?c.why:'')}</p><h2>Approvals</h2><table><tr><th>Discipline</th><th>Decision</th></tr>${req.map(d=>`<tr><td>${d}</td><td>${sh.appr[d]||'Pending'}</td></tr>`).join('')}</table>`;
+  const W=groupWarns(c);
+  G.forEach(g=>withTag(g,()=>{
+    const t=tag(),rs=records(),k=calc(rs),cc=cr(),p=propVal();
+    h+=`<h2>${esc(g)} · ${esc(t.desc)}: ${t.val} → ${p} ${esc(t.unit)} (stage ${t.phase})</h2>
+    <p class="s">Engineering ${k.hrs.toFixed(1)} h · ${money(k.eng)} · materials Δ ${money(k.mat+k.rework)} · critical path ${k.crit} d · exposure if unlinked items missed ${money(k.exposure)}</p>
+    <table><tr><th>Record</th><th>App</th><th>Owner</th><th>Impact</th><th>Baseline → proposed</th><th>Rev</th><th>Result</th></tr>${rs.map(r=>`<tr><td>${esc(r.id)} – ${esc(r.name)}</td><td>${r.app}</td><td>${r.disc}</td><td>${OUT[r.o].t}</td><td>${r.fd&&r.dep?esc(r.fd[0])+': '+esc(r.fd[1](t.val,0))+' → '+esc(r.fd[1](p,1)):'—'}</td><td>${r.rev}${r.rev2?' → '+r.rev2:''}</td><td>${esc(r.state||'—')}</td></tr>`).join('')}</table>`;
+    if(cc&&cc.status==='Implemented'){const tl=allTasks(c).filter(x=>x.tag===g);
+      h+=`<b>Close-out tasks</b><table><tr><th>Task</th><th>Owner</th><th>Checklist</th><th>Sign-off note</th></tr>${tl.map(x=>`<tr><td>${esc(x.label)}</td><td>${x.disc}</td><td>${x.ck.map((q,j)=>(x.chk.items[j]?'☑ ':'☐ ')+esc(q)).join('<br>')}</td><td>${x.done?'Signed off: ':'OPEN: '}${esc(x.chk.note)}</td></tr>`).join('')}</table>`}
+  }));
+  h+=`<h2>Consistency warnings (${W.length})</h2>`+(W.map(x=>`<div class="w"><b>${x.tag}</b> ${esc(x.msg)}</div>`).join('')||'<p>None.</p>');
+  h+=`<h2>Audit trail</h2><table>${S.log.slice().reverse().map(l=>`<tr><td>${esc(l)}</td></tr>`).join('')}</table>`;
+  return h;
+}
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify({S,TAGS}));const e=$('saved');if(e)e.textContent='Saved '+now()}catch(e){const el=$('saved');if(el)el.textContent='Not saved (storage unavailable)'}
+}
+function load(){
+  try{const raw=localStorage.getItem(KEY);if(!raw)return;const d=JSON.parse(raw);
+    if(d&&d.S&&Array.isArray(d.TAGS)&&d.TAGS.length){TAGS=d.TAGS;S=Object.assign(fresh(),d.S)}}catch(e){}
+}
+function restoreState(txt){
+  const d=JSON.parse(txt);if(!d||!d.S||!Array.isArray(d.TAGS)||!d.TAGS.length)throw new Error('Not a TagLink state file');
+  TAGS=d.TAGS;S=Object.assign(fresh(),d.S);
+}
+function parseRegister(txt){
+  txt=txt.trim();if(!txt)throw new Error('Nothing to import');
+  if(txt[0]==='[')return JSON.parse(txt);
+  const lines=txt.split(/\r?\n/).filter(l=>l.trim());
+  const hdr=lines[0].toLowerCase().includes('tag')&&isNaN(+lines[0].split(',')[4]);
+  return(hdr?lines.slice(1):lines).map(l=>{const p=l.split(',').map(x=>x.trim());return{tag:p[0],desc:p[1],attr:p[2],unit:p[3],val:p[4],to:p[5],phase:p[6]}});
+}
+function doImport(){
+  try{
+    const rows=parseRegister($('imp').value);let added=0,skipped=[];
+    rows.forEach((r,i)=>{
+      const id=String(r.tag||r.id||'').trim(),val=+r.val,to=+r.to;
+      if(!id||!isFinite(val)||!isFinite(to)||val<=0){skipped.push(`row ${i+1}: invalid`);return}
+      if(TAGS.some(t=>t.id===id)){skipped.push(`${id}: duplicate`);return}
+      TAGS.push({id,desc:r.desc||'Imported equipment',attr:r.attr||'Rated power',unit:r.unit||'kW',val,to,phase:PH.some(p=>p.n===r.phase)?r.phase:'Design'});added++;
+    });
+    if(added){S.tagId=TAGS[TAGS.length-1].id;S.sel=null;log(`imported ${added} tag(s)`)}
+    render();
+    $('impMsg').innerHTML=`<span class="${added?'msgok':'msgerr'}">${added} imported${skipped.length?'; skipped '+esc(skipped.join(', ')):''}</span>`;
+  }catch(e){$('impMsg').innerHTML=`<span class="msgerr">${esc(e.message)}</span>`}
+}
+
 function render(){
+  reconcile();
   const rs=records();
-  renderTags();renderInteg();renderMatrix();renderArch();renderDom(rs);renderKpi(rs);renderGraph(rs);renderLegend();renderDetail(rs);
-  renderIso(rs);renderConsistency(rs);renderCost(rs);renderPath();renderExchange(rs);renderAsset(rs);renderProject();renderImpact(rs);renderChange();renderTasks(rs);renderInbox();renderNotif(rs);
+  document.body.classList.toggle('light',S.skin==='light');$('skin').value=S.skin;$('role').value=S.role;$('mine').checked=S.mine;
+  renderTabs();renderDash(rs);renderTags();renderChange();renderTasks();renderConsistency(rs);
+  renderKpi(rs);renderGraph(rs);renderLegend();renderDetail(rs);renderImpact(rs);renderDom(rs);renderCost(rs);renderIso(rs);
+  renderInteg();renderMatrix();renderArch();renderExchange(rs);
+  renderProject();renderAsset(rs);renderPath();
+  renderInbox();renderNotif(rs);
   $('hubTitle').textContent=`Tag hub · ${tag().id} (${tag().desc}) — common reference across ${new Set(rs.map(r=>r.app)).size} applications`;
   $('log').innerHTML=S.log.map(l=>`<div>${esc(l)}</div>`).join('')||'<span class="sub">No activity yet.</span>';
+  save();
 }
 $('role').innerHTML=ROLES.map(r=>`<option>${r}</option>`).join('');
 $('role').onchange=e=>{S.role=e.target.value;render()};
 $('mine').onchange=e=>{S.mine=e.target.checked;render()};
-$('skin').onchange=e=>{document.body.classList.toggle('light',e.target.value==='light')};
-$('bell').onclick=()=>$('inbox').scrollIntoView({behavior:'smooth',block:'center'});
+$('skin').onchange=e=>{S.skin=e.target.value;render()};
+$('bell').onclick=()=>goTab('act');
 $('readAll').onclick=()=>{S.inbox.filter(m=>m.role===S.role).forEach(m=>m.read=true);render()};
 $('impBtn').onclick=doImport;
-$('impSample').onclick=()=>{$('imp').value='tag,desc,attr,unit,val,to\n40-M-401,Slurry pump motor,Rated power,kW,200,250\n40-M-402,Reagent mixer motor,Rated power,kW,55,75'};
+$('impSample').onclick=()=>{$('imp').value='tag,desc,attr,unit,val,to,phase\n40-M-401,Slurry pump motor,Rated power,kW,200,250,Design\n40-M-402,Reagent mixer motor,Rated power,kW,55,75,Procure'};
 $('impFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('imp').value=r.result;doImport()};r.readAsText(f)};
-$('reset').onclick=()=>{TAGS=JSON.parse(JSON.stringify(ORIG));S=fresh();$('role').value=S.role;$('mine').checked=false;$('imp').value='';$('impMsg').innerHTML='';render()};
-render();
+$('exPack').onclick=()=>download((cr()?cr().id:'preview')+'-change-pack.html','text/html',packHtml());
+$('exCsv').onclick=exportCsv;
+$('exJson').onclick=()=>download('taglink-state.json','application/json',JSON.stringify({S,TAGS},null,1));
+$('stFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{restoreState(r.result);render();$('stMsg').innerHTML='<span class="msgok">State restored</span>'}catch(err){$('stMsg').innerHTML=`<span class="msgerr">${esc(err.message)}</span>`}};r.readAsText(f)};
+$('reset').onclick=()=>{try{localStorage.removeItem(KEY)}catch(e){}TAGS=JSON.parse(JSON.stringify(ORIG));const sk=S.skin;S=fresh();S.skin=sk;$('imp').value='';$('impMsg').innerHTML='';$('stMsg').innerHTML='';render()};
+load();render();
 </script>
 </body>
 </html>
