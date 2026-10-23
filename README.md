@@ -7,3 +7,9 @@ Demonstrates: an equipment tag as the common reference across SmartPlant Foundat
 Key honesty rule built into the model: propagation depends on which apps are linked, attribute mappings and approval gates. Derived calcs are never auto-corrected.
 
 Illustrative only. No real Hexagon APIs or data.
+
+## Features
+- Baseline → proposed diff per linked record, plus cost / schedule impact (illustrative rates)
+- Configurable approval matrix (always / when impacted / never, plus % escalation rule)
+- Isometric 3D view (baseline / proposed / overlay), per-role notification inbox, CSV/JSON tag import
+- Dark and light hex-grid skins; BoM → requisition → PO procurement path with close-out task sign-off

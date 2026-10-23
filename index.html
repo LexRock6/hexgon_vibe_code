@@ -7,10 +7,16 @@
 <style>
 :root{
   --bg:#0d1117;--panel:#151b23;--panel2:#1b232e;--line:#2a3441;--text:#e6edf3;--mute:#8b98a8;
-  --accent:#00b3a4;--auto:#2ea36b;--flag:#e0a800;--verify:#e8731a;--manual:#e5484d;--notify:#3b82f6;--none:#566275;
+  --accent:#00b3a4;--on-accent:#04201d;--auto:#2ea36b;--flag:#e0a800;--verify:#e8731a;--manual:#e5484d;--notify:#3b82f6;--none:#566275;
+  --hexbg:none;
+}
+body.light{
+  --bg:#eaf0f4;--panel:#ffffff;--panel2:#f0f4f7;--line:#d3dce4;--text:#14202b;--mute:#5a6978;
+  --accent:#0a7f77;--on-accent:#ffffff;--auto:#1f8a57;--flag:#b78300;--verify:#c4580a;--manual:#d02b31;--notify:#2563eb;--none:#7b8794;
+  --hexbg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34zM28 100L0 84V66l28-16 28 16v18z' fill='none' stroke='%23c9d5de' stroke-width='1'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{margin:0;background:var(--bg) var(--hexbg);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
 .hex{width:28px;height:32px;background:var(--accent);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
@@ -19,10 +25,12 @@ header .sp{flex:1}
 select,input,textarea,button{font:inherit;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
 button{cursor:pointer}button:hover:not(:disabled){border-color:var(--accent)}
 button:disabled{opacity:.4;cursor:not-allowed}
-button.pri{background:var(--accent);border-color:var(--accent);color:#04201d;font-weight:600}
-button.bad{border-color:var(--manual);color:#ff8a8d}
+button.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
+button.bad{border-color:var(--manual);color:var(--manual)}
+button.sm{padding:2px 8px;font-size:12px}
 label.role{font-size:12px;color:var(--mute);display:flex;gap:6px;align-items:center}
-main{display:grid;grid-template-columns:260px 1fr 380px;gap:12px;padding:12px;align-items:start}
+.bell{position:relative}.bell b{background:var(--manual);color:#fff;border-radius:99px;padding:0 6px;font-size:11px;margin-left:4px}
+main{display:grid;grid-template-columns:280px 1fr 380px;gap:12px;padding:12px;align-items:start}
 @media(max-width:1150px){main{grid-template-columns:1fr}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px}
 .card h3{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--mute)}
@@ -37,26 +45,37 @@ main{display:grid;grid-template-columns:260px 1fr 380px;gap:12px;padding:12px;al
 .switch{accent-color:var(--accent);width:16px;height:16px}
 svg{width:100%;height:auto;display:block}
 svg text{fill:var(--text);font-size:10.5px}
-.node{cursor:pointer}.node:hover polygon{stroke:#fff}
+.node{cursor:pointer}.node:hover polygon{stroke:var(--text)}
 .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;margin-top:6px}
 .dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;background:currentColor}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th{color:var(--mute);text-align:left;font-weight:500;font-size:11px;padding:4px 6px;border-bottom:1px solid var(--line)}
 td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}
-tr.hl td{background:rgba(0,179,164,.08)}
+tr.hl td{background:rgba(0,179,164,.1)}
 .steps{display:flex;gap:4px;margin:6px 0 12px}
 .step{flex:1;text-align:center;font-size:11px;padding:5px 2px;border-radius:6px;background:var(--panel2);color:var(--mute)}
-.step.done{background:rgba(46,163,107,.18);color:var(--auto)}.step.cur{background:var(--accent);color:#04201d;font-weight:700}
+.step.done{background:rgba(46,163,107,.18);color:var(--auto)}.step.cur{background:var(--accent);color:var(--on-accent);font-weight:700}
 .row{display:flex;gap:8px;align-items:center;margin:6px 0;flex-wrap:wrap}
 .row input[type=number]{width:90px}
-textarea{width:100%;min-height:50px;resize:vertical}
+textarea{width:100%;min-height:50px;resize:vertical;font-family:ui-monospace,Menlo,monospace;font-size:12px}
 .appr{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--line)}
 .log{max-height:170px;overflow:auto;font-size:12px;color:var(--mute)}.log div{padding:2px 0;border-bottom:1px dashed var(--line)}
-.note{font-size:12px;color:var(--mute);border-left:3px solid var(--flag);padding:4px 8px;margin-top:8px;background:rgba(224,168,0,.06)}
+.note{font-size:12px;color:var(--mute);border-left:3px solid var(--flag);padding:4px 8px;margin-top:8px;background:rgba(224,168,0,.07)}
 .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
 .kpi div{background:var(--panel2);border-radius:8px;padding:8px;text-align:center}
-.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--mute)}
+.kpi b{font-size:19px;display:block}.kpi span{font-size:11px;color:var(--mute)}
 .detail{background:var(--panel2);border-radius:8px;padding:8px 10px;margin-top:8px;font-size:12.5px;min-height:44px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;border-radius:0}.seg button.on{background:var(--accent);color:var(--on-accent);font-weight:600}
+.path{display:flex;gap:6px;flex-wrap:wrap}
+.stage{flex:1;min-width:120px;background:var(--panel2);border-radius:8px;padding:8px;font-size:12px;border-top:3px solid var(--none)}
+.stage.auto{border-color:var(--auto)}.stage.task{border-color:var(--flag)}.stage.signed{border-color:var(--accent)}
+.stage b{display:block;margin-bottom:2px}.stage small{color:var(--mute)}
+.inbox div.msg{padding:6px 8px;border-radius:6px;margin-bottom:4px;background:var(--panel2);font-size:12.5px;cursor:pointer;border-left:3px solid var(--notify)}
+.inbox div.msg.read{opacity:.5;border-color:var(--none)}
+.mono{font-family:ui-monospace,Menlo,monospace}
+.diff{font-size:12px;white-space:nowrap}.diff s{color:var(--mute)}
+.msgok{color:var(--auto);font-size:12px}.msgerr{color:var(--manual);font-size:12px}
 footer{padding:8px 16px 20px;color:var(--mute);font-size:12px;text-align:center}
 </style>
 </head>
@@ -64,9 +83,9 @@ footer{padding:8px 16px 20px;color:var(--mute);font-size:12px;text-align:center}
 <header>
   <div class="logo"><div class="hex"></div><div>TagLink <div class="sub">Tag-centric change control · concept</div></div></div>
   <div class="sp"></div>
-  <label class="role">Viewing as
-    <select id="role"></select>
-  </label>
+  <label class="role">Skin <select id="skin"><option value="dark">Dark industrial</option><option value="light">Light hex-grid</option></select></label>
+  <label class="role">Viewing as <select id="role"></select></label>
+  <button class="bell" id="bell" title="Notification inbox">Inbox<b id="bellN">0</b></button>
   <label class="role"><input type="checkbox" id="mine" class="switch"> My items only</label>
   <button id="reset">Reset demo</button>
 </header>
@@ -78,6 +97,14 @@ footer{padding:8px 16px 20px;color:var(--mute);font-size:12px;text-align:center}
       <div class="integ" id="integ"></div>
       <div class="note">Impact depends on which apps are connected, whether the attribute is mapped, and the approval gate. Toggle them and watch the impact change.</div>
     </div>
+    <div class="card"><h3>Approval matrix</h3><div id="matrix"></div></div>
+    <div class="card"><h3>Import tag register</h3>
+      <textarea id="imp" rows="5" placeholder="tag,desc,attr,unit,val,to"></textarea>
+      <div class="row"><button id="impBtn" class="pri">Import</button><button id="impSample">Sample</button>
+        <input type="file" id="impFile" accept=".csv,.json,.txt" style="max-width:150px"></div>
+      <div id="impMsg"></div>
+      <div class="sub">CSV (<span class="mono">tag,desc,attr,unit,val,to</span>) or a JSON array of the same keys.</div>
+    </div>
   </section>
 
   <section>
@@ -88,16 +115,25 @@ footer{padding:8px 16px 20px;color:var(--mute);font-size:12px;text-align:center}
       <div class="legend" id="legend"></div>
       <div class="detail" id="detail">Click a node to inspect the linked record.</div>
     </div>
-    <div class="card"><h3>Impact register</h3><div id="impact"></div></div>
+    <div class="card">
+      <h3>3D model view (Smart 3D link)</h3>
+      <div class="row"><div class="seg" id="viewSeg"></div><span id="viewNote" class="sub"></span></div>
+      <svg id="iso" viewBox="0 0 560 300" role="img" aria-label="Isometric equipment model"></svg>
+    </div>
+    <div class="card"><h3>Cost &amp; schedule impact <span class="sub">(illustrative rates)</span></h3><div id="cost"></div></div>
+    <div class="card"><h3>Procurement path · BoM → requisition → PO (Ausenco-style)</h3><div class="path" id="path"></div><div id="pathNote"></div></div>
+    <div class="card"><h3>Impact register · baseline → proposed</h3><div id="impact"></div></div>
   </section>
 
   <section>
     <div class="card"><h3>Controlled change</h3><div id="change"></div></div>
-    <div class="card"><h3>Notifications for this role</h3><div id="notif" style="font-size:13px"></div></div>
+    <div class="card"><h3>Close-out tasks</h3><div id="tasks"></div></div>
+    <div class="card inbox"><h3>Notification inbox · <span id="inboxRole"></span> <button class="sm" id="readAll" style="float:right">Mark all read</button></h3><div id="inbox"></div></div>
+    <div class="card"><h3>Impact for this role</h3><div id="notif" style="font-size:13px"></div></div>
     <div class="card"><h3>Audit trail</h3><div class="log" id="log"></div></div>
   </section>
 </main>
-<footer>Illustrative concept only. Product names (SmartPlant Foundation, Smart 3D, Smart Cloud, HxGN SDx2) are Hexagon's; no real integration, data or API is used.</footer>
+<footer>Illustrative concept only. Product names (SmartPlant Foundation, Smart 3D, Smart Cloud, HxGN SDx2) are Hexagon's; no real integration, data, API or Ausenco process is used. Rates, prices and lead times are made up.</footer>
 
 <script>
 const APPS={
@@ -116,29 +152,42 @@ const OUT={
   manual:{t:'Not linked',d:'App not integrated: the change will not reach this record. Manual process (email/spreadsheet).'},
   none:{t:'Unaffected',d:'Linked to the tag, but does not depend on the changed attribute.'}
 };
-const TAGS=[
-  {id:'20-M-101A',desc:'Feed pump motor',attr:'Rated power',unit:'kW',val:250,to:315,parent:'20-P-101A'},
-  {id:'20-M-205',desc:'Cooling fan motor',attr:'Rated power',unit:'kW',val:75,to:90,parent:'20-F-205'},
-  {id:'30-M-310B',desc:'Thickener drive motor',attr:'Rated power',unit:'kW',val:132,to:160,parent:'30-TH-310'}
+const ORIG=[
+  {id:'20-M-101A',desc:'Feed pump motor',attr:'Rated power',unit:'kW',val:250,to:315},
+  {id:'20-M-205',desc:'Cooling fan motor',attr:'Rated power',unit:'kW',val:75,to:90},
+  {id:'30-M-310B',desc:'Thickener drive motor',attr:'Rated power',unit:'kW',val:132,to:160}
 ];
+let TAGS=JSON.parse(JSON.stringify(ORIG));
+const RATE=145, LEAD_DAYS=21;
+
+/* ---- derived engineering values (illustrative) ---- */
+const fla=v=>Math.round(v*1.65);
+const cable=v=>{const need=fla(v)*1.25/2.6,sz=[35,50,70,95,120,150,185,240,300];
+  const pick=n=>sz.find(s=>s>=n);return pick(need)?pick(need)+' mm²':'2×'+(pick(need/2)||300)+' mm²'};
+const frame=v=>(v<=90?'280S':v<=160?'315S':v<=250?'315L':v<=355?'355M':'400L');
+const money=n=>(n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString();
+
 function recs(t){const i=t.id;return[
- {id:'DS-'+i,app:'SPF',name:'Motor datasheet',type:'doc',disc:'Electrical',dep:true,rev:'B'},
- {id:'EL-001',app:'SPF',name:'Electrical load list',type:'doc',disc:'Electrical',dep:true,rev:'D'},
- {id:'SLD-020',app:'SPF',name:'Single-line diagram',type:'doc',disc:'Electrical',dep:true,rev:'C'},
- {id:'CALC-E-077',app:'SPF',name:'Cable & breaker sizing calc',type:'calc',disc:'Electrical',dep:true,rev:'A'},
- {id:'PID-020-001',app:'SPF',name:'P&ID (tag appears, power not shown)',type:'doc',disc:'Piping',dep:false,rev:'F'},
- {id:'3D-'+i,app:'S3D',name:'Motor 3D object',type:'model',disc:'Mechanical',dep:true,rev:'-'},
- {id:'FDN-'+i.slice(-4),app:'S3D',name:'Foundation / baseplate',type:'model',disc:'Civil',dep:true,rev:'-'},
- {id:'CBL-'+i.slice(-4),app:'S3D',name:'Cable & tray routing',type:'model',disc:'Electrical',dep:true,rev:'-'},
- {id:'RP-20-014',app:'CLD',name:'Design review package',type:'info',disc:'Project Manager',dep:true,rev:'-'},
- {id:'DT-'+i,app:'SDX',name:'Digital twin asset node',type:'doc',disc:'Operations',dep:true,rev:'-'},
- {id:'ETAP-LF-02',app:'EXT',name:'Load-flow case',type:'calc',disc:'Electrical',dep:true,rev:'-'},
- {id:'PR-4521',app:'EXT',name:'Purchase requisition',type:'doc',disc:'Procurement',dep:true,rev:'1'}
+ {id:'DS-'+i,app:'SPF',name:'Motor datasheet',type:'doc',disc:'Electrical',dep:true,rev:'B',m:{h:3,d:1},fd:['Rated power',v=>v+' kW']},
+ {id:'EL-001',app:'SPF',name:'Electrical load list',type:'doc',disc:'Electrical',dep:true,rev:'D',m:{h:2,d:1},fd:['Connected load',v=>v+' kW']},
+ {id:'SLD-020',app:'SPF',name:'Single-line diagram',type:'doc',disc:'Electrical',dep:true,rev:'C',m:{h:6,d:2},fd:['Breaker',v=>Math.ceil(fla(v)*1.25/50)*50+' A']},
+ {id:'CALC-E-077',app:'SPF',name:'Cable & breaker sizing calc',type:'calc',disc:'Electrical',dep:true,rev:'A',m:{h:8,d:3},fd:['Cable size',cable]},
+ {id:'PID-020-001',app:'SPF',name:'P&ID (tag appears, power not shown)',type:'doc',disc:'Piping',dep:false,rev:'F',m:{h:0,d:0}},
+ {id:'3D-'+i,app:'S3D',name:'Motor 3D object',type:'model',disc:'Mechanical',dep:true,rev:'-',m:{h:4,d:1},fd:['Frame size',frame]},
+ {id:'FDN-'+i.slice(-4),app:'S3D',name:'Foundation / baseplate',type:'model',disc:'Civil',dep:true,rev:'-',m:{h:10,d:4},fd:['Baseplate mass',v=>(v/250*1.2).toFixed(1)+' t']},
+ {id:'CBL-'+i.slice(-4),app:'S3D',name:'Cable & tray routing',type:'model',disc:'Electrical',dep:true,rev:'-',m:{h:5,d:2},fd:['Cable',cable]},
+ {id:'RP-20-014',app:'CLD',name:'Design review package',type:'info',disc:'Project Manager',dep:true,rev:'-',m:{h:1,d:0},fd:['Package rev',(v,k)=>k?'Rev 1':'Rev 0']},
+ {id:'DT-'+i,app:'SDX',name:'Digital twin asset node',type:'doc',disc:'Operations',dep:true,rev:'-',m:{h:1.5,d:1},fd:['Nameplate',v=>v+' kW']},
+ {id:'ETAP-LF-02',app:'EXT',name:'Load-flow case',type:'calc',disc:'Electrical',dep:true,rev:'-',m:{h:6,d:2},fd:['Motor load',v=>v+' kW']},
+ {id:'PR-4521',app:'EXT',name:'Purchase requisition',type:'doc',disc:'Procurement',dep:true,rev:'1',m:{h:3,d:2},fd:['Unit price',v=>money(95*v)]}
 ]}
+
 const fresh=()=>({
   tagId:TAGS[0].id,role:'Electrical',
   integ:{SPF:{on:true,map:true},S3D:{on:true,map:true},CLD:{on:true,map:false},SDX:{on:true,map:true},EXT:{on:false,map:false}},
-  cr:{},log:[],sel:null,mine:false
+  matrix:{Electrical:'impacted',Mechanical:'impacted',Civil:'impacted',Procurement:'impacted',Piping:'impacted',Operations:'impacted','Project Manager':'always'},
+  opsPct:20,
+  cr:{},log:[],inbox:[],sel:null,mine:false,view:'overlay',showInbox:false
 });
 let S=fresh();
 const $=id=>document.getElementById(id);
@@ -146,6 +195,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const tag=()=>TAGS.find(t=>t.id===S.tagId);
 const now=()=>new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
 function log(m){S.log.unshift(`${now()} · ${S.role}: ${m}`)}
+function notify(roles,msg){[...new Set(roles)].filter(r=>r!==S.role).forEach(r=>S.inbox.unshift({role:r,msg,t:now(),read:false}))}
 
 function outcome(r){
   if(!r.dep)return'none';
@@ -156,32 +206,76 @@ function outcome(r){
   if(r.type==='info')return'notify';
   return a.map?'auto':'flag';
 }
-function cr(){return S.cr[S.tagId]||null}
+const cr=()=>S.cr[S.tagId]||null;
+const propVal=()=>cr()?cr().to:tag().to;
 function records(){
-  const c=cr();
-  return recs(tag()).map(r=>{
+  const c=cr(),t=tag();
+  return recs(t).map(r=>{
     const o=outcome(r);
+    const done=c&&c.tasks&&c.tasks[r.id];
     let state=null;
     if(c&&c.status==='Implemented'){
-      if(o==='auto'){state='Updated → '+c.to+' '+tag().unit}
-      else if(o==='flag'||o==='verify'||o==='manual')state='Task: '+(o==='manual'?'manual update required':'review/recalc assigned');
+      if(o==='auto')state='Updated → '+c.to+' '+t.unit;
+      else if(o==='flag'||o==='verify'||o==='manual')state=done?'Signed off ✓':'Task: '+(o==='manual'?'manual update required':'review/recalc assigned');
       else if(o==='notify')state='Notified';
     }
     return{...r,o,state};
   });
 }
 function required(){
-  const set=new Set(['Project Manager']);
-  records().forEach(r=>{if(r.o!=='none')set.add(r.disc)});
-  return[...set].filter(d=>d!=='Operations'||true);
+  const rs=records(),set=new Set();
+  const pct=Math.abs(propVal()-tag().val)/tag().val*100;
+  ROLES.forEach(d=>{
+    const m=S.matrix[d];
+    if(m==='always')set.add(d);
+    else if(m==='impacted'&&rs.some(r=>r.disc===d&&r.o!=='none'))set.add(d);
+  });
+  if(pct>S.opsPct){set.add('Project Manager');set.add('Operations')}
+  if(!set.size)set.add('Project Manager');
+  return ROLES.filter(r=>set.has(r));
+}
+
+/* ---- cost & schedule ---- */
+function calc(rs){
+  const t=tag(),to=propVal(),ratio=to/t.val;
+  let hrs=0,days=0,exposure=0;const byD={};
+  rs.forEach(r=>{
+    let h=0,d=0;
+    if(r.o==='auto'||r.o==='notify')h=.5;
+    else if(r.o==='flag')h=r.m.h,d=r.m.d;
+    else if(r.o==='verify')h=r.m.h*1.5,d=r.m.d;
+    else if(r.o==='manual'){h=r.m.h*1.5;d=r.m.d+2;exposure+=r.m.h*4*RATE}
+    hrs+=h;days=Math.max(days,d);if(h)byD[r.disc]=(byD[r.disc]||0)+h;
+  });
+  const mat=95*(to-t.val)+14000*(ratio-1)+9000*(ratio-1);
+  const lead=to!==t.val?LEAD_DAYS:0;
+  return{hrs,eng:hrs*RATE,mat,days,lead,crit:Math.max(days,lead),exposure,byD,ratio};
+}
+
+/* ---- procurement path stages ---- */
+function stages(){
+  const I=S.integ,live=I.EXT.on&&I.SDX.on&&I.EXT.map,spf=I.SPF.on&&I.SPF.map;
+  return[
+   {id:'st:bom',name:'Update equipment BoM',disc:'Electrical',auto:spf,note:spf?'SPF mapped → auto':'SPF not mapped → manual'},
+   {id:'st:req',name:'Revise requisition PR-4521',disc:'Procurement',auto:live,note:live?'ERP via SDx2 → auto':'ERP not linked → manual'},
+   {id:'st:quote',name:'Vendor re-quote & lead time',disc:'Procurement',auto:false,note:'Always human'},
+   {id:'st:po',name:'PO amendment / commercial OK',disc:'Project Manager',auto:false,note:'Always human'},
+   {id:'st:ifc',name:'Issue datasheet to doc control',disc:'Electrical',auto:spf,note:spf?'Transmittal auto':'Manual transmittal'}
+  ];
+}
+function taskList(rs){
+  const t=[];
+  rs.filter(r=>['flag','verify','manual'].includes(r.o)).forEach(r=>t.push({id:r.id,label:r.id+' · '+r.name,disc:r.disc,kind:OUT[r.o].t}));
+  stages().filter(s=>!s.auto).forEach(s=>t.push({id:s.id,label:s.name,disc:s.disc,kind:'Procurement path'}));
+  return t;
 }
 
 /* ---------- render ---------- */
 function renderTags(){
   $('tags').innerHTML=TAGS.map(t=>{
     const c=S.cr[t.id];
-    return`<div class="tag ${t.id===S.tagId?'sel':''}" data-t="${t.id}"><div class="hex" style="width:22px;height:25px;background:${c?'var(--flag)':'var(--accent)'}"></div>
-    <div><b>${t.id}</b><span>${t.desc} · ${c&&c.status==='Implemented'?c.to:t.val} ${t.unit}${c?' · '+c.status:''}</span></div></div>`}).join('');
+    return`<div class="tag ${t.id===S.tagId?'sel':''}" data-t="${esc(t.id)}"><div class="hex" style="width:22px;height:25px;background:${c?'var(--flag)':'var(--accent)'}"></div>
+    <div><b>${esc(t.id)}</b><span>${esc(t.desc)} · ${t.val} ${esc(t.unit)}${c?' · '+c.status:''}</span></div></div>`}).join('');
   document.querySelectorAll('.tag').forEach(e=>e.onclick=()=>{S.tagId=e.dataset.t;S.sel=null;render()});
 }
 function renderInteg(){
@@ -199,6 +293,14 @@ function renderInteg(){
     render();
   });
 }
+function renderMatrix(){
+  $('matrix').innerHTML=`<table><tr><th>Discipline</th><th>Approval required</th></tr>`+ROLES.map(d=>
+   `<tr><td>${d}</td><td><select data-d="${d}">${[['always','Always'],['impacted','When impacted'],['never','Never']].map(([v,l])=>`<option value="${v}" ${S.matrix[d]===v?'selected':''}>${l}</option>`).join('')}</select></td></tr>`).join('')+
+   `</table><div class="row">Escalate to PM + Operations when change &gt; <input type="number" id="pct" min="0" max="500" value="${S.opsPct}" style="width:64px"> %</div>
+   <div class="sub">Approvers this change: <b>${required().join(', ')}</b></div>`;
+  document.querySelectorAll('#matrix select').forEach(e=>e.onchange=()=>{S.matrix[e.dataset.d]=e.value;log(`approval matrix: ${e.dataset.d} → ${e.value}`);render()});
+  $('pct').onchange=e=>{S.opsPct=Math.max(0,+e.target.value||0);log('escalation threshold → '+S.opsPct+'%');render()};
+}
 function renderKpi(rs){
   const n=o=>rs.filter(r=>r.o===o).length;
   $('kpi').innerHTML=`<div><b class="auto">${n('auto')}</b><span>auto-sync</span></div>
@@ -211,7 +313,7 @@ function renderGraph(rs){
   const order=Object.keys(APPS);
   const items=[...rs].sort((a,b)=>order.indexOf(a.app)-order.indexOf(b.app));
   const hexPts=(x,y,r)=>[0,1,2,3,4,5].map(i=>{const a=Math.PI/3*i+Math.PI/6;return(x+r*Math.cos(a)).toFixed(1)+','+(y+r*Math.sin(a)).toFixed(1)}).join(' ');
-  let s=`<g stroke="#2a3441" fill="none"><circle cx="${cx}" cy="${cy}" r="${R}" stroke-dasharray="3 5"/></g>`;
+  let s=`<g stroke="var(--line)" fill="none"><circle cx="${cx}" cy="${cy}" r="${R}" stroke-dasharray="3 5"/></g>`;
   const col={auto:'--auto',flag:'--flag',verify:'--verify',manual:'--manual',notify:'--notify',none:'--none'};
   let lines='',nodes='';
   items.forEach((r,i)=>{
@@ -219,68 +321,121 @@ function renderGraph(rs){
     const c=`var(${col[r.o]})`,dim=S.mine&&r.disc!==S.role&&r.disc!=='Project Manager'?.25:1;
     lines+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${c}" stroke-width="${r.o==='none'?1:2}" stroke-dasharray="${r.o==='manual'?'5 4':''}" opacity="${dim*.7}"/>`;
     const ly=y+(Math.sin(a)>=0?33:-24);
-    nodes+=`<g class="node" data-r="${r.id}" opacity="${dim}">
-      <polygon points="${hexPts(x,y,20)}" fill="#151b23" stroke="${c}" stroke-width="${S.sel===r.id?4:2}"/>
+    nodes+=`<g class="node" data-r="${esc(r.id)}" opacity="${dim}">
+      <polygon points="${hexPts(x,y,20)}" fill="var(--panel)" stroke="${c}" stroke-width="${S.sel===r.id?4:2}"/>
       <text x="${x}" y="${y+4}" text-anchor="middle" style="font-size:9px;font-weight:700">${r.app}</text>
       <text x="${x}" y="${ly}" text-anchor="middle">${esc(r.id.length>14?r.id.slice(0,13)+'…':r.id)}</text></g>`;
   });
   s+=lines+`<polygon points="${hexPts(cx,cy,56)}" fill="#00b3a4" stroke="#04201d" stroke-width="3"/>
-   <text x="${cx}" y="${cy-2}" text-anchor="middle" style="fill:#04201d;font-size:13px;font-weight:800">${t.id}</text>
-   <text x="${cx}" y="${cy+14}" text-anchor="middle" style="fill:#04201d;font-size:10px">${(cr()&&cr().status==='Implemented'?cr().to:t.val)} ${t.unit}</text>`+nodes;
+   <text x="${cx}" y="${cy-2}" text-anchor="middle" style="fill:#04201d;font-size:13px;font-weight:800">${esc(t.id)}</text>
+   <text x="${cx}" y="${cy+14}" text-anchor="middle" style="fill:#04201d;font-size:10px">${(cr()&&cr().status==='Implemented'?cr().to:t.val)} ${esc(t.unit)}</text>`+nodes;
   $('graph').innerHTML=s;
   document.querySelectorAll('.node').forEach(n=>n.onclick=()=>{S.sel=n.dataset.r;render()});
 }
-function pill(o){return`<span class="pill ${o}" title="${esc(OUT[o].d)}">${OUT[o].t}</span>`}
-function renderLegend(){$('legend').innerHTML=Object.keys(OUT).map(o=>`<span class="${o}"><i class="dot"></i>${OUT[o].t}</span>`).join('')}
+const pill=o=>`<span class="pill ${o}" title="${esc(OUT[o].d)}">${OUT[o].t}</span>`;
+const renderLegend=()=>{$('legend').innerHTML=Object.keys(OUT).map(o=>`<span class="${o}"><i class="dot"></i>${OUT[o].t}</span>`).join('')};
+function diffOf(r){
+  if(!r.fd||!r.dep)return'—';
+  const t=tag(),p=propVal();
+  return`<span class="diff">${r.fd[0]}: <s>${r.fd[1](t.val,0)}</s> → <b>${r.fd[1](p,1)}</b></span>`;
+}
 function renderDetail(rs){
   const r=rs.find(x=>x.id===S.sel);
-  $('detail').innerHTML=r?`<b>${esc(r.id)}</b> · ${esc(r.name)} <span class="sub">(${APPS[r.app].name}, ${r.disc}, rev ${r.rev})</span><br>${pill(r.o)} ${esc(OUT[r.o].d)}${r.state?`<br><b>After implementation:</b> ${esc(r.state)}`:''}`
+  $('detail').innerHTML=r?`<b>${esc(r.id)}</b> · ${esc(r.name)} <span class="sub">(${APPS[r.app].name}, ${r.disc}, rev ${r.rev})</span><br>${pill(r.o)} ${esc(OUT[r.o].d)}<br>${diffOf(r)}${r.state?`<br><b>After implementation:</b> ${esc(r.state)}`:''}`
    :'Click a node to inspect the linked record.';
 }
 function renderImpact(rs){
   const list=rs.filter(r=>!S.mine||r.disc===S.role||r.disc==='Project Manager');
-  $('impact').innerHTML=`<table><tr><th>Record</th><th>App</th><th>Owner</th><th>Impact</th><th>Result</th></tr>`+
-  list.map(r=>`<tr class="${r.id===S.sel?'hl':''}"><td><b>${esc(r.id)}</b><br><span class="sub">${esc(r.name)}</span></td><td>${r.app}</td><td>${r.disc}</td><td>${pill(r.o)}</td><td>${r.state?esc(r.state):'—'}</td></tr>`).join('')+'</table>';
+  $('impact').innerHTML=`<table><tr><th>Record</th><th>App</th><th>Owner</th><th>Impact</th><th>Baseline → proposed</th><th>Result</th></tr>`+
+  list.map(r=>`<tr class="${r.id===S.sel?'hl':''}"><td><b>${esc(r.id)}</b><br><span class="sub">${esc(r.name)}</span></td><td>${r.app}</td><td>${r.disc}</td><td>${pill(r.o)}</td><td>${diffOf(r)}</td><td>${r.state?esc(r.state):'—'}</td></tr>`).join('')+'</table>';
+}
+function renderCost(rs){
+  const k=calc(rs),t=tag(),c=cr();
+  const bars=Object.entries(k.byD).sort((a,b)=>b[1]-a[1]).map(([d,h])=>
+    `<div class="row" style="margin:2px 0"><span style="width:110px">${d}</span><span style="flex:1;background:var(--panel2);border-radius:4px;height:8px"><i style="display:block;height:8px;border-radius:4px;background:var(--accent);width:${Math.round(h/k.hrs*100)}%"></i></span><span style="width:50px;text-align:right">${h.toFixed(1)} h</span></div>`).join('');
+  $('cost').innerHTML=`<div class="sub" style="margin-bottom:6px">${c?c.id+' · ':'Preview · '}${t.id} ${t.val} → ${propVal()} ${t.unit} (${((k.ratio-1)*100).toFixed(0)}%)</div>
+   <div class="kpi"><div><b>${k.hrs.toFixed(1)}</b><span>engineering hrs</span></div><div><b>${money(k.eng)}</b><span>engineering cost</span></div>
+   <div><b>${money(k.mat)}</b><span>materials Δ</span></div><div><b class="${k.crit>25?'flag':''}">${k.crit} d</b><span>critical path</span></div></div>
+   <div class="row sub"><span>Engineering rework: ${k.days} d</span>·<span>Procurement lead-time Δ: ${k.lead} d (parallel)</span>·<span class="${k.exposure?'manual':''}">Exposure if unlinked items are missed: <b>${money(k.exposure)}</b></span></div>
+   ${bars}`;
+}
+function renderPath(){
+  const c=cr(),impl=c&&c.status==='Implemented';
+  $('path').innerHTML=stages().map(s=>{
+    const signed=impl&&c.tasks[s.id];
+    const cls=!impl?'':s.auto?'auto':signed?'signed':'task';
+    const st=!impl?(s.auto?'Will auto-run':'Will be a task'):s.auto?'Auto-completed':signed?'Signed off ✓':'Task open';
+    return`<div class="stage ${cls}"><b>${s.name}</b><small>${s.disc}</small><br><small>${s.note}</small><br><span class="pill ${cls==='auto'||cls==='signed'?'auto':cls==='task'?'flag':'none'}">${st}</span></div>`}).join('');
+  $('pathNote').innerHTML=`<div class="note">Even with full integration, vendor re-quote and PO amendment stay human decisions.</div>`;
 }
 const STEPS=['Draft','In review','Approved','Implemented'];
 function renderChange(){
   const t=tag(),c=cr(),box=$('change');
   if(!c){
-    box.innerHTML=`<div>Propose a controlled change to <b>${t.id}</b>.</div>
-    <div class="row">${t.attr}: <b>${t.val} ${t.unit}</b> → <input type="number" id="newv" value="${t.to}"> ${t.unit}</div>
-    <textarea id="why" placeholder="Reason (e.g. vendor selected larger frame after pump curve revision)">Pump duty point revised; motor upsized.</textarea>
+    box.innerHTML=`<div>Propose a controlled change to <b>${esc(t.id)}</b>.</div>
+    <div class="row">${esc(t.attr)}: <b>${t.val} ${esc(t.unit)}</b> → <input type="number" id="newv" value="${t.to}"> ${esc(t.unit)}</div>
+    <textarea id="why" style="font-family:inherit;font-size:13px" placeholder="Reason">Pump duty point revised; motor upsized.</textarea>
     <div class="row"><button class="pri" id="raise">Raise change request</button></div>
-    <div class="note">Impact analysis above is computed from the tag's linked records before submission.</div>`;
+    <div class="note">Baseline vs proposed, cost/schedule and the 3D view all preview the proposed value.</div>`;
+    $('newv').oninput=e=>{t.to=+e.target.value||t.to;const rs=records();renderCost(rs);renderImpact(rs);renderIso(rs);renderKpi(rs);renderMatrix()};
     $('raise').onclick=()=>{
-      S.cr[S.tagId]={id:'CR-'+(100+Object.keys(S.cr).length+1),to:+$('newv').value||t.to,why:$('why').value,status:'In review',appr:{}};
-      log(`raised ${S.cr[S.tagId].id} on ${t.id}: ${t.val}→${S.cr[S.tagId].to} ${t.unit}`);render();
+      const n=+$('newv').value||t.to;
+      S.cr[S.tagId]={id:'CR-'+(100+Object.keys(S.cr).length+1),to:n,why:$('why').value,status:'In review',appr:{},tasks:{}};
+      log(`raised ${S.cr[S.tagId].id} on ${t.id}: ${t.val}→${n} ${t.unit}`);
+      notify(required(),`${S.cr[S.tagId].id}: approval requested for ${t.id} (${t.val}→${n} ${t.unit})`);render();
     };return;
   }
   const req=required();
-  if(c.status==='In review'&&req.every(d=>c.appr[d]==='Approved')){c.status='Approved';log(`${c.id} fully approved`)}
+  if(c.status==='In review'&&req.every(d=>c.appr[d]==='Approved')){c.status='Approved';log(`${c.id} fully approved`);notify(['Project Manager'],`${c.id} fully approved – ready to implement`)}
+  else if(c.status==='Approved'&&!req.every(d=>c.appr[d]==='Approved')){c.status='In review';log(`${c.id} back to review (approval matrix changed)`)}
   const idx=STEPS.indexOf(c.status),rej=c.status==='Rejected';
-  let h=`<b>${c.id}</b> · ${t.id}: ${t.val} → <b>${c.to} ${t.unit}</b><br><span class="sub">${esc(c.why)}</span>
+  let h=`<b>${c.id}</b> · ${esc(t.id)}: ${t.val} → <b>${c.to} ${esc(t.unit)}</b><br><span class="sub">${esc(c.why)}</span>
    <div class="steps">${STEPS.map((s,i)=>`<div class="step ${rej?'':i<idx?'done':i===idx?'cur':''}">${s}</div>`).join('')}</div>`;
   if(rej)h+=`<div class="note" style="border-color:var(--manual)">Rejected. Tag value unchanged.</div>`;
   h+=`<h3>Required approvals</h3>`+req.map(d=>{
     const st=c.appr[d];
     const can=c.status==='In review'&&S.role===d&&!st;
     return`<div class="appr"><span>${d}</span><span>${st?`<span class="pill ${st==='Approved'?'auto':'manual'}">${st}</span>`:
-      can?`<button class="pri" data-a="Approved" data-d="${d}">Approve</button> <button class="bad" data-a="Rejected" data-d="${d}">Reject</button>`:
+      can?`<button class="pri sm" data-a="Approved" data-d="${d}">Approve</button> <button class="bad sm" data-a="Rejected" data-d="${d}">Reject</button>`:
       `<span class="pill none">Pending</span>`}</span></div>`}).join('');
+  const open=c.status==='Implemented'?taskList(records()).filter(x=>!c.tasks[x.id]).length:0;
   h+=`<div class="row" style="margin-top:10px">`;
   if(c.status==='Approved')h+=`<button class="pri" id="impl" ${S.role==='Project Manager'?'':'disabled'}>Implement change${S.role==='Project Manager'?'':' (PM only)'}</button>`;
-  if(c.status==='Implemented'||rej)h+=`<button id="close">Close &amp; allow new change</button>`;
+  if(c.status==='Implemented')h+=`<button id="close" ${open?'disabled':''}>${open?`Close-out blocked: ${open} task(s) open`:'Close &amp; allow new change'}</button>`;
+  if(rej)h+=`<button id="close">Close &amp; allow new change</button>`;
   h+=`</div>`;
-  if(c.status==='In review')h+=`<div class="note">Switch “Viewing as” to each discipline to approve. Changing integration settings re-computes who must approve.</div>`;
-  if(c.status==='Implemented')h+=`<div class="note">Auto-sync records updated. Flagged items, calcs and unlinked apps are now tasks — the model does <b>not</b> claim these are correct until an engineer signs off.</div>`;
+  if(c.status==='In review')h+=`<div class="note">Switch “Viewing as” to each discipline to approve. Integration or matrix changes re-compute who must approve.</div>`;
+  if(c.status==='Implemented')h+=`<div class="note">Auto-sync records updated. Flagged items, calcs and unlinked apps are tasks — nothing is claimed correct until an engineer signs off.</div>`;
   box.innerHTML=h;
   box.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
     c.appr[b.dataset.d]=b.dataset.a;log(`${b.dataset.a.toLowerCase()} ${c.id}`);
+    notify(['Project Manager',...req],`${c.id}: ${b.dataset.d} ${b.dataset.a.toLowerCase()}`);
     if(b.dataset.a==='Rejected')c.status='Rejected';render();
   });
-  const im=$('impl');if(im)im.onclick=()=>{c.status='Implemented';log(`implemented ${c.id}; ${records().filter(r=>r.o==='auto').length} records auto-synced`);render()};
+  const im=$('impl');if(im)im.onclick=()=>{
+    c.status='Implemented';
+    const rs=records(),tl=taskList(rs);
+    log(`implemented ${c.id}; ${rs.filter(r=>r.o==='auto').length} records auto-synced, ${tl.length} tasks opened`);
+    tl.forEach(x=>notify([x.disc],`${c.id}: task for you – ${x.label}`));
+    notify(req,`${c.id} implemented`);render()};
   const cl=$('close');if(cl)cl.onclick=()=>{if(c.status==='Implemented'){tag().val=c.to}delete S.cr[S.tagId];log('closed '+c.id);render()};
+}
+function renderTasks(rs){
+  const c=cr();
+  if(!c||c.status!=='Implemented'){$('tasks').innerHTML='<span class="sub">Tasks appear after implementation (flagged items, calcs, unlinked apps, manual procurement steps).</span>';return}
+  const tl=taskList(rs);
+  $('tasks').innerHTML=tl.length?tl.map(x=>{
+    const d=c.tasks[x.id],can=!d&&(S.role===x.disc||S.role==='Project Manager');
+    return`<div class="appr"><span>${esc(x.label)}<br><span class="sub">${x.disc} · ${x.kind}</span></span>
+    <span>${d?'<span class="pill auto">Signed off</span>':`<button class="pri sm" data-task="${esc(x.id)}" ${can?'':'disabled'}>Sign off</button>`}</span></div>`}).join(''):'<span class="msgok">No manual tasks – fully auto-synced.</span>';
+  $('tasks').querySelectorAll('[data-task]').forEach(b=>b.onclick=()=>{const lbl=(tl.find(x=>x.id===b.dataset.task)||{}).label||b.dataset.task;c.tasks[b.dataset.task]=true;log('signed off '+lbl);notify(['Project Manager'],`${c.id}: ${lbl} signed off by ${S.role}`);render()});
+}
+function renderInbox(){
+  const mine=S.inbox.filter(m=>m.role===S.role);
+  $('inboxRole').textContent=S.role;
+  $('inbox').innerHTML=mine.length?mine.map((m,i)=>`<div class="msg ${m.read?'read':''}" data-i="${S.inbox.indexOf(m)}"><b>${m.t}</b> ${esc(m.msg)}</div>`).join(''):'<span class="sub">No notifications for this role.</span>';
+  $('inbox').querySelectorAll('.msg').forEach(e=>e.onclick=()=>{S.inbox[+e.dataset.i].read=true;render()});
+  $('bellN').textContent=mine.filter(m=>!m.read).length;
 }
 function renderNotif(rs){
   const mine=rs.filter(r=>r.disc===S.role&&r.o!=='none');
@@ -289,16 +444,90 @@ function renderNotif(rs){
   $('notif').innerHTML=mine.length?`<b>${S.role}</b> sees ${mine.length} impacted item(s) from ${c.id}:<ul>`+mine.map(r=>`<li>${esc(r.id)} — ${OUT[r.o].t}</li>`).join('')+'</ul>'
    :`<b>${S.role}</b> has no impacted records on ${c.id}; ${S.role==='Project Manager'?'oversees all.':'informed only.'}`;
 }
+
+/* ---- isometric 3D view ---- */
+function renderIso(rs){
+  const t=tag(),k=34,ox=215,oy=130;
+  const P=(x,y,z)=>`${(ox+(x-y)*0.866*k).toFixed(1)},${(oy+(x+y)*0.5*k-z*k).toFixed(1)}`;
+  const box=(x,y,z,w,d,h,fill,dash,stroke)=>{
+    const st=`stroke="${stroke||'var(--text)'}" stroke-width="1" ${dash?'stroke-dasharray="4 3"':''}`;
+    const f=dash?'none':fill;
+    return`<polygon points="${P(x,y,z+h)} ${P(x+w,y,z+h)} ${P(x+w,y+d,z+h)} ${P(x,y+d,z+h)}" fill="${f}" ${st} opacity="${dash?1:1}"/>
+    <polygon points="${P(x,y+d,z)} ${P(x+w,y+d,z)} ${P(x+w,y+d,z+h)} ${P(x,y+d,z+h)}" fill="${f}" fill-opacity="${dash?0:.78}" ${st}/>
+    <polygon points="${P(x+w,y,z)} ${P(x+w,y+d,z)} ${P(x+w,y+d,z+h)} ${P(x+w,y,z+h)}" fill="${f}" fill-opacity="${dash?0:.55}" ${st}/>`};
+  const obj=rs.find(r=>r.id.startsWith('3D-')),c=cr();
+  const modelUpdates=obj.o==='auto'&&c&&c.status==='Implemented';
+  const sFor=v=>Math.cbrt(v/ORIG[0].val); // relative size scale from kW
+  const base=Math.cbrt(t.val/t.val),prop=Math.cbrt(propVal()/t.val);
+  const scene=(s,dash,tint)=>{
+    const mw=2.4*s,md=1.4*s,mh=1.4*s,fw=Math.max(5.8,3.0+mw+.5),fd=Math.max(3.2,md+1.4);
+    let o='';
+    o+=box(0,0,0,fw,fd,.4,'#6b7785',dash);
+    o+=box(.4,(fd-1.4)/2,.4,2.2,1.4,1.2,'#8a96a3',dash);
+    o+=box(2.8,(fd-md)/2,.4,mw,md,mh,tint,dash);
+    o+=box(2.8+mw,(fd-.5)/2,.4+mh/2,fw-2.8-mw+.8,.5,.2,'#c9a227',dash);
+    return o;
+  };
+  const tint=obj.o==='auto'?'#2ea36b':obj.o==='manual'?'#e5484d':'#e0a800';
+  let s=`<polygon points="${P(-1,-1,0)} ${P(9,-1,0)} ${P(9,6,0)} ${P(-1,6,0)}" fill="var(--panel2)" stroke="var(--line)"/>`;
+  const v=S.view;
+  if(v==='baseline')s+=scene(base,false,'#3b82f6');
+  else if(v==='proposed')s+=scene(prop,false,tint);
+  else s+=scene(base,true)+scene(prop,false,tint);
+  s+=`<text x="12" y="20" style="font-weight:700">${esc(t.id)} · ${v==='baseline'?t.val:propVal()} ${esc(t.unit)}${v==='overlay'?` <tspan style="font-weight:400">(dashed = baseline ${t.val})</tspan>`:''}</text>
+   <text x="12" y="288" style="font-size:10px">Frame ${frame(v==='baseline'?t.val:propVal())} · baseplate ${((v==='baseline'?t.val:propVal())/250*1.2).toFixed(1)} t</text>`;
+  $('iso').innerHTML=s;
+  $('viewSeg').innerHTML=[['baseline','Baseline'],['proposed','Proposed'],['overlay','Overlay']].map(([k,l])=>`<button data-v="${k}" class="${S.view===k?'on':''}">${l}</button>`).join('');
+  $('viewSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;renderIso(rs);});
+  $('viewNote').innerHTML=obj.o==='auto'?`<span class="auto">Smart 3D linked + mapped: object resizes on implementation${modelUpdates?' (done)':''}.</span>`
+    :`<span class="${obj.o==='manual'?'manual':'flag'}">${obj.o==='manual'?'Smart 3D not linked: model stays at baseline until updated by hand.':'Mapping off: modeller must update the object manually.'}</span>`;
+}
+
+/* ---- import ---- */
+function parseRegister(txt){
+  txt=txt.trim();if(!txt)throw new Error('Nothing to import');
+  let rows;
+  if(txt[0]==='['){rows=JSON.parse(txt)}
+  else{
+    const lines=txt.split(/\r?\n/).filter(l=>l.trim());
+    const hdr=lines[0].toLowerCase().includes('tag')&&isNaN(+lines[0].split(',')[4]);
+    rows=(hdr?lines.slice(1):lines).map(l=>{const p=l.split(',').map(x=>x.trim());return{tag:p[0],desc:p[1],attr:p[2],unit:p[3],val:p[4],to:p[5]}});
+  }
+  return rows;
+}
+function doImport(){
+  const msg=$('impMsg');
+  try{
+    const rows=parseRegister($('imp').value);let added=0,skipped=[];
+    rows.forEach((r,i)=>{
+      const id=String(r.tag||r.id||'').trim(),val=+r.val,to=+r.to;
+      if(!id||!isFinite(val)||!isFinite(to)||val<=0){skipped.push(`row ${i+1}: invalid`);return}
+      if(TAGS.some(t=>t.id===id)){skipped.push(`${id}: duplicate`);return}
+      TAGS.push({id,desc:r.desc||'Imported equipment',attr:r.attr||'Rated power',unit:r.unit||'kW',val,to});added++;
+    });
+    if(added){const last=TAGS[TAGS.length-1];S.tagId=last.id;S.sel=null;log(`imported ${added} tag(s)`)}
+    render();
+    $('impMsg').innerHTML=`<span class="${added?'msgok':'msgerr'}">${added} imported${skipped.length?'; skipped '+esc(skipped.join(', ')):''}</span>`;
+  }catch(e){msg.innerHTML=`<span class="msgerr">${esc(e.message)}</span>`}
+}
+
 function render(){
   const rs=records();
-  renderTags();renderInteg();renderKpi(rs);renderGraph(rs);renderLegend();renderDetail(rs);renderImpact(rs);renderChange();renderNotif(rs);
+  renderTags();renderInteg();renderMatrix();renderKpi(rs);renderGraph(rs);renderLegend();renderDetail(rs);
+  renderIso(rs);renderCost(rs);renderPath();renderImpact(rs);renderChange();renderTasks(rs);renderInbox();renderNotif(rs);
   $('hubTitle').textContent=`Tag hub · ${tag().id} (${tag().desc}) — common reference across ${new Set(rs.map(r=>r.app)).size} applications`;
   $('log').innerHTML=S.log.map(l=>`<div>${esc(l)}</div>`).join('')||'<span class="sub">No activity yet.</span>';
 }
 $('role').innerHTML=ROLES.map(r=>`<option>${r}</option>`).join('');
 $('role').onchange=e=>{S.role=e.target.value;render()};
 $('mine').onchange=e=>{S.mine=e.target.checked;render()};
-$('reset').onclick=()=>{TAGS[0].val=250;TAGS[1].val=75;TAGS[2].val=132;S=fresh();$('role').value=S.role;$('mine').checked=false;render()};
+$('skin').onchange=e=>{document.body.classList.toggle('light',e.target.value==='light')};
+$('bell').onclick=()=>$('inbox').scrollIntoView({behavior:'smooth',block:'center'});
+$('readAll').onclick=()=>{S.inbox.filter(m=>m.role===S.role).forEach(m=>m.read=true);render()};
+$('impBtn').onclick=doImport;
+$('impSample').onclick=()=>{$('imp').value='tag,desc,attr,unit,val,to\n40-M-401,Slurry pump motor,Rated power,kW,200,250\n40-M-402,Reagent mixer motor,Rated power,kW,55,75'};
+$('impFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('imp').value=r.result;doImport()};r.readAsText(f)};
+$('reset').onclick=()=>{TAGS=JSON.parse(JSON.stringify(ORIG));S=fresh();$('role').value=S.role;$('mine').checked=false;$('imp').value='';$('impMsg').innerHTML='';render()};
 render();
 </script>
 </body>
